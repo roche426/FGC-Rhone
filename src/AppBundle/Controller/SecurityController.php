@@ -34,7 +34,7 @@ class SecurityController extends Controller
     /**
      * @Route("/register", name="user_registration")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, Mailer $mailer)
     {
         // 1) build the form
         $user = new User();
@@ -47,14 +47,19 @@ class SecurityController extends Controller
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+            $user->setToken(uniqid('FGPR'));
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+            $mailer->accountActivationEmail($user);
+
+            $userEmail = $user->getEmail();
+            $flashType = 'success';
+            $flashMessage = 'Vous êtes enregistré ! Afin de finaliser votre inscription, un email de confirmation vous a été transmis à l\'adresse suivante : ' . $userEmail;
+            $this->addFlash($flashType, $flashMessage);
 
             return $this->redirectToRoute('login');
         }
@@ -64,6 +69,41 @@ class SecurityController extends Controller
             array('form' => $form->createView())
         );
     }
+
+    /**
+     * @Route("/confirmation_mail/{slug}", name="mailConfirmation", defaults={"slug" = null})
+     */
+    public function mailConfirmation(Request $request)
+    {
+        $tokenUrl = $request->get('slug');
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(
+            ['token' => $tokenUrl]
+        );
+
+        if($user) {
+            $user->setToken(null);
+
+            $user->setIsActive(true);
+
+            $em->persist($user);
+            $em->flush();
+
+            $flashType = 'success';
+            $flashMessage = 'Votre compte est activé !';
+
+        } else {
+            $flashType = 'danger';
+            $flashMessage = 'Impossible d\'activer le compte.';
+        }
+
+        $this->addFlash($flashType, $flashMessage);
+
+        return ($this->redirectToRoute('login'));
+    }
+
+
 
     /**
      * Password forgotten
@@ -186,40 +226,5 @@ class SecurityController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/confirmedAccount/{slug}", name="mailConfirmation")
-     */
-    public function mailConfirmation(Request $request, Mailer $mailer)
-    {
-        $tokenUrl = $request->get('slug');
-
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(
-            ['token' => $tokenUrl]
-        );
-
-        if($user) {
-            $user->setToken(null);
-
-            $user->setIsActive(true);
-
-            $em->persist($user);
-            $em->flush();
-
-            $flashType = 'success';
-            $flashMessage = 'Votre compte est activé !';
-
-
-        } else {
-            $flashType = 'danger';
-            $flashMessage = 'Impossible d\'activer le compte.';
-        }
-
-        $this->addFlash($flashType, $flashMessage);
-
-        return ($this->redirectToRoute('login'));
-    }
-
 
 }

@@ -43,6 +43,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
+     * @var bool
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive = false;
@@ -92,13 +93,6 @@ class User implements AdvancedUserInterface, \Serializable
         $this->lastname = $lastname;
     }
 
-
-    public function __construct()
-    {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
-    }
 
     public function getUsername()
     {
