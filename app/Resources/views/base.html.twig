@@ -68,7 +68,28 @@
                 {% endif %}
             </div>
         </nav>
-    
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}" role="alert">
+                    {% if label == "success" %}
+                        <i class="far fa-check-circle"></i> {{ message|raw }}
+                    {% elseif label == "warning" %}
+                        <i class="far fa-pause-circle"></i> {{ message|raw }}
+                    {% elseif label == "danger" %}
+                        <i class="far fa-times-circle"></i> {{ message|raw }}
+                    {% elseif label == "info" %}
+                        <i class="far fa-question-circle"></i> {{ message|raw }}
+                    {% elseif label == "secondary" %}
+                        <i class="far fa-arrow-alt-circle-right"></i> {{ message|raw }}
+                    {% else %}
+                        {{ message|raw }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
         {% block body %}{% endblock %}
     
         {% block javascripts %}{% endblock %}

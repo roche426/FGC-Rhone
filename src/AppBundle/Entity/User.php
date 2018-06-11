@@ -37,12 +37,6 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
 
@@ -58,6 +52,13 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="is_admin", type="boolean")
      */
     private $isAdmin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", nullable=true, unique=true)
+     */
+    private $token;
 
     /**
      * @return mixed
@@ -138,24 +139,25 @@ class User implements UserInterface, \Serializable
         $this->isAdmin = $isAdmin;
     }
 
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
 
 
     /**
-     * @return mixed
+     * @param string $token
+     * @return User
      */
-    public function getPlainPassword()
+    public function setToken($token)
     {
-        return $this->plainPassword;
-    }
+        $this->token = $token;
 
-    /**
-     * @param mixed $plainPassword
-     */
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
+        return $this;
     }
-
 
 
     public function getSalt()
