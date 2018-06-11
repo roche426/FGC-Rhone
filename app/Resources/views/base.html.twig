@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><img class="img-header" src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/29496227_1623547551027900_127981036054249472_n.jpg?_nc_cat=0&oh=3dfb04e0f67c090765af5827e280aa0a&oe=5B966129">
+                Fédération des Gardes Particuliers du Rhône
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            L'assiociation
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Bureau</a>
+                            <a class="dropdown-item" href="#">Bulletins</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Documents</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Informations
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Port d'armes</a>
+                            <a class="dropdown-item" href="#">Les nuisibles</a>
+                            <a class="dropdown-item" href="#">Formations-recyclage</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Actualités <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Galerie photo <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/membres">Espace client</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Connexion/Inscription</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                {% if app.user %}
+                    <p class="nav-link"></p>
+                    <a href="/logout" type="button" class="btn btn-lg ">Bienvenue {{ app
+                        .user.getFirstname }} <br> <i class="fas fa-sign-out-alt">Se déconnecter</i></a>
+                {% else %}
+                    <a href="/user/registration" type="button" class="btn btn-lg btn-danger">Essai gratuit</a>
+                {% endif %}
+            </div>
+        </nav>
+    
+        {% block body %}{% endblock %}
+    
+        {% block javascripts %}{% endblock %}
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    </body>
+</html>

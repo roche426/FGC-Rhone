@@ -1,0 +1,6 @@
+{% block content %}
+    <strong>Bienvenue sur Mafonciere !</strong><br>
+    <p>Votre compte à bien été créé, pour valider votre mail <a href="{{ url('mailConfirmation', { 'slug': user.token }) }}">cliquer ici</a>.</p>
+    <p>Merci de votre compréhension,<br>A très bientôt sur Mafonciere !</p>
+    <p><i>(Ceci est un mail automatique, merci de ne pas répondre. Si vous souhaitez nous contacter vous pouvez le faire directement sur la plateforme)</i></p>
+{% endblock %}
