@@ -1,0 +1,60 @@
+    <div class="header-nav mb-5">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="{{ path('homePage') }}"><img class="img-header"
+                                                                       src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/29496227_1623547551027900_127981036054249472_n.jpg?_nc_cat=0&oh=3dfb04e0f67c090765af5827e280aa0a&oe=5B966129">
+                Fédération des Gardes Particuliers du Rhône
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            L'assiociation
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Bureau</a>
+                            <a class="dropdown-item" href="#">Bulletins</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Documents</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Informations
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Port d'armes</a>
+                            <a class="dropdown-item" href="#">Les nuisibles</a>
+                            <a class="dropdown-item" href="#">Formations-recyclage</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('actuality') }}">Actualités <span class="sr-only">(current)
+                            </span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Galerie photo <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/membres">Espace client</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Connexion/Inscription</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                {% if app.user %}
+                    <p class="nav-link"></p>
+                    <a href="/logout">Bienvenue {{ app.user.getFirstname }} <br> <i class="fas fa-sign-out-alt">Se déconnecter</i></a>
+                {% else %}
+                    <a href="/user/registration">Se connecter</a>
+                {% endif %}
+            </div>
+        </nav>
+    </div>

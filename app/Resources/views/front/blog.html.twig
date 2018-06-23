@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="text-center col-md-6 offset-md-3">
+                <h1>{{ article.title }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                {% if article.imageArticle %}
+                    {{ article.imageArticle }}
+                {% endif %}
+                <img class="img-article" src="/assets/images/img.jpg">
+                <p class="text-justify">{{ article.article }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-md-8">
+                <h5>{{ article.author }}</h5>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
+
+

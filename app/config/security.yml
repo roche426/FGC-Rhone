@@ -27,7 +27,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: /connected
+                default_target_path: /user/connected
 
             logout:
                 invalidate_session: true
@@ -45,6 +45,8 @@ security:
         ROLE_ADMIN:       ROLE_USER
 
     access_control:
-        # require ROLE_USER for /connected*
+        # require ROLE_USER for /user*
         - { path: ^/user, roles: ROLE_USER }
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/admin, roles: ROLE_ADMIN }
 

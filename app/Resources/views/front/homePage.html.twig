@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container contain-home p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <h1>Les dernières actualités</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center mb-3">
+                {% for blog in blogs %}
+                    <h3 class="mb-4">{{ blog.title }} <a href="{{ path('actuality') }}/{{ blog.id }}">Lire l'article</a></h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="container contain-home mt-5 p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <h1>Les mots du Président</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img class="img-chairman" src="https://cdn.emojidex.com/emoji/seal/%EF%BC%9F.png?1417137872">
+            </div>
+            <div class="col-md-8 ">
+                <h5>Mr le Président</h5>
+                <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                <a href="#">Voir les membres du bureau</a>
+            </div>
+        </div>
+    </div>
+    <div class="container contain-home mt-5 p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <h1>Rejoignez-nous</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-1 text-center">
+                <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                <a href="#">Contacter-nous</a>
+            </div>
+            <div class="col-md-4  text-center">
+                <img class="img-chairman" src="https://cdn.emojidex.com/emoji/seal/%EF%BC%9F.png?1417137872">
+            </div>
+        </div>
+    </div>
+    <div class="container contain-home mt-5 mb-5 p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3 mt-3">
+                <h1>Espace membres</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <p>Accéder à votre espace personnel <br><a href="#">Se connecter</a></p>
+                <p>Membre de l'association, mais pas d'accès à votre espace? <br><a href="#">S'inscrire</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -32,9 +32,17 @@ class Mailer
 
     public function forgotPasswordEmail(User $user)
     {
-        $subject = "Mafoncière - Réinitialisation de votre mot de passe";
+        $subject = "Réinitialisation de votre mot de passe";
         $to = $user->getEmail();
         $body = $this->templating->render('mail/forgotPasswordEmail.html.twig', array('user' => $user));
+        $this->sendMail($to, $subject, $body);
+    }
+
+    public function accountActivationEmail(User $user)
+    {
+        $subject = "Confirmation d'inscription";
+        $to = $user->getEmail();
+        $body = $this->templating->render('mail/accountActivation.html.twig', array('user' => $user));
         $this->sendMail($to, $subject, $body);
     }
 

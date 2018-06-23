@@ -6,19 +6,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class UserController
+ * Class AdminController
  * @package AppBundle\Controller
- * @Route("/user", name="user")
-
+ * @Route("/admin", name="admin")
  */
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
-     * @Route("/connected", name="connected")
+     * @Route("/index", name="adminHome")
      */
     public function ConnectedAction()
     {
-        return $this->render('user/index.html.twig');
+        return $this->render('admin/index.html.twig');
     }
 
 

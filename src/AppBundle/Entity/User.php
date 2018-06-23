@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -37,27 +37,29 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
 
     private $email;
 
     /**
+     * @var bool
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = false;
 
     /**
      * @var bool
      * @ORM\Column(name="is_admin", type="boolean")
      */
-    private $isAdmin;
+    private $isAdmin = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", nullable=true, unique=true)
+     */
+    private $token;
 
     /**
      * @return mixed
@@ -91,13 +93,6 @@ class User implements UserInterface, \Serializable
         $this->lastname = $lastname;
     }
 
-
-    public function __construct()
-    {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
-    }
 
     public function getUsername()
     {
@@ -138,24 +133,43 @@ class User implements UserInterface, \Serializable
         $this->isAdmin = $isAdmin;
     }
 
-
-
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getPlainPassword()
+    public function isActive()
     {
-        return $this->plainPassword;
+        return $this->isActive;
     }
 
     /**
-     * @param mixed $plainPassword
+     * @param bool $isActive
+     * @return User
      */
-    public function setPlainPassword($plainPassword)
+    public function setIsActive($isActive)
     {
-        $this->plainPassword = $plainPassword;
+        $this->isActive = $isActive;
+        return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+
+    /**
+     * @param string $token
+     * @return User
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
 
 
     public function getSalt()
@@ -177,12 +191,11 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        if ($this->isAdmin) {
-
-            return array('ROLE_ADMIN');
+        if (!$this->isAdmin()) {
+            return array('ROLE_USER');
         }
 
-        return array('ROLE_USER');
+        return array('ROLE_ADMIN');
     }
 
     public function eraseCredentials()
@@ -196,6 +209,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->email,
             $this->password,
+            $this->isActive,
+
             // see section on salt below
             // $this->salt,
         ));
@@ -208,8 +223,30 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->email,
             $this->password,
+            $this->isActive,
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);
+
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
     }
 }
