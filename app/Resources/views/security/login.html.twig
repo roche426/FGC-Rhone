@@ -2,31 +2,51 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container contain-home p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <h1>Connexion</h1>
+            </div>
+        </div>
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <p>Post haec indumentum regale quaerebatur et ministris fucandae purpurae tortis confessisque pectoralem tuniculam</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
                 <form action="{{ path('login') }}" method="post">
-                    <label for="username">Email :</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-                    <label for="password">Mot de passe:</label>
-                    <input type="password" id="password" name="_password" />
-
-
-                    <button type="submit">login</button>
-
+                    <label for="username">Email</label>
+                    <input type="text" class="form-control" id="username" name="_username" value="{{last_username }}" placeholder="Saisissez votre adresse email" />
+                    <small class="form-text text-muted mb-2">Nous ne partagerons jamais votre email avec quelqu'un d'autre.</small>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="_password" placeholder="Saisissez votre mot de passe"/>
                     <small class="form-text text-muted"><a href="{{ path('forgotPassword') }}">Mot de passe oublié ?</a></small>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-light">Se connecter</button>
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <a href="{{ path('registration') }}"> Inscription</a>
-            <div>
+    </div>
+    <div class="container contain-home mt-5 p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <h1>Pas encore inscrit?</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
+                <p>Post haec indumentum regale quaerebatur et ministris fucandae purpurae tortis confessisque pectoralem tuniculam</p>
+            </div>
+        </div>
+            <div class="col-md-8 offset-md-2 text-center">
+                <a type="button" class="btn btn-light" href="{{ path('registration') }}"> S'inscire</a>
+            </div>
         </div>
     </div>
 {% endblock %}

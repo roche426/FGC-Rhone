@@ -6,7 +6,7 @@ body{
     background-size: cover;
 }
 
-h1{
+h1, .navbar-brand{
     text-shadow: 2px 2px rgb(181, 107, 42), -2px 2px rgb(181, 107, 42), 2px -2px rgb(181, 107, 42);
     color: white;
     border-radius: 25px;
@@ -65,6 +65,8 @@ h1{
 
 .navbar-brand{
     font-size: 30px;
+    color: white!important;
+
 }
 
 .dropdown-item{
