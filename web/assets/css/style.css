@@ -1,4 +1,77 @@
+/* == Mise en forme générale == */
+
+body{
+    background-color: #321c0d;
+    color: white;
+    font-family: Ubuntu;
+}
+
+.header-nav{
+    background: #002e13!important;
+}
+
+.header-nav a{
+    color: white!important;
+}
+
+.homepage-contain-slide1{
+    margin-top: 150px;
+    color: #002e13;
+}
+
+.homepage-contain-slide1 h1{
+    font-size: 70px;
+}
+
+.homepage-contain-slide1{
+    margin-top: 150px;
+    color: #002e13;
+}
+
+.homepage-contain-slide2 {
+    margin-top: 250px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50% 20% / 10% 40%;
+}
+
+.homepage-contain-slide3{
+    margin-top: 250px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50% 20% / 10% 40%;
+}
+
+.homepage-contain-slide3 a{
+    font-size: 30px;
+    color: white;
+}
+
+
+
+#slide1 {
+    background: url("/assets/images/bg-hunt.jpg") center 0 no-repeat fixed;
+    height: 1000px;
+}
+
+#slide2 {
+    background: url("/assets/images/bg-forest.jpg") center 0 no-repeat fixed;
+    height: 1000px;
+}
+#slide3 {
+    background: url("/assets/images/bg-river.jpg") center 0 no-repeat fixed;
+    height: 1000px;
+
+}
+
 .img-header{
     height: 100px;
     width: 100px;
 }
+
+.img-article {
+    width: 500px;
+    height: 300px;
+    float: left;
+    margin-right: 10px;
+}
+
+

@@ -191,7 +191,11 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        if (!$this->isAdmin()) {
+            return array('ROLE_USER');
+        }
+
+        return array('ROLE_ADMIN');
     }
 
     public function eraseCredentials()
