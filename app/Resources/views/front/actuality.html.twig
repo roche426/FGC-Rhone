@@ -2,7 +2,7 @@
 
 {% block body %}
     {% for article in articles %}
-    <a href="/blog/{{ article.id }}">{{ article.title }}</a>
+    <a href="{{ path('actuality') }}/{{ article.id }}">{{ article.title }}</a>
     {% endfor %}
 {% endblock %}
 

@@ -1,24 +1,18 @@
 /* == Mise en forme générale == */
-
 body{
-    background-color: #321c0d;
-    color: white;
+    color: black;
     font-family: Ubuntu;
+    background: url("https://wallpapertag.com/wallpaper/full/e/2/f/143523-light-brown-background-2880x1800-for-1080p.jpg");
+    background-size: cover;
 }
 
-.header-nav{
-    background: #002e13!important;
+h1{
+    text-shadow: 2px 2px rgb(181, 107, 42), -2px 2px rgb(181, 107, 42), 2px -2px rgb(181, 107, 42);
+    color: white;
+    border-radius: 25px;
 }
 
-.header-nav a{
-    color: white!important;
-}
-
-.homepage-contain-slide1{
-    margin-top: 150px;
-    color: #002e13;
-}
-
+/* == Homepage vitrine == */
 .homepage-contain-slide1 h1{
     font-size: 70px;
 }
@@ -45,7 +39,10 @@ body{
     color: white;
 }
 
-
+.homepage-contain-slide1{
+    margin-top: 150px;
+    color: #002e13;
+}
 
 #slide1 {
     background: url("/assets/images/bg-hunt.jpg") center 0 no-repeat fixed;
@@ -59,13 +56,38 @@ body{
 #slide3 {
     background: url("/assets/images/bg-river.jpg") center 0 no-repeat fixed;
     height: 1000px;
+}
 
+/* == NavBar == */
+.header-nav{
+    background-color: rgba(229, 193, 179, 0.6);
+}
+
+.navbar-brand{
+    font-size: 30px;
+}
+
+.dropdown-item{
+    color: black!important;
 }
 
 .img-header{
     height: 100px;
     width: 100px;
 }
+
+/* == Page Accueil == */
+.contain-home{
+    background-color: rgba(229, 193, 179, 0.2);
+    border-radius: 25px;
+}
+
+.img-chairman{
+    height: 230px;
+    width: 230px;
+    border-radius: 50%;
+}
+
 
 .img-article {
     width: 500px;

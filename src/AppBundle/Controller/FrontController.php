@@ -6,16 +6,25 @@ use AppBundle\Entity\Blog;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class FrontController extends Controller
 {
     /**
      * @Route("/", name="index")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return $this->render('front/index.html.twig');
+    }
+
+    /**
+     * @Route("/home", name="homePage")
+     */
+    public function homePageAction()
+    {
+        $em = $this->getDoctrine();
+        $blogs = $em->getRepository(Blog::class)->findTwoLastArticles();
+        return $this->render('front/homePage.html.twig', ['blogs' => $blogs]);
     }
 
     /**
@@ -35,7 +44,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/actuality", name="actuality")
+     * @Route("/blog", name="actuality")
      */
     public function actualityAction()
     {
