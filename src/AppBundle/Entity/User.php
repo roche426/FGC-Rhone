@@ -21,12 +21,12 @@ class User implements AdvancedUserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(name="first_name", type="string", length=25, unique=true)
+     * @ORM\Column(name="first_name", type="string", length=25)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(name="last_name", type="string", length=25, unique=true)
+     * @ORM\Column(name="last_name", type="string", length=25)
      */
     private $lastname;
 
@@ -34,7 +34,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="password", type="string", length=64)
      */
     private $password;
-
 
     /**
      * @ORM\Column(name="email", type="string", length=254, unique=true)
