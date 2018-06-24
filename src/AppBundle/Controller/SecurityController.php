@@ -45,9 +45,12 @@ class SecurityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
-            $user->setToken(uniqid('FGPR'));
+            if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*\W)#', $user->getPassword()) &&
+                strlen($user->getPassword()) >= 8) {
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+                $user->setToken(uniqid('FGPR', true));
+
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
@@ -57,11 +60,14 @@ class SecurityController extends Controller
             $mailer->accountActivationEmail($user);
 
             $userEmail = $user->getEmail();
-            $flashType = 'success';
-            $flashMessage = 'Vous êtes enregistré ! Afin de finaliser votre inscription, un email de confirmation vous a été transmis à l\'adresse suivante : ' . $userEmail;
-            $this->addFlash($flashType, $flashMessage);
+            $this->addFlash('success', 'Vous êtes enregistré ! Afin de finaliser votre inscription, un email de confirmation vous a été transmis à l\'adresse suivante : ' . $userEmail);
 
             return $this->redirectToRoute('login');
+            }
+
+            $this->addFlash('warning', 'Le mot de passe doit comprendre au moins une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial et avoir au moins 8 caractères');
+
+
         }
 
         return $this->render(
@@ -134,7 +140,7 @@ class SecurityController extends Controller
 
             if ($user) {
                 //Unique Id Token fill in
-                $user->setToken(uniqid('mf'));
+                $user->setToken(uniqid('FGPR', true));
 
                 //Token persisted in db
                 $em->persist($user);

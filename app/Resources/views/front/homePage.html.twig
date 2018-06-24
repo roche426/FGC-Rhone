@@ -9,10 +9,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="text-center mb-3">
-                {% for blog in blogs %}
-                    <h3 class="mb-4">{{ blog.title }} <a href="{{ path('actuality') }}/{{ blog.id }}">Lire l'article</a></h3>
-                {% endfor %}
+                {% if blogs %}
+                    {% for blog in blogs %}
+                        <div class="text-center mb-3">
+                            <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blog.title }}
+                                <a href="{{ path('actuality') }}/{{ blog.id }}"> : Lire l'article</a>
+                            </h3>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-6 offset-md-3 text-center">
+                        <h3 >Pas encore d'articles publiés</h3>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>

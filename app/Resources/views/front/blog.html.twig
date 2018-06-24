@@ -4,15 +4,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="text-center col-md-6 offset-md-3">
+            <div class="text-center col-md-8 offset-md-2">
                 <h1>{{ article.title }}</h1>
             </div>
         </div>
         <div class="row">
             <div>
-                {% if article.imageArticle %}
+                {% if article%}
                     {{ article.imageArticle }}
-                {% endif %}
                 <img class="img-article" src="/assets/images/img.jpg">
                 <p class="text-justify">{{ article.article }}</p>
             </div>
@@ -22,6 +21,14 @@
                 <h5>{{ article.author }}</h5>
             </div>
         </div>
+        {% else %}
+        <div class="row">
+            <div class="col-md-2 offset-md-8">
+                <h5>Pas d'article disponible</h5>
+            </div>
+        </div>
+        {% endif %}
+
 
 
     </div>
