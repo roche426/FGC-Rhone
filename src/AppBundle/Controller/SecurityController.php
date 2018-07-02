@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\PasswordType;
 use AppBundle\Form\UserType;
 use AppBundle\Mail\Mailer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -32,7 +33,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/register", name="registration")
+     * @Route("/admin/register", name="registration")
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, Mailer $mailer)
     {
@@ -44,12 +45,10 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*\W)#', $user->getPassword()) &&
-                strlen($user->getPassword()) >= 8) {
-                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-                $user->setPassword($password);
-                $user->setToken(uniqid('FGPR', true));
+
+            $user->setToken(uniqid('FGPR', true));
+            $password = $passwordEncoder->encodePassword($user, $user->getToken());
+            $user->setPassword($password);
 
 
             // 4) save the User!
@@ -57,7 +56,7 @@ class SecurityController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $mailer->accountActivationEmail($user);
+            $mailer->registrationActivationEmail($user);
 
             $userEmail = $user->getEmail();
             $this->addFlash('success', 'Vous êtes enregistré ! Afin de finaliser votre inscription, un email de confirmation vous a été transmis à l\'adresse suivante : ' . $userEmail);
@@ -68,8 +67,6 @@ class SecurityController extends Controller
             $this->addFlash('warning', 'Le mot de passe doit comprendre au moins une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial et avoir au moins 8 caractères');
 
 
-        }
-
         return $this->render(
             'security/register.html.twig',
             array('form' => $form->createView())
@@ -77,36 +74,63 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/confirmation_mail/{slug}", name="mailConfirmation", defaults={"slug" = null})
+     * @Route("/registration-confirmation/{slug}", name="registrationConfirmation", defaults={"slug" = null})
+     * @Method({"GET", "POST"})
      */
-    public function mailConfirmation(Request $request)
+    public function registrationConfirmation(Request $request, UserPasswordEncoderInterface $encoder)
     {
-        $tokenUrl = $request->get('slug');
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\PasswordType', $user);
+        $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(
-            ['token' => $tokenUrl]
-        );
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        if($user) {
-            $user->setToken(null);
+            //form fill in
+            $userForm = $form->getData();
+            $plainPassword = $userForm->getPassword();
 
-            $user->setIsActive(true);
+            //URL information
+            $tokenUrl= $request->get('slug');
 
-            $em->persist($user);
-            $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->findOneBy(
+                ['token' => $tokenUrl]
+            );
 
-            $flashType = 'success';
-            $flashMessage = 'Votre compte est activé !';
+            if($user) {
+                //user Update
+                $encoded = $encoder->encodePassword($user, $plainPassword); //password encoded
+                $user->setPassword($encoded); //user Password encoded update
 
-        } else {
-            $flashType = 'danger';
-            $flashMessage = 'Impossible d\'activer le compte.';
+                $user->setToken(null); //user token update
+                $user->setIsActive(true);
+
+                //user updates persisted in db
+                $em->persist($user);
+                $em->flush();
+
+                //message flash parameters
+                $flashType = 'success';
+                $flashMessage = 'Votre inscription est finalisée !';
+
+            } else {
+                //message flash parameters
+                $flashType = 'danger';
+                $flashMessage = 'Une erreur est survenue lors de l\'inscription!';
+            }
+
+            //message flash
+            $this->addFlash($flashType, $flashMessage);
+
+            //Redirection
+            return ($this->redirectToRoute('login'));
+
         }
 
-        $this->addFlash($flashType, $flashMessage);
-
-        return ($this->redirectToRoute('login'));
+        return $this->render('security/password.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
     }
 
 
