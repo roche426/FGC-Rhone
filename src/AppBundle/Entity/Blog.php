@@ -3,8 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Blog
  *
@@ -24,30 +23,30 @@ class Blog
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="author", type="string", length=50)
      */
     private $author;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="article", type="text")
      */
     private $article;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="image_article", type="string", length=255, nullable=true)
      */
+
     private $imageArticle;
 
     /**

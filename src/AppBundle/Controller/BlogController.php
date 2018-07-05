@@ -69,4 +69,18 @@ class BlogController extends Controller
             ['form' => $form->createView()]);
     }
 
+    /**
+    * @Route("/delete{id}", name="blog_delete")
+     */
+    public function deleteBlogAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Blog::class)->find($id);
+
+        $em->remove($blog);
+        $em->flush();
+
+        return $this->redirectToRoute('blog_home');
+    }
+
 }
