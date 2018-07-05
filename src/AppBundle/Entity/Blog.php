@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Blog
@@ -48,6 +49,11 @@ class Blog
      * @ORM\Column(name="image_article", type="string", length=255, nullable=true)
      */
     private $imageArticle;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
+     */
+    private $user;
 
 
     /**
@@ -155,5 +161,23 @@ class Blog
     {
         return $this->imageArticle;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
 }
 

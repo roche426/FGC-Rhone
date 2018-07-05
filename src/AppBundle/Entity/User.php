@@ -61,6 +61,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $token;
 
     /**
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
+     */
+    private $articles;
+
+    /**
      * @return mixed
      */
     public function getFirstname()
@@ -148,6 +153,22 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->isActive = $isActive;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param mixed $articles
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
     }
 
     /**

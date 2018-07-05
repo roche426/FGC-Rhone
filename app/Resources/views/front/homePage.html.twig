@@ -8,22 +8,21 @@
                 <h1>Les dernières actualités</h1>
             </div>
         </div>
-        <div class="row">
                 {% if blogs %}
                     {% for blog in blogs %}
-                        <div class="text-center mb-3">
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-3">
                             <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blog.title }}
                                 <a href="{{ path('actuality') }}/{{ blog.id }}"> : Lire l'article</a>
                             </h3>
                         </div>
+                    </div>
                     {% endfor %}
                 {% else %}
                     <div class="col-md-6 offset-md-3 text-center">
                         <h3 >Pas encore d'articles publiés</h3>
                     </div>
                 {% endif %}
-
-            </div>
         </div>
     </div>
     <div class="container contain-home mt-5 p-3">
