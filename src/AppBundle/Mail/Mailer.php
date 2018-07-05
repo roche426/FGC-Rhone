@@ -38,11 +38,11 @@ class Mailer
         $this->sendMail($to, $subject, $body);
     }
 
-    public function accountActivationEmail(User $user)
+    public function registrationActivationEmail(User $user)
     {
         $subject = "Confirmation d'inscription";
         $to = $user->getEmail();
-        $body = $this->templating->render('mail/accountActivation.html.twig', array('user' => $user));
+        $body = $this->templating->render('mail/registrationActivation.html.twig', array('user' => $user));
         $this->sendMail($to, $subject, $body);
     }
 
