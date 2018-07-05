@@ -21,7 +21,8 @@
                 <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blogs.title }}</h3>
             </div>
             <div class="col-md-2 text-center">
-                <a href="{{ path('blog_delete', {id:blogs.id}) }}">Supprimer</a>
+                <a class="alert-delete" href="{{ path('blog_delete', {id:blogs.id}) }}"
+                   data-confirm-message="Confirmer la supression de l'article?">Supprimer</a>
             </div>
             <div class="col-md-2 text-center">
                 <a href="{{ path('blog_edit', {id:blogs.id}) }}">Modifier</a>
@@ -33,7 +34,5 @@
             <h3 >Pas encore d'articles publiés</h3>
         </div>
     {% endif %}
-</div>
-
 {% endblock %}
 

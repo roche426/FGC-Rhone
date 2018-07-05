@@ -74,7 +74,6 @@ class BlogController extends Controller
      */
     public function deleteBlogAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->find($id);
 
