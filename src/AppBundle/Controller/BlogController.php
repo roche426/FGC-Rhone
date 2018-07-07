@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
+use AppBundle\Images\ImageManipulator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BlogController extends Controller
 {
+
     /**
      * @Route("/", name="blog_home")
      */
@@ -26,15 +28,36 @@ class BlogController extends Controller
     /**
     * @Route("/edit/{id}", name="blog_edit")
      */
-    public function editBlogAction(Request $request, $id)
+    public function editBlogAction(Request $request, ImageManipulator $imageManipulator, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->find($id);
+
+        $currentPicure = $blog->getImageArticle();
 
         $editform = $this->createForm('AppBundle\Form\BlogType', $blog);
         $editform->handleRequest($request);
 
         if ($editform->isSubmitted() && $editform->isValid()) {
+
+            if ($editform['imageArticle']->getdata()) {
+                $pictureProfil = $blog->getImageArticle();
+
+                $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
+
+                $imageManipulator->handleUploadedArticlePicture($pictureProfil, $fileNamePicture);
+
+                $blog->setImageArticle($this->getParameter('upload_Path_Article_Picture') . $fileNamePicture);
+
+                if ($currentPicure) {
+                    unlink($currentPicure);
+                }
+            }
+
+            if (!$editform['imageArticle']->getdata()) {
+                $blog->setImageArticle($currentPicure);
+            }
+
             $em->persist($blog);
             $em->flush();
 
@@ -48,7 +71,7 @@ class BlogController extends Controller
     /**
     * @Route("/new", name="blog_new")
      */
-    public function newBlogAction(Request $request)
+    public function newBlogAction(Request $request, ImageManipulator $imageManipulator)
     {
         $blog = new Blog();
 
@@ -57,6 +80,16 @@ class BlogController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $blog->setUser($this->getUser());
+
+            if ($form['imageArticle']->getdata()) {
+                $pictureProfil = $blog->getImageArticle();
+
+                $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
+
+                $imageManipulator->handleUploadedArticlePicture($pictureProfil, $fileNamePicture);
+
+                $blog->setImageArticle( $this->getParameter('upload_Path_Article_Picture') . $fileNamePicture);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($blog);
@@ -76,6 +109,12 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->find($id);
+
+        $currentPicture = $blog->getImageArticle();
+
+        if ($currentPicture) {
+            unlink($currentPicture);
+        }
 
         $em->remove($blog);
         $em->flush();

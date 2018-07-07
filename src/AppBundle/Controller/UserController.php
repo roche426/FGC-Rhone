@@ -8,13 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Class UserController
  * @package AppBundle\Controller
- * @Route("/user", name="user")
+ * @Route("/user")
 
  */
 class UserController extends Controller
 {
     /**
-     * @Route("/connected", name="connected")
+     * @Route("/home", name="member_area")
      */
     public function ConnectedAction()
     {

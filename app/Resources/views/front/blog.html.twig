@@ -11,8 +11,8 @@
         <div class="row">
             <div>
                 {% if article%}
-                    {{ article.imageArticle }}
-                <img class="img-article" src="/assets/images/img.jpg">
+
+                <img class="img-article" src="/{{ article.imageArticle }}">
                 <p class="text-justify">{{ article.article }}</p>
             </div>
         </div>

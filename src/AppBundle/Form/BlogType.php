@@ -19,7 +19,9 @@ class BlogType extends AbstractType
             ->add('title', TextType::class)
             ->add('author', TextType::class)
             ->add('article', TextType::class)
-            ->add('imageArticle', FileType::class, array('required' => false));
+            ->add('imageArticle', FileType::class, array(
+                'required' => false,
+                'data_class' => null));
     }
 
     /**
@@ -28,7 +30,8 @@ class BlogType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Blog'
+            'data_class' => 'AppBundle\Entity\Blog',
+            'with_upload_file' => true,
         ));
     }
 
