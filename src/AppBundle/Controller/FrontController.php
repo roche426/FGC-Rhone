@@ -3,14 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
+use AppBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class FrontController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/")
      */
     public function indexAction()
     {
@@ -29,17 +31,36 @@ class FrontController extends Controller
 
     /**
      * @param $id
-     * @Route("/blog/{id}"), name="showArticle"
+     * @Route("/blog/{id}")
      * @Method({"POST", "GET"})
      * @return string
      */
-    public function displayBlogAction($id)
+    public function displayBlogAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository(Blog::class)->findOneBy(array('id' => $id));
+        $articles = $em->getRepository(Blog::class)->findOneBy(array('id' => $id));
+        $comments = $em->getRepository(Comment::class)->findAll(array('id' => $id));
+
+        $comment = new Comment();
+        $form = $this->createForm('AppBundle\Form\CommentType', $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setPublicationDate(new \DateTime('now'));
+            $comment->setUser($this->getUser());
+            $comment->setArticle($articles);
+
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirect($id);
+        }
 
         return $this->render('front/blog.html.twig', array(
-            'article' => $article,
+            'article' => $articles,
+            'comments' => $comments,
+            'form' => $form->createView()
         ));
     }
 

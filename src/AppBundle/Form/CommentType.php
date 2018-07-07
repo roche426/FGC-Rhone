@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BlogType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,12 +16,7 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('author', TextType::class)
-            ->add('article', TextType::class)
-            ->add('imageArticle', FileType::class, array(
-                'required' => false,
-                'data_class' => null));
+            ->add('comment', TextType::class);
     }
 
     /**
@@ -30,8 +25,7 @@ class BlogType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Blog',
-            'with_upload_file' => true,
+            'data_class' => 'AppBundle\Entity\Comment'
         ));
     }
 
@@ -40,7 +34,7 @@ class BlogType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_blog';
+        return 'appbundle_comment';
     }
 
 

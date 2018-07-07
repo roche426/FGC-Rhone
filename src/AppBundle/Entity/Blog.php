@@ -54,6 +54,10 @@ class Blog
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="comments")
+     */
+    private $comments;
 
     /**
      * Get id
@@ -176,6 +180,23 @@ class Blog
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
 
 
 }

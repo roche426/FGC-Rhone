@@ -11,8 +11,8 @@
         <div class="row">
             <div>
                 {% if article%}
-                    {{ article.imageArticle }}
-                <img class="img-article" src="/assets/images/img.jpg">
+
+                <img class="img-article" src="/{{ article.imageArticle }}">
                 <p class="text-justify">{{ article.article }}</p>
             </div>
         </div>
@@ -25,6 +25,37 @@
         <div class="row">
             <div class="col-md-2 offset-md-8">
                 <h5>Pas d'article disponible</h5>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Commentaires</h3>
+            </div>
+        </div>
+        {% if comments %}
+            {% for comment in comments %}
+            <div class="row">
+                <div class="col-md-2 offset-md-2 text-center">
+                    <h5> {{ comment.user.firstName }} {{ comment.user.lastName }} </h5>
+                </div>
+                <div class="col-md-6">
+                    <p>{{ comment.comment }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun commentaire</p>
+        {% endif %}
+
+        {% if app.user %}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+
+                <input type="submit" value="Enregistrer" />
+                {{ form_end(form) }}
             </div>
         </div>
         {% endif %}

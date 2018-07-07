@@ -8,11 +8,11 @@ $(".alert-delete").click(function(e) {
         message: $message,
         buttons: {
             confirm: {
-                label: 'Yes',
+                label: 'Oui',
                 className: 'btn-success'
             },
             cancel: {
-                label: 'No',
+                label: 'Non',
                 className: 'btn-danger'
             }
         },

@@ -1,7 +1,7 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    #parameter_name: value
+    upload_Path_Article_Picture: 'uploaded_files/pictures_articles/'
 
 services:
     # default configuration for services in *this* file
@@ -36,3 +36,8 @@ services:
 
     AppBundle\Mail\Mailer:
         $mail:    '%mail%'
+
+    claviska\SimpleImage:
+
+    AppBundle\Images\ImageManipulator:
+        $uploadPath: '%kernel.root_dir%/../web/uploaded_files/pictures_articles/'
