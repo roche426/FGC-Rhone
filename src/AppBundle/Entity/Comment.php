@@ -4,13 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * Blog
+ * Comment
  *
- * @ORM\Table(name="blog")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BlogRepository")
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-class Blog
+class  Comment
 {
     /**
      * @var int
@@ -24,35 +25,27 @@ class Blog
     /**
      * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="title", type="string", length=100)
+     * @ORM\Column(name="comment", type="string", length=255)
      */
-    private $title;
+    private $comment;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="author", type="string", length=50)
+     * @var \DateTime
+     * @ORM\Column(name="publication_date", type="date")
      */
-    private $author;
+
+    private $publicationDate;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="article", type="text")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     */
+
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Blog", inversedBy="comments")
      */
     private $article;
-
-    /**
-     * @var string
-     * @ORM\Column(name="image_article", type="string", length=255, nullable=true)
-     */
-
-    private $imageArticle;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
-     */
-    private $user;
 
 
     /**
@@ -66,99 +59,35 @@ class Blog
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Blog
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
      * @return string
      */
-    public function getTitle()
+    public function getComment()
     {
-        return $this->title;
+        return $this->comment;
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Blog
+     * @param string $comment
      */
-    public function setAuthor($author)
+    public function setComment($comment)
     {
-        $this->author = $author;
-
-        return $this;
+        $this->comment = $comment;
     }
 
     /**
-     * Get author
-     *
-     * @return string
+     * @return \DateTime
      */
-    public function getAuthor()
+    public function getPublicationDate()
     {
-        return $this->author;
+        return $this->publicationDate;
     }
 
     /**
-     * Set article
-     *
-     * @param string $article
-     *
-     * @return Blog
+     * @param \DateTime $publicationDate
      */
-    public function setArticle($article)
+    public function setPublicationDate($publicationDate)
     {
-        $this->article = $article;
-
-        return $this;
-    }
-
-    /**
-     * Get article
-     *
-     * @return string
-     */
-    public function getArticle()
-    {
-        return $this->article;
-    }
-
-    /**
-     * Set imageArticle
-     *
-     * @param string $imageArticle
-     *
-     * @return Blog
-     */
-    public function setImageArticle($imageArticle)
-    {
-        $this->imageArticle = $imageArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get imageArticle
-     *
-     * @return string
-     */
-    public function getImageArticle()
-    {
-        return $this->imageArticle;
+        $this->publicationDate = $publicationDate;
     }
 
     /**
@@ -176,6 +105,23 @@ class Blog
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param mixed $article
+     */
+    public function setArticle($article)
+    {
+        $this->article = $article;
+    }
+
 
 
 }
