@@ -50,12 +50,9 @@ h1, .navbar-brand{
 }
 
 #slide2 {
-    background: url("/assets/images/bg-forest.jpg") center 0 no-repeat fixed;
-    height: 1000px;
-}
-#slide3 {
     background: url("/assets/images/bg-river.jpg") center 0 no-repeat fixed;
     height: 1000px;
+    color: white;
 }
 
 /* == NavBar == */
@@ -97,5 +94,4 @@ h1, .navbar-brand{
     float: left;
     margin-right: 10px;
 }
-
 

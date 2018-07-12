@@ -27,7 +27,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: /user/connected
+                default_target_path: member_area
 
             logout:
                 invalidate_session: true

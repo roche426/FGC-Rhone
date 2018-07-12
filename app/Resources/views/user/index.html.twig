@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Espace membre</h1>
+    <div class="container">
+        <div class="row">
+            <h1>Espace membre</h1>
+        </div>
+        <div class="row">
+            <a class="btn btn-darkg" href="{{ path('blog_home') }}">Vos articles</a>
+        </div>
+    </div>
 
-    <a href="{{ path('blog_home') }}">Vos articles</a>
 {% endblock %}
 
 

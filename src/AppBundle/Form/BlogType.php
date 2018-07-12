@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +19,7 @@ class BlogType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('author', TextType::class)
-            ->add('article', TextType::class)
+            ->add('article', FroalaEditorType::class)
             ->add('imageArticle', FileType::class, array(
                 'required' => false,
                 'data_class' => null));
@@ -34,14 +35,4 @@ class BlogType extends AbstractType
             'with_upload_file' => true,
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'appbundle_blog';
-    }
-
-
 }

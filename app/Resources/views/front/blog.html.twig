@@ -13,7 +13,7 @@
                 {% if article%}
 
                 <img class="img-article" src="/{{ article.imageArticle }}">
-                <p class="text-justify">{{ article.article }}</p>
+                <p class="text-justify">{{ froala_display( article.article ) }}</p>
             </div>
         </div>
         <div class="row">
