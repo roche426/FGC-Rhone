@@ -35,14 +35,4 @@ class BlogType extends AbstractType
             'with_upload_file' => true,
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'appbundle_blog';
-    }
-
-
 }
