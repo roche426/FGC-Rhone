@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\FirstConnexionType;
+use AppBundle\Form\ProfilEditionType;
+use AppBundle\Images\ImageManipulator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,14 +27,24 @@ class UserController extends Controller
     /**
      * @Route("/first-connexion", name="first_connexion")
      */
-    public function firstConnectionAction(Request $request)
+    public function firstConnectionAction(Request $request, ImageManipulator $imageManipulator)
     {
         $user = $this->getUser();
 
-        $form = $this->createForm(FirstConnexionType::class, $user);
+        $form = $this->createForm(ProfilEditionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form['pictureProfil']->getdata()) {
+                $pictureProfil = $user->getPictureProfil();
+
+                $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
+
+                $imageManipulator->handleUploadedPicture($pictureProfil, $fileNamePicture);
+
+                $user->setPictureProfil( $this->getParameter('upload_Path_Profil_Picture') . $fileNamePicture);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -47,14 +58,33 @@ class UserController extends Controller
     /**
      * @Route("/edit-profil", name="edit_profil")
      */
-    public function editProfilAction(Request $request)
+    public function editProfilAction(Request $request, ImageManipulator $imageManipulator)
     {
         $user = $this->getUser();
+        $currentPicture = $this->getUser()->getPictureProfil();
 
-        $editform = $this->createForm(FirstConnexionType::class, $user);
+        $editform = $this->createForm(ProfilEditionType::class, $user);
         $editform->handleRequest($request);
 
         if ($editform->isSubmitted() && $editform->isValid()) {
+
+            if ($editform['pictureProfil']->getdata()) {
+                $pictureProfil = $user->getPictureProfil();
+
+                $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
+
+                $imageManipulator->handleUploadedPicture($pictureProfil, $fileNamePicture);
+
+                $user->setPictureProfil( $this->getParameter('upload_Path_Profil_Picture') . $fileNamePicture);
+
+                if ($currentPicture) {
+                    unlink($currentPicture);
+                }
+            }
+
+            if (!$editform['pictureProfil']->getdata()) {
+                $user->setPicureProfil($currentPicture);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

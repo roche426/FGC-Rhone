@@ -4,11 +4,12 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FirstConnexionType extends AbstractType
+class ProfilEditionType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -21,7 +22,11 @@ class FirstConnexionType extends AbstractType
             ->add('postalCode', TextType::class)
             ->add('address', TextType::class)
             ->add('additionalAddress', TextType::class, ['required' => false])
-            ->add('phoneNumber', TextType::class);
+            ->add('phoneNumber', TextType::class)
+            ->add('pictureProfil', FileType::class, array(
+                'required' => false,
+                'data_class' => null
+            ));
 
 
     }

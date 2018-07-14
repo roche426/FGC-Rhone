@@ -23,7 +23,7 @@ class ImageManipulator
     /**
      * Upload and resize of article picture
      */
-    public function handleUploadedArticlePicture($picture, $fileNamePicture)
+    public function handleUploadedPicture($picture, $fileNamePicture)
     {
         if (isset($picture)) {
             $this->simpleImage
@@ -32,4 +32,5 @@ class ImageManipulator
             ->toFile($this->uploadPath.$fileNamePicture);
         }
     }
+
 }
