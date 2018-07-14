@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CommentType extends AbstractType
+class FirstConnexion extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,7 +16,11 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment', TextType::class);
+            ->add('title', TextType::class)
+            ->add('author', TextType::class)
+            ->add('imageArticle', FileType::class, array(
+                'required' => false,
+                'data_class' => null));
     }
 
     /**
@@ -25,8 +29,8 @@ class CommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Comment'
+            'data_class' => 'AppBundle\Entity\User',
+            'with_upload_file' => true,
         ));
     }
-
 }

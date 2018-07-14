@@ -45,7 +45,7 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-
+            $user->setRegistrationDate(new \DateTime('now'));
             $user->setToken(uniqid('FGPR', true));
             $password = $passwordEncoder->encodePassword($user, $user->getToken());
             $user->setPassword($password);

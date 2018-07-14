@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -74,5 +75,18 @@ class FrontController extends Controller
 
         return $this->render('front/actuality.html.twig', array('articles' => $articles));
     }
+
+    /**
+     * @Route("/bureau-members", name="bureauMembers")
+     */
+    public function bureauMembersAction()
+    {
+        $em = $this->getDoctrine()->getRepository(User::class);
+        $members = $em->findAll();
+
+        return $this->render('front/bureauMembers.html.twig', array('members' => $members));
+    }
+
+
 
 }
