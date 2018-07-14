@@ -21,8 +21,7 @@ class ImageManipulator
     }
 
     /**
-     * Upload and resize of profil picture
-     * @param User $user
+     * Upload and resize of article picture
      */
     public function handleUploadedArticlePicture($picture, $fileNamePicture)
     {

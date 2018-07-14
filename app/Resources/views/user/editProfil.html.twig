@@ -6,10 +6,12 @@
             <h1>Mes informations</h1>
         </div>
         <div class="row">
-            {{ form_start(form) }}
-            <input type="submit" value="valider">
-            {{ form_end(form) }}
+            {{ form_start(editForm) }}
         </div>
+        <div class="row">
+            <input type="submit" value="modifier">
+        </div>
+        {{ form_end(editForm) }}
     </div>
 
 {% endblock %}

@@ -21,7 +21,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/home", name="homePage")
+     * @Route("/home", name="home_page")
      */
     public function homePageAction()
     {
@@ -77,7 +77,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/bureau-members", name="bureauMembers")
+     * @Route("/bureau-members", name="bureau_members")
      */
     public function bureauMembersAction()
     {

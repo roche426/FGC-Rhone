@@ -67,9 +67,9 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @var string
-     * @ORM\Column(name="adress", type="string", nullable=true)
+     * @ORM\Column(name="address", type="string", nullable=true)
      */
-    private $adress;
+    private $address;
 
     /**
      * @var string
@@ -112,9 +112,9 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="number_phone", type="string", nullable=true)
+     * @ORM\Column(name="phone_number", type="string", nullable=true)
      */
-    private $numberPhone;
+    private $phoneNumber;
 
     /**
      * @var string
@@ -347,17 +347,17 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return string
      */
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
      * @param string $adress
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
     }
 
     /**
@@ -395,17 +395,17 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return string
      */
-    public function getNumberPhone()
+    public function getPhoneNumber()
     {
-        return $this->numberPhone;
+        return $this->phoneNumber;
     }
 
     /**
-     * @param string $numberPhone
+     * @param string $phoneNumber
      */
-    public function setNumberPhone($numberPhone)
+    public function setPhoneNumber($phoneNumber)
     {
-        $this->numberPhone = $numberPhone;
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**

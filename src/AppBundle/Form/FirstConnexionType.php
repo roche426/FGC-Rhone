@@ -3,12 +3,12 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FirstConnexion extends AbstractType
+class FirstConnexionType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,11 +16,14 @@ class FirstConnexion extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('author', TextType::class)
-            ->add('imageArticle', FileType::class, array(
-                'required' => false,
-                'data_class' => null));
+            ->add('birthDate', DateType::class)
+            ->add('city', TextType::class)
+            ->add('postalCode', TextType::class)
+            ->add('address', TextType::class)
+            ->add('additionalAddress', TextType::class, ['required' => false])
+            ->add('phoneNumber', TextType::class);
+
+
     }
 
     /**
