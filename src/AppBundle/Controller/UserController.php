@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
-     * @Route("/home", name="member_area")
+     * @Route("/", name="member_area")
      */
     public function connectedAction()
     {

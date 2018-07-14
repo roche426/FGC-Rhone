@@ -41,4 +41,4 @@ services:
     claviska\SimpleImage:
 
     AppBundle\Images\ImageManipulator:
-        $uploadPath: '%kernel.root_dir%/../web/uploaded_files/pictures_articles/'
+        $uploadPath: '%kernel.root_dir%/../web/uploaded_files/pictures_profil/'
