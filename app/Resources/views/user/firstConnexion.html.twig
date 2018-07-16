@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Mes informations</h1>
+        </div>
+        <div class="row">
+            {{ form_start(form) }}
+            <input type="submit" value="valider">
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+

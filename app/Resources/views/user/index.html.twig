@@ -6,7 +6,49 @@
             <h1>Espace membre</h1>
         </div>
         <div class="row">
-            <a class="btn btn-darkg" href="{{ path('blog_home') }}">Vos articles</a>
+            <div class="col-md-4">
+                <div class="row">
+                    <a class="btn btn-darkg" href="{{ path('blog_home') }}">Voir vos articles</a>
+                </div>
+                <div class="row">
+                    <a class="btn btn-darkg" href="{{ path('edit_profil') }}">Modifier votre profil</a>
+                </div>
+                <div class="row">
+                    <a class="btn btn-darkg" href="{{ path('add_files') }}">Vos documents</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <h1>Mon profil</h1>
+                </div>
+                <div class="row">
+                    <img src="/{{ app.user.pictureProfil }}">
+                </div>
+                <div class="row">
+                    <p>{{ app.user.firstName }}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.lastName }}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.birthDate | date('d-M-Y')}}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.address }}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.additionalAddress }}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.city }}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.postalCode }}</p>
+                </div>
+                <div class="row">
+                    <p>{{ app.user.description }}</p>
+                </div>
+            </div>
         </div>
     </div>
 

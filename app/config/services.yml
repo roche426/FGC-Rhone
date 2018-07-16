@@ -2,6 +2,8 @@
 # https://symfony.com/doc/current/service_container.html
 parameters:
     upload_Path_Article_Picture: 'uploaded_files/pictures_articles/'
+    upload_Path_Profil_Picture: 'uploaded_files/pictures_profil/'
+    IdCard_Directory: '%kernel.project_dir%/private/idCards/'
 
 services:
     # default configuration for services in *this* file
@@ -40,4 +42,4 @@ services:
     claviska\SimpleImage:
 
     AppBundle\Images\ImageManipulator:
-        $uploadPath: '%kernel.root_dir%/../web/uploaded_files/pictures_articles/'
+        $uploadPath: '%kernel.root_dir%/../web/uploaded_files/pictures_profil/'

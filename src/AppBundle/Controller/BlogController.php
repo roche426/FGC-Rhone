@@ -28,12 +28,12 @@ class BlogController extends Controller
     /**
     * @Route("/edit/{id}", name="blog_edit")
      */
-    public function editBlogAction(Request $request, ImageManipulator $imageManipulator, $id)
+    public function editBlogAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->find($id);
 
-        $currentPicure = $blog->getImageArticle();
+        $currentPicture = $blog->getImageArticle();
 
         $editform = $this->createForm('AppBundle\Form\BlogType', $blog);
         $editform->handleRequest($request);
@@ -45,17 +45,17 @@ class BlogController extends Controller
 
                 $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
 
-                $imageManipulator->handleUploadedArticlePicture($pictureProfil, $fileNamePicture);
+                $pictureProfil->move($this->getParameter('upload_Path_Article_Picture'), $fileNamePicture);
 
                 $blog->setImageArticle($this->getParameter('upload_Path_Article_Picture') . $fileNamePicture);
 
-                if ($currentPicure) {
-                    unlink($currentPicure);
+                if ($currentPicture) {
+                    unlink($currentPicture);
                 }
             }
 
             if (!$editform['imageArticle']->getdata()) {
-                $blog->setImageArticle($currentPicure);
+                $blog->setImageArticle($currentPicture);
             }
 
             $em->persist($blog);
@@ -71,7 +71,7 @@ class BlogController extends Controller
     /**
     * @Route("/new", name="blog_new")
      */
-    public function newBlogAction(Request $request, ImageManipulator $imageManipulator)
+    public function newBlogAction(Request $request)
     {
         $blog = new Blog();
 
@@ -86,8 +86,7 @@ class BlogController extends Controller
 
                 $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
 
-                $imageManipulator->handleUploadedArticlePicture($pictureProfil, $fileNamePicture);
-
+                $pictureProfil->move($this->getParameter('upload_Path_Article_Picture'), $fileNamePicture);
                 $blog->setImageArticle( $this->getParameter('upload_Path_Article_Picture') . $fileNamePicture);
             }
 

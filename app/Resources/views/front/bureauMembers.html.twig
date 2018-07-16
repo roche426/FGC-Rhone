@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="text-center col-md-8 offset-md-2">
+                <h1>Le Bureau</h1>
+            </div>
+        </div>
+        {% for member in members %}
+        <div class="row">
+            <div class="col-md-2">
+                {% if member.statut == constant('CHAIRMAN', member) %}
+                    <h5>Président</h5>
+                {% elseif member.statut == constant('TREASURER', member) %}
+                    <h5>Trésorier </h5>
+                {% elseif member.statut == constant('SECRETARY', member) %}
+                    <h5>Sécrétaire</h5>
+                {% endif %}
+                    <p>{{ member.firstName }}{{ member.lastName }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

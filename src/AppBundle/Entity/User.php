@@ -12,6 +12,10 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 class User implements AdvancedUserInterface, \Serializable
 {
+    const CHAIRMAN = 1;
+    const TREASURER = 2 ;
+    const SECRETARY = 3 ;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -20,25 +24,64 @@ class User implements AdvancedUserInterface, \Serializable
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(name="first_name", type="string", length=25)
      */
     private $firstname;
 
     /**
+     * @var string
      * @ORM\Column(name="last_name", type="string", length=25)
      */
     private $lastname;
 
     /**
+     * @var string
      * @ORM\Column(name="password", type="string", length=64)
      */
     private $password;
 
     /**
+     * @var string
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
-
     private $email;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
+     */
+    private $birthDate;
+
+    /**
+     * @var string
+     * @ORM\Column(name="city", type="string", nullable=true)
+     */
+    private $city;
+
+    /**
+     * @var string
+     * @ORM\Column(name="postal_code", type="string", nullable=true)
+     */
+    private $postalCode;
+
+    /**
+     * @var string
+     * @ORM\Column(name="address", type="string", nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string
+     * @ORM\Column(name="additional_address", type="string", nullable=true)
+     */
+    private $additionalAddress;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="registration_date", type="date")
+     */
+    private $registrationDate;
 
     /**
      * @var bool
@@ -60,6 +103,34 @@ class User implements AdvancedUserInterface, \Serializable
     private $token;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="statut", type="smallint", nullable=true)
+     */
+    private $statut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture_profil", type="string", nullable=true)
+     */
+    private $pictureProfil;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    private $description;
+
+    /**
      * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
      */
     private $articles;
@@ -68,6 +139,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
      */
     private $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Files", mappedBy="user")
+     */
+    private $files;
 
 
     /**
@@ -207,6 +283,182 @@ class User implements AdvancedUserInterface, \Serializable
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * @param int $statut
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param \DateTime $birthDate
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @param string $postalCode
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $adress
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalAddress()
+    {
+        return $this->additionalAddress;
+    }
+
+    /**
+     * @param string $additionalAddress
+     */
+    public function setAdditionalAddress($additionalAddress)
+    {
+        $this->additionalAddress = $additionalAddress;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationDate()
+    {
+        return $this->registrationDate;
+    }
+
+    /**
+     * @param \DateTime $registrationDate
+     */
+    public function setRegistrationDate($registrationDate)
+    {
+        $this->registrationDate = $registrationDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPictureProfil()
+    {
+        return $this->pictureProfil;
+    }
+
+    /**
+     * @param string $pictureProfil
+     */
+    public function setPictureProfil($pictureProfil)
+    {
+        $this->pictureProfil = $pictureProfil;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param mixed $files
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
     }
 
 

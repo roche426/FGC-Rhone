@@ -45,7 +45,7 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-
+            $user->setRegistrationDate(new \DateTime('now'));
             $user->setToken(uniqid('FGPR', true));
             $password = $passwordEncoder->encodePassword($user, $user->getToken());
             $user->setPassword($password);
@@ -74,7 +74,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/registration-confirmation/{slug}", name="registrationConfirmation", defaults={"slug" = null})
+     * @Route("/registration-confirmation/{slug}", name="registration_confirmation", defaults={"slug" = null})
      * @Method({"GET", "POST"})
      */
     public function registrationConfirmation(Request $request, UserPasswordEncoderInterface $encoder)
@@ -123,7 +123,7 @@ class SecurityController extends Controller
             $this->addFlash($flashType, $flashMessage);
 
             //Redirection
-            return ($this->redirectToRoute('login'));
+            return ($this->redirectToRoute('first_connexion'));
 
         }
 
@@ -138,7 +138,7 @@ class SecurityController extends Controller
     /**
      * Password forgotten
      *
-     * @Route("/password/new", name="forgotPassword")
+     * @Route("/password/new", name="forgot_password")
      * @Method({"GET", "POST"})
      */
     public function forgotPasswordAction(Request $request, Mailer $mailer)
@@ -199,7 +199,7 @@ class SecurityController extends Controller
     /**
      * Update Password forgotten
      *
-     * @Route("/password/update/{slug}", name="updatePassword", defaults={"slug" = null})
+     * @Route("/password/update/{slug}", name="update_password", defaults={"slug" = null})
      * @Method({"GET", "POST"})
      */
     public function updatePasswordAction(Request $request, UserPasswordEncoderInterface $encoder)

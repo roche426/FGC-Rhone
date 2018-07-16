@@ -8,12 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Class AdminController
  * @package AppBundle\Controller
- * @Route("/admin", name="admin")
+ * @Route("/admin")
  */
 class AdminController extends Controller
 {
     /**
-     * @Route("/index", name="adminHome")
+     * @Route("/index", name="admin_home")
      */
     public function ConnectedAction()
     {
