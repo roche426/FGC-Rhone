@@ -6,13 +6,24 @@
             <h1>Mes Documents</h1>
         </div>
         <div class="row">
-            {{ form_start(form) }}
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                <p>Télécharger votre carte d'identité</p>
+            </div>
+            <div class="col-md-6">
+                {% if files.idCard %}
+                <a href="{{ path('download_files', {idCard:true}) }}">Voir votre carte d'identité</a>
+                {% else %}
+                    <p>Aucun document téléchargé</p>
+                {% endif %}
+            </div>
         </div>
         <div class="row">
             <input type="submit" value="modifier">
         </div>
         {{ form_end(form) }}
     </div>
+
 
 {% endblock %}
 

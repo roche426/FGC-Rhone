@@ -13,12 +13,14 @@
             <div class="col-md-2">
                 {% if member.statut == constant('CHAIRMAN', member) %}
                     <h5>Président</h5>
+                    <p>{{ member.firstName }}{{ member.lastName }}</p>
                 {% elseif member.statut == constant('TREASURER', member) %}
                     <h5>Trésorier </h5>
+                    <p>{{ member.firstName }}{{ member.lastName }}</p>
                 {% elseif member.statut == constant('SECRETARY', member) %}
                     <h5>Sécrétaire</h5>
-                {% endif %}
                     <p>{{ member.firstName }}{{ member.lastName }}</p>
+                {% endif %}
             </div>
         </div>
         <div class="row">

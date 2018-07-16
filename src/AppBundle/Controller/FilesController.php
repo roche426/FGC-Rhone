@@ -6,6 +6,7 @@ use AppBundle\Entity\Files;
 use AppBundle\Form\FilesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,10 +19,15 @@ class FilesController extends Controller
     /**
      * @Route("add-files", name="add_files")
      */
-    public function addFiles(Request $request)
+    public function addFilesAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
         $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
+
+        if (!$files) {
+            return $this->redirectToRoute('first_connexion');
+        }
 
         $currentIdCard = $files->getIdCard();
 
@@ -50,8 +56,24 @@ class FilesController extends Controller
         }
 
         return $this->render('user/editFiles.html.twig', [
-            'form' => $form->createView(),
-            'files' =>   $files ]
+                'form' => $form->createView(),
+                'files' =>   $files ]
         );
+    }
+
+
+    /**
+     * @Route("download", name="download_files")
+     */
+    public function downloadFilesAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
+
+        if ($request->query->get('idCard')) {
+            return $this->file($files->getIdCard());
+        }
+
+        return new Response('erreur');
     }
 }
