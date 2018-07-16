@@ -2,77 +2,87 @@
 
 {% block body %}
 
-    <div class="container contain-home p-3">
+    <div class="container-fluid pt-5 pb-5" style="background-color:#fcebc2">
         <div class="row">
             <div class="col-md-6 offset-md-3 text-center mb-3">
                 <h1>Les dernières actualités</h1>
             </div>
         </div>
-                {% if blogs %}
-                    {% for blog in blogs %}
-                    <div class="row">
-                        <div class="col-md-12 text-center mb-3">
-                            <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blog.title }}
-                                <a class="btn btn-dark" href="{{ path('actuality') }}/{{ blog.id }}">Lire l'article</a>
-                            </h3>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="col-md-6 offset-md-3 text-center">
-                        <h3 >Pas encore d'articles publiés</h3>
-                    </div>
-                {% endif %}
-        </div>
+        {% if blogs %}
+            {% for blog in blogs %}
+            <div class="row">
+                <div class="col-md-12 text-center mb-3">
+                    <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blog.title }}
+                        <a class="btn btn-dark" href="{{ path('actuality') }}/{{ blog.id }}">Lire l'article</a>
+                    </h3>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-6 offset-md-3 text-center">
+                <h3 >Pas encore d'articles publiés</h3>
+            </div>
+        {% endif %}
     </div>
-    <div class="container contain-home mt-5 p-3">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3">
-                <h1>Les mots du Président</h1>
+    <div class="container-fluid pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center mb-3">
+                    <h1>Les mots du Président</h1>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 text-justify">
-                <img class="img-chairman" src="https://cdn.emojidex.com/emoji/seal/%EF%BC%9F.png?1417137872">
-            </div>
-            <div class="col-md-8 ">
-                <h5>Mr le Président</h5>
-                <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-                <a class="btn btn-dark" href="#">Voir les membres du bureau</a>
-            </div>
-        </div>
-    </div>
-    <div class="container contain-home mt-5 p-3">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3">
-                <h1>Rejoignez-nous</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-1 text-justify">
-                <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-                <a class="btn btn-dark" href="#">Contacter-nous</a>
-            </div>
-            <div class="col-md-4  text-center">
-                <img class="img-chairman" src="https://cdn.emojidex.com/emoji/seal/%EF%BC%9F.png?1417137872">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-chairman" src="/assets/images/princesse.jpg">
+                </div>
+                <div class="col-md-8 text-justify">
+                    <h5>Mr le Président</h5>
+                    <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                    <a class="btn btn-dark" href="#">Voir les membres du bureau</a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container contain-home mt-5 mb-5 p-3">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3 mt-3">
-                <h1>Espace membres</h1>
+
+    <div class="container-fluid pt-5 pb-5" style="background-color:#fcebc2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center mb-3">
+                    <h1>Rejoignez-nous</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 text-justify">
+                    <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                </div>
+                <div class="col-md-4  text-center">
+                    <img class="img-joinUs" src="/assets/images/chien.jpg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 offset-md-5 mt-2">
+                    <a class="btn btn-dark center-block" href="#">Contacter-nous</a>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 text-justify">
-                <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+    </div>
+    <div class="container-fluid pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center mb-3 mt-3">
+                    <h1>Espace membres</h1>
+                </div>
             </div>
-            <div class="col-md-6 text-center mt-3">
-                <p>Accéder à votre espace personnel <br>
-                    <a class="btn btn-dark mt-2" href="#">Se connecter</a></p>
-                <p>Membre de l'association, mais pas d'accès à votre espace? <br>
-                    <a class="btn btn-dark mt-2" href="#">Demander vos accès</a></p>
+            <div class="row">
+                <div class="col-md-6 text-justify">
+                    <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                </div>
+                <div class="col-md-6 text-center mt-3">
+                    <p>Accéder à votre espace personnel <br>
+                        <a class="btn btn-dark mt-2" href="#">Se connecter</a></p>
+                    <p>Membre de l'association, mais pas d'accès à votre espace? <br>
+                        <a class="btn btn-dark mt-2" href="#">Demander vos accès</a></p>
+                </div>
             </div>
         </div>
     </div>
