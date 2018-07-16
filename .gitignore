@@ -16,3 +16,11 @@
 /vendor/
 /web/bundles/
 .idea/
+
+/web/uploaded_files/pictures_articles/*
+!/web/uploaded_files/pictures_articles/.gitkeep
+/web/uploaded_files/pictures_profil/*
+!/web/uploaded_files/pictures_profil/.gitkeep
+
+/private/idCards/*
+!/private/idCards/.gitkeep

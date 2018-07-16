@@ -3,6 +3,7 @@
 parameters:
     upload_Path_Article_Picture: 'uploaded_files/pictures_articles/'
     upload_Path_Profil_Picture: 'uploaded_files/pictures_profil/'
+    IdCard_Directory: '%kernel.project_dir%/private/idCards/'
 
 services:
     # default configuration for services in *this* file

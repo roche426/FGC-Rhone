@@ -140,6 +140,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Files", mappedBy="user")
+     */
+    private $files;
+
 
     /**
      * @return mixed
@@ -438,6 +443,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param mixed $files
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
     }
 
 

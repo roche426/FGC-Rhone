@@ -2,11 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Files;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserController
@@ -30,6 +31,9 @@ class UserController extends Controller
     public function firstConnectionAction(Request $request, ImageManipulator $imageManipulator)
     {
         $user = $this->getUser();
+
+        $files = new Files();
+        $files->setUser($this->getUser());
 
         $form = $this->createForm(ProfilEditionType::class, $user);
         $form->handleRequest($request);
@@ -92,8 +96,8 @@ class UserController extends Controller
 
             return $this->redirectToRoute('member_area');
         }
-            return $this->render('user/editProfil.html.twig', array('editForm' => $editform->createView()));
-    }
 
+        return $this->render('user/editProfil.html.twig', array('editForm' => $editform->createView()));
+    }
 
 }
