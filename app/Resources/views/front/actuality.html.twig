@@ -12,7 +12,7 @@
             {% if articles %}
                 {% for article in articles %}
                     <h5 class="mb-3"><img src="/assets/images/article.png">
-                        <a href="{{ path('actuality', {id:article.id}) }}"> {{ article.title }}</a>
+                        <a href="{{ path('show_article', {id:article.id }) }}"> {{ article.title }}</a>
                     </h5>
                 {% endfor %}
             {% else %}
