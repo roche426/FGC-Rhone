@@ -1,15 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block body %}
-
-    <div class="container contain-home p-3">
+{% block titleDashboard %}
+    <div class="container text-center" style="border: solid">
         <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3">
-                <h1>Inscription</h1>
+            <div class="">
+                <h1>Inscrire un nouveau membre</h1>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-8 offset-md-2">
+        {% endblock %}
+        {% block body %}
+        <div class="row text-center center-block" style="border: solid">
+            <div class="col-md-4 offset-md-4">
                 {{ form_start(form) }}
                 {{ form_row(form.firstName) }}
                 {{ form_row(form.lastName) }}

@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AdminController extends Controller
 {
     /**
-     * @Route("/index", name="admin_home")
+     * @Route("/", name="admin_home")
      */
     public function ConnectedAction()
     {
