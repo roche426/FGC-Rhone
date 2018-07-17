@@ -29,6 +29,11 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ path('member_area') }}">Espace membre</a>
                         </li>
+                        {% if app.user.admin %}
+                            <li class="nav-item active ml-5">
+                                <a class="nav-link" href="{{ path('admin_home') }}">Administration</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a href="/logout"><i class="fas fa-sign-out-alt">X</i></a>
                         </li>

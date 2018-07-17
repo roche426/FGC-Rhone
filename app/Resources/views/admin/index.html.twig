@@ -1,14 +1,10 @@
 {% extends 'baseAdmin.html.twig' %}
 
-
 {% block titleDashboard %}
     <h2>Tableau de bord</h2>
-
 {% endblock %}
+
 {% block body %}
-    <a href="{{ path('registration') }}">Créer un nouveau membre</a>
-
-{% endblock %}
-
-{% block stylesheets %}
+    <a class="btn btn-dark" href="{{ path('registration') }}">Créer un nouveau membre</a>
+    <a class="btn btn-dark" href="{{ path('admin_users') }}">Voir les membres</a>
 {% endblock %}

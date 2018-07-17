@@ -1,27 +1,32 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <div class="container text-center" style="border: solid">
-        <div class="row">
-            <div class="">
-                <h1>Inscrire un nouveau membre</h1>
-            </div>
+    <div class="container">
+        <div class="row center-block">
+            <h2 class="text-center" >Inscrire un nouveau membre</h2>
         </div>
         {% endblock %}
         {% block body %}
-        <div class="row text-center center-block" style="border: solid">
-            <div class="col-md-4 offset-md-4">
-                {{ form_start(form) }}
-                {{ form_row(form.firstName) }}
-                {{ form_row(form.lastName) }}
-                {{ form_row(form.email) }}
-
-                <button class="btn btn-light" type="submit">S'inscrire</button>
-                {{ form_end(form) }}
+        <div class="row text-center center-block">
+            {{ form_start(form) }}
+            <div class="col-md-3">
+                {{ form_label(form.firstName) }}
+                {{ form_widget(form.firstName) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.lastName) }}
+                {{ form_widget(form.lastName) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
             </div>
         </div>
+        <div class="row text-center center-block mt-5">
+            <button class="btn btn-dark" type="submit">Envoyer les identifiants</button>
+            {{ form_end(form) }}
+        </div>
     </div>
-
 
 {% endblock %}
 

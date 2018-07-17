@@ -1,0 +1,46 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Liste des membres du site</h2>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/{{ user.pictureProfil }}" alt="Card image cap">
+                <div class="card-body text-center">
+                    <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+                    <p class="card-text">{{ user.description }} </p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">Date de naissance : {{ app.user.birthDate | date('d/m/Y')}}</li>
+                    <li class="list-group-item">Adresse : {{ user.address }} {{ user.additionalAddress }}</li>
+                    <li class="list-group-item">Ville :{{ user.postalCode }} {{ user.city }}</li>
+                    <li class="list-group-item">Coordonnées : {{ user.email }} {{ user.phoneNumber }}</li>
+                    <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y')}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <div class="list-group">
+                <div class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-1">Articles publiés par {{ user.firstName }} {{ user.lastName }}</h3>
+                    </div>
+                </div>
+                {% for article in articles %}
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{article.title}}</h5>
+                    </div>
+                    <small class="text-muted">Date à ajouter</small>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

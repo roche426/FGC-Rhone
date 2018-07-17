@@ -1,0 +1,42 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Liste des membres du site</h2>
+{% endblock %}
+
+{% block body %}
+        <table class="table">
+            <thead class="thead-dark ">
+            <tr>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Date de naissance</th>
+                <th scope="col">Email</th>
+                <th scope="col">Numéro de téléphone</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Date d'inscription</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.birthDate |date('d/m/Y')}} </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>{{ user.address }} {{ user.AdditionalAddress }}</td>
+                <td>{{ user.postalCode }} {{ user.city }}</td>
+                <td>{{ user.registrationDate |date('d/m/Y')}} </td>
+                <td>
+                    <a class="btn btn-dark" href="{{ path('admin_see_user', {id:user.id}) }}">Voir</a>
+                    <a class="btn btn-dark" href="#">Supprimer</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
