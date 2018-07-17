@@ -2,63 +2,64 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container-fluid pt-5 pb-5">
         <div class="row">
-            <div class="text-center col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3 text-center mb-3">
                 <h1>{{ article.title }}</h1>
             </div>
         </div>
-        <div class="row">
-            <div>
-                {% if article%}
-
-                <img class="img-article" src="/{{ article.imageArticle }}">
-                <p class="text-justify">{{ froala_display( article.article ) }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 offset-md-8">
-                <h5>{{ article.author }}</h5>
-            </div>
-        </div>
-        {% else %}
-        <div class="row">
-            <div class="col-md-2 offset-md-8">
-                <h5>Pas d'article disponible</h5>
-            </div>
-        </div>
-        {% endif %}
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h3>Commentaires</h3>
-            </div>
-        </div>
-        {% if comments %}
-            {% for comment in comments %}
-            <div class="row">
-                <div class="col-md-2 offset-md-2 text-center">
-                    <h5> {{ comment.user.firstName }} {{ comment.user.lastName }} </h5>
+        <div class="container">
+            <div class="row mt-3">
+                {% if article %}
+                <div class="col-md-6">
+                    <img class="img-article" src="/{{ article.imageArticle }}">
                 </div>
                 <div class="col-md-6">
-                    <p>{{ comment.comment }}</p>
+                    <p>{{ froala_display(article.article) }}"</p>
                 </div>
             </div>
-            {% endfor %}
-        {% else %}
-            <p>Aucun commentaire</p>
-        {% endif %}
-
-        {% if app.user %}
-        <div class="row">
-            <div class="col-md-12 text-center">
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-
-                <input type="submit" value="Enregistrer" />
-                {{ form_end(form) }}
+            <div class="row mt-3 ml-5">
+                <h5>Auteur : {{ article.author }}</h5>
             </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-md-2 offset-md-8">
+                        <h5>Pas d'article disponible</h5>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <h3>Commentaires</h3>
+                </div>
+            </div>
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="row">
+                        <div class="col-md-2 offset-md-2 text-center">
+                            <h5> {{ comment.user.firstName }} {{ comment.user.lastName }} </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{ comment.comment }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun commentaire</p>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+
+                        <input type="submit" value="Enregistrer" />
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 {% endblock %}
 

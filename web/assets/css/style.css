@@ -1,42 +1,20 @@
 /* == Mise en forme générale == */
-body{
+html{
     color: black;
     font-family: Ubuntu;
-    background: url("https://wallpapertag.com/wallpaper/full/e/2/f/143523-light-brown-background-2880x1800-for-1080p.jpg");
-    background-size: cover;
+    font-size: 1rem;
 }
 
-h1, .navbar-brand{
-    text-shadow: 2px 2px rgb(181, 107, 42), -2px 2px rgb(181, 107, 42), 2px -2px rgb(181, 107, 42);
-    color: white;
-    border-radius: 25px;
+h1, .navbar-brand, .navbar-brand:hover{
+    color: #fcebc2;
+    font-weight: bold;
+    text-shadow: 1px 1px #202d11, -1px 1px #202d11, 1px -1px #202d11;
 }
+
 
 /* == Homepage vitrine == */
 .homepage-contain-slide1 h1{
-    font-size: 70px;
-}
-
-.homepage-contain-slide1{
-    margin-top: 150px;
-    color: #002e13;
-}
-
-.homepage-contain-slide2 {
-    margin-top: 250px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 50% 20% / 10% 40%;
-}
-
-.homepage-contain-slide3{
-    margin-top: 250px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 50% 20% / 10% 40%;
-}
-
-.homepage-contain-slide3 a{
-    font-size: 30px;
-    color: white;
+    font-size: 80px;
 }
 
 .homepage-contain-slide1{
@@ -46,45 +24,47 @@ h1, .navbar-brand{
 
 #slide1 {
     background: url("/assets/images/bg-hunt.jpg") center 0 no-repeat fixed;
-    height: 1000px;
+    height: 920px;
 }
 
-#slide2 {
-    background: url("/assets/images/bg-river.jpg") center 0 no-repeat fixed;
-    height: 1000px;
-    color: white;
-}
 
 /* == NavBar == */
 .header-nav{
-    background-color: rgba(229, 193, 179, 0.6);
+    background-color: #202d11;
 }
 
 .navbar-brand{
-    font-size: 30px;
+    font-size: 3rem;
+}
+
+.navbar-nav {
+    float:none;
+    margin:0 auto;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+    font-size: 2rem;
+}
+
+.nav-link{
     color: white!important;
-
 }
 
-.dropdown-item{
-    color: black!important;
-}
-
-.img-header{
-    height: 100px;
-    width: 100px;
-}
 
 /* == Page Accueil == */
-.contain-home{
-    background-color: rgba(229, 193, 179, 0.2);
-    border-radius: 25px;
-}
 
 .img-chairman{
     height: 230px;
     width: 230px;
-    border-radius: 50%;
+}
+
+.img-joinUs{
+    height: 250px;
+    width: 500px;
 }
 
 

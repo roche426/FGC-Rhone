@@ -2,15 +2,15 @@
 
 {% block body %}
 
-<div class="container contain-home p-3">
+<div class="container pt-5 pb-5">
     <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>Vos article</h1>
+        <div class="col-md-6 offset-md-3 text-center mb-5">
+            <h1>Vos articles</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 text-center mb-5">
-            <a href="{{ path('blog_new') }}">Créer un nouvel article</a>
+        <div class="col-md-4 offset-md-4 text-center mb-5">
+            <a class="btn btn-dark" href="{{ path('blog_new') }}">Créer un nouvel article</a>
         </div>
     </div>
 
@@ -21,11 +21,11 @@
                 <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blogs.title }}</h3>
             </div>
             <div class="col-md-2 text-center">
-                <a class="alert-delete" href="{{ path('blog_delete', {id:blogs.id}) }}"
-                   data-confirm-message="Confirmer la supression de l'article?">Supprimer</a>
+                <a class="btn btn-dark" href="{{ path('blog_edit', {id:blogs.id}) }}">Modifier</a>
             </div>
             <div class="col-md-2 text-center">
-                <a href="{{ path('blog_edit', {id:blogs.id}) }}">Modifier</a>
+                <a class="alert-delete btn btn-dark" href="{{ path('blog_delete', {id:blogs.id}) }}"
+                   data-confirm-message="Confirmer la supression de l'article?">Supprimer</a>
             </div>
         </div>
         {% endfor %}

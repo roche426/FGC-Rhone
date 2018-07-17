@@ -32,13 +32,13 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        $files = new Files();
-        $files->setUser($this->getUser());
-
         $form = $this->createForm(ProfilEditionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $files = new Files();
+            $files->setUser($this->getUser());
 
             if ($form['pictureProfil']->getdata()) {
                 $pictureProfil = $user->getPictureProfil();
@@ -52,11 +52,13 @@ class UserController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
+            $em->persist($files);
             $em->flush();
 
             return $this->redirectToRoute('member_area');
         }
-            return $this->render('user/firstConnexion.html.twig', array('form' => $form->createView()));
+
+        return $this->render('user/firstConnexion.html.twig', array('form' => $form->createView()));
     }
 
     /**
