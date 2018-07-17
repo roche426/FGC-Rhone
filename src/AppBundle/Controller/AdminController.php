@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,7 +35,18 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/users/{id}", name="admin_see_user")
+     * @Route("/articles", name="admin_articles")
+     */
+    public function showArticlesAction()
+    {
+        $em = $this->getDoctrine()->getRepository(Blog::class);
+        $articles = $em->findAll();
+
+        return $this->render('admin/articles.html.twig', ['articles' => $articles]);
+    }
+
+    /**
+     * @Route("/users/{id}", name="admin_show_user")
      */
     public function showOneUserAction($id)
     {
@@ -45,6 +57,22 @@ class AdminController extends Controller
         return $this->render('admin/showUser.html.twig', [
             'user' => $user,
             'articles' => $articles]);
+    }
+
+
+    /**
+     * @Route("/article/{id}", name="admin_show_article")
+     */
+    public function showOneArticleAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository(Blog::class)->find($id);
+        $comments = $em->getRepository(Comment::class)->findAll(['user' => $id]);
+
+        return $this->render('admin/showArticle.html.twig', [
+            'article' => $article,
+            'comments' => $comments
+        ]);
     }
 
 

@@ -31,7 +31,7 @@
                 <td>{{ user.postalCode }} {{ user.city }}</td>
                 <td>{{ user.registrationDate |date('d/m/Y')}} </td>
                 <td>
-                    <a class="btn btn-dark" href="{{ path('admin_see_user', {id:user.id}) }}">Voir</a>
+                    <a class="btn btn-dark" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
                     <a class="btn btn-dark" href="#">Supprimer</a>
                 </td>
 
