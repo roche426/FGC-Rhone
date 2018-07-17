@@ -1,53 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container pt-5 pb-5">
         <div class="row">
-            <h1>Espace membre</h1>
+            <div class="col-md-6 offset-md-3 text-center mb-5">
+                <h1>Espace membre</h1>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="row">
-                    <a class="btn btn-darkg" href="{{ path('blog_home') }}">Voir vos articles</a>
-                </div>
-                <div class="row">
-                    <a class="btn btn-darkg" href="{{ path('edit_profil') }}">Modifier votre profil</a>
-                </div>
-                <div class="row">
-                    <a class="btn btn-darkg" href="{{ path('add_files') }}">Vos documents</a>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/{{ app.user.pictureProfil }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Mon profil</h5>
+                        <p class="card-text">{{ app.user.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ app.user.firstName }} {{ app.user.lastName }}</li>
+                        <li class="list-group-item">{{ app.user.birthDate | date('d-M-Y')}}</li>
+                        <li class="list-group-item">{{ app.user.address }}</li>
+                        {% if app.user.additionalAddress %}
+                            <li class="list-group-item">{{ app.user.additionalAddress }}</li>
+                        {% endif %}
+                        <li class="list-group-item">{{ app.user.city }} {{ app.user.postalCode }}</li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="row">
-                    <h1>Mon profil</h1>
-                </div>
-                <div class="row">
-                    <img src="/{{ app.user.pictureProfil }}">
-                </div>
-                <div class="row">
-                    <p>{{ app.user.firstName }}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.lastName }}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.birthDate | date('d-M-Y')}}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.address }}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.additionalAddress }}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.city }}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.postalCode }}</p>
-                </div>
-                <div class="row">
-                    <p>{{ app.user.description }}</p>
-                </div>
+            <div class="col-md-8 text-center">
+                    <a class="btn btn-dark" href="{{ path('blog_home') }}">Voir vos articles</a>
+                    <a class="btn btn-dark ml-5 mr-5" href="{{ path('edit_profil') }}">Modifier votre profil</a>
+                    <a class="btn btn-dark" href="{{ path('add_files') }}">Vos documents</a>
+            </div>
             </div>
         </div>
     </div>
