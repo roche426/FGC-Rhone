@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-12 text-center mb-3">
                     <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blog.title }}
-                        <a class="btn btn-dark" href="{{ path('actuality') }}/{{ blog.id }}">Lire l'article</a>
+                        <a class="btn btn-dark" href="{{ path('show_article', {id:blog.id }) }}">Lire l'article</a>
                     </h3>
                 </div>
             </div>

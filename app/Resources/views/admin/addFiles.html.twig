@@ -1,0 +1,32 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Ajouter des documents à partager</h2>
+{% endblock %}
+{% block body %}
+    <div class="container pt-5 pb-5">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <div class="card">
+                    {{ form_start(form) }}
+                    <div class="card-body">
+                        <h5 class="card-title">Télécharger votre document</h5>
+                        <p class="card-text">{{ form_label(form.pathFile) }}</p>
+                        <p class="card-text">{{ form_widget(form.pathFile) }}</p>
+                        <p class="card-text">{{ form_label(form.nameFile) }}</p>
+                        <p class="card-text">{{ form_widget(form.nameFile) }}</p>
+                        <p class="card-text">{{ form_label(form.fileAccess) }}</p>
+                        <p class="card-text">{{ form_widget(form.fileAccess) }}</p>
+                        <p class="card-text">{{ form_label(form.isShared) }}</p>
+                        <p class="card-text">{{ form_widget(form.isShared) }}</p>
+                        <input class="btn btn-dark" type="submit" value="Ajouter">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

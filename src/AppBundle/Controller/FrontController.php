@@ -21,7 +21,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/home", name="home_page")
+     * @Route("home", name="home_page")
      */
     public function homePageAction()
     {
@@ -31,10 +31,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @param $id
-     * @Route("/blog/{id}")
-     * @Method({"POST", "GET"})
-     * @return string
+     * @Route("blog/{id}", name="show_article")
      */
     public function displayBlogAction(Request $request, $id)
     {
@@ -66,7 +63,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/blog", name="actuality")
+     * @Route("blog", name="actuality")
      */
     public function actualityAction()
     {
@@ -77,7 +74,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/bureau-members", name="bureau_members")
+     * @Route("bureau-members", name="bureau_members")
      */
     public function bureauMembersAction()
     {
