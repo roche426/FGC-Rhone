@@ -25,15 +25,16 @@ class FilesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
 
-        $currentIdCard = $files->getIdCard();
+        if (!$files) {
+            return $this->redirectToRoute('first_connexion');
+        }
 
+        $currentIdCard = $files->getIdCard();
 
         $form = $this->createForm(FilesType::class, $files);
         $form->handleRequest($request);
 
-        if (!$files) {
-            return $this->redirectToRoute('first_connexion');
-        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 

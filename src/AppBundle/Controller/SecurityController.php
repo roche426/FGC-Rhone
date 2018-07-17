@@ -62,9 +62,7 @@ class SecurityController extends Controller
             $this->addFlash('success', 'Vous êtes enregistré ! Afin de finaliser votre inscription, un email de confirmation vous a été transmis à l\'adresse suivante : ' . $userEmail);
 
             return $this->redirectToRoute('login');
-            }
-
-            $this->addFlash('warning', 'Le mot de passe doit comprendre au moins une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial et avoir au moins 8 caractères');
+        }
 
 
         return $this->render(
