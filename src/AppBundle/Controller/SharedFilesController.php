@@ -34,10 +34,10 @@ class SharedFilesController extends Controller
             if ($form['pathFile']->getData()) {
 
                 $uploadedFile = $files->getPathFile();
-                $uploadedFileName = $files->getNameFile() . '.' .$uploadedFile->guessExtension();
+                $uploadedFileName = $files->getNameFile() . '.' . $uploadedFile->guessExtension();
 
                 $uploadedFile->move($this->getParameter('shared_Files_Directory'), $uploadedFileName);
-                $files->setPathFile($this->getParameter('shared_Files_Directory').$uploadedFileName);
+                $files->setPathFile($this->getParameter('shared_Files_Directory') . $uploadedFileName);
 
                 $files->setDateUpload(new \DateTime('now'));
             }
@@ -50,7 +50,50 @@ class SharedFilesController extends Controller
 
         return $this->render('admin/addFiles.html.twig', [
                 'form' => $form->createView(),
-                'files' =>   $files ]
+                'files' => $files
+            ]
         );
+    }
+
+    /**
+     * @Route("shared-files", name="admin_show_files")
+     */
+    public function showFilesAction()
+    {
+        $em = $this->getDoctrine()->getRepository(SharedFiles::class);
+        $files = $em->findAll();
+
+        return $this->render('admin/files.html.twig', ['files' => $files]);
+    }
+
+    /**
+     * @Route("download/{id}", name="admin_download_files")
+     */
+    public function downloadFilesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $files = $em->getRepository(SharedFiles::class)->findOneBy(['id' => $id]);
+
+        return $this->file($files->getPathFile());
+    }
+
+    /**
+     * @Route("delete/{id}", name="admin_delete_files")
+     */
+    public function deleteFilesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $files = $em->getRepository(SharedFiles::class)->findOneBy(['id' => $id]);
+
+        if ($files->getPathFile()) {
+            unlink($files->getPathFile());
+
+            $em->remove($files);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_show_files');
+        }
+
+        return $this->redirectToRoute('admin_show_files');
     }
 }

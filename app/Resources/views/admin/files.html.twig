@@ -1,0 +1,49 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Liste des membres du site</h2>
+{% endblock %}
+
+{% block body %}
+        <table class="table">
+            <thead class="thead-dark ">
+            <tr>
+                <th scope="col">Nom du fichier</th>
+                <th scope="col">Droit d'accès</th>
+                <th scope="col">Document en cours de partage?</th>
+                <th scope="col">Date de téléchargement</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for file in files %}
+            <tr>
+                <td>{{ file.nameFile }}</td>
+                <td>
+                    {% if file.fileAccess == constant('MEMBERS_ACCESS_FILE', file)%}
+                        Membres
+                    {% elseif file.fileAccess == constant('BUREAU_MEMBERS_ACCESS_FILE', file)%}
+                        Membres du bureau
+                    {% elseif file.fileAccess == constant('ADMIN_ACCESS_FILE', file)%}
+                        Administrateurs
+                    {% else %}
+                        Public
+                    {% endif %}
+                </td>
+                <td>
+                    {% if file.isShared %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}{{ file.isShared }} </td>
+                <td>{{ file.dateUpload |date('d/m/Y') }} </td>
+
+                <td>
+                    <a class="btn btn-dark" href="{{ path('admin_download_files', {id:file.id}) }}">Voir</a>
+                    <a class="btn btn-dark" href="{{ path('admin_delete_files', {id:file.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

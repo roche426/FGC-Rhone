@@ -24,3 +24,5 @@
 
 /private/idCards/*
 !/private/idCards/.gitkeep
+/private/sharedFiles/*
+!/private/sharedFiles/.gitkeep
