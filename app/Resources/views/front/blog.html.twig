@@ -11,15 +11,13 @@
         <div class="container">
             <div class="row mt-3">
                 {% if article %}
-                <div class="col-md-6">
+                <div class="col-md-6 mt-3">
                     <img class="img-article" src="/{{ article.imageArticle }}">
+                    <h5>Par {{ article.user.firstName }} {{ article.user.LastName }}</h5>
                 </div>
                 <div class="col-md-6">
-                    <p>{{ froala_display(article.article) }}"</p>
+                    <p>{{ froala_display(article.article) }}</p>
                 </div>
-            </div>
-            <div class="row mt-3 ml-5">
-                <h5>Auteur : {{ article.author }}</h5>
             </div>
             {% else %}
                 <div class="row">
@@ -62,5 +60,6 @@
         </div>
     </div>
 {% endblock %}
+
 
 
