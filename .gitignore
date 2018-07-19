@@ -21,6 +21,8 @@
 !/web/uploaded_files/pictures_articles/.gitkeep
 /web/uploaded_files/pictures_profil/*
 !/web/uploaded_files/pictures_profil/.gitkeep
+/web/uploaded_files/galery/*
+!/web/uploaded_files/galery/.gitkeep
 
 /private/idCards/*
 !/private/idCards/.gitkeep

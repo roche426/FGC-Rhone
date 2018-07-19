@@ -2,7 +2,6 @@
 namespace AppBundle\Images;
 
 
-use AppBundle\Entity\User;
 use claviska\SimpleImage;
 
 class ImageManipulator
@@ -11,13 +10,12 @@ class ImageManipulator
      * @var SimpleImage
      */
     private $simpleImage;
+    private $profilUploadPath;
 
-    private $uploadPath;
-
-    public function __construct(SimpleImage $simpleImage, $uploadPath)
+    public function __construct(SimpleImage $simpleImage, $profilUploadPath)
     {
         $this->simpleImage = $simpleImage;
-        $this->uploadPath = $uploadPath;
+        $this->profilUploadPath = $profilUploadPath;
     }
 
     /**
@@ -27,9 +25,22 @@ class ImageManipulator
     {
         if (isset($picture)) {
             $this->simpleImage
+                ->fromFile($picture->getRealPath())
+                ->bestFit(200, 200)
+                ->toFile($this->profilUploadPath . $fileNamePicture);
+        }
+    }
+
+    /**
+     * Upload and resize of article picture
+     */
+    public function handleUploadedGaleryImage($picture, $fileNamePicture)
+    {
+        if (isset($picture)) {
+            $this->simpleImage
             ->fromFile($picture->getRealPath())
-            ->bestFit(200,200)
-            ->toFile($this->uploadPath.$fileNamePicture);
+            ->resize(400,400)
+            ->toFile($fileNamePicture);
         }
     }
 
