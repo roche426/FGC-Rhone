@@ -2,7 +2,6 @@
 namespace AppBundle\Images;
 
 
-use AppBundle\Entity\User;
 use claviska\SimpleImage;
 
 class ImageManipulator

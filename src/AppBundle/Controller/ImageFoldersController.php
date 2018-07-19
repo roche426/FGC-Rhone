@@ -35,6 +35,8 @@ class ImageFoldersController extends Controller
                 mkdir($path);
             }
 
+            $folder->setCreationDate(new \DateTime('now'));
+
             $em->persist($folder);
             $em->flush();
 
@@ -57,11 +59,6 @@ class ImageFoldersController extends Controller
     {
         $folders = $this->getDoctrine()->getRepository(ImageFolders::class)->findAll();
 
-        /*foreach ($folders as $folder) {
-            $images = array_diff(scandir($folder->getPath()), ['.', '..']);
-
-        }*/
-
         return $this->render('admin/showGallery.html.twig', array(
             'folders' => $folders
         ));
@@ -81,6 +78,48 @@ class ImageFoldersController extends Controller
             'folder' => $folder,
             'images' => $images
         ));
+
+    }
+
+    /**
+     * @Route("show_gallery/delete/{image}/{id}", name="delete_images_gallery")
+     */
+    public function deleteImagesGalleryAction($image, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $folder = $em->getRepository(ImageFolders::class)->find($id);
+
+        unlink($folder->getPath().$image);
+
+        if (!array_diff(scandir($folder->getPath()), ['.', '..'])) {
+            rmdir($folder->getPath());
+
+            $em->remove($folder);
+            $em->flush();
+
+            return $this->redirectToRoute('show_gallery');
+
+        }
+
+        return $this->redirectToRoute('show_images_gallery', ['id' => $id]);
+
+    }
+
+    /**
+     * @Route("show_gallery/delete/{id}", name="delete_folder_gallery")
+     */
+    public function deleteFolderGalleryAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $folder = $em->getRepository(ImageFolders::class)->find($id);
+
+        array_map('unlink', glob($folder->getPath().'*'));
+        rmdir($folder->getPath());
+
+        $em->remove($folder);
+        $em->flush();
+
+        return $this->redirectToRoute('show_gallery');
 
     }
 

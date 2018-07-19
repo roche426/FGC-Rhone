@@ -2,9 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Image;
 use AppBundle\Entity\ImageFolders;
-use AppBundle\Form\ImageType;
 use AppBundle\Images\ImageManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -46,7 +44,7 @@ class ImageController extends Controller
                 }
             }
 
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('show_gallery');
         }
 
         return $this->render('admin/addImages.html.twig', [
@@ -54,5 +52,4 @@ class ImageController extends Controller
                 'folder' =>   $folder ]
         );
     }
-
 }
