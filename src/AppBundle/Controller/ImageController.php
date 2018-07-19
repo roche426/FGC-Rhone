@@ -7,6 +7,7 @@ use AppBundle\Entity\ImageFolders;
 use AppBundle\Form\ImageType;
 use AppBundle\Images\ImageManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,17 +22,18 @@ class ImageController extends Controller
      */
     public function addFolderAction(Request $request, ImageManipulator $imageManipulator, $id)
     {
-
-        $image = new Image();
         $em = $this->getDoctrine()->getManager();
         $folder = $em->getRepository(ImageFolders::class)->findOneBy(['id' => $id]);
 
-        $form = $this->createForm(ImageType::class, $image);
+        $form = $this->createFormBuilder()
+            ->add('name', FileType::class, ['multiple' => true])
+            ->getForm();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $uploadedImages = $image->getName();
+            $uploadedImages = $form['name']->getData();
 
             foreach ($uploadedImages as $uploadedImage) {
                 if ($uploadedImage) {
