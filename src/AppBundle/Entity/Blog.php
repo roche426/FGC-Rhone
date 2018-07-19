@@ -55,7 +55,7 @@ class Blog
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="comments")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
      */
     private $comments;
 

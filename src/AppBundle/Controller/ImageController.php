@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
 use AppBundle\Entity\ImageFolders;
-use AppBundle\Form\ImageFoldersType;
 use AppBundle\Form\ImageType;
 use AppBundle\Images\ImageManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,20 +31,18 @@ class ImageController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $uploadedImages = $image->getName();
 
-            if ($form['name']->getdata()) {
+            foreach ($uploadedImages as $uploadedImage) {
+                if ($uploadedImage) {
 
-                $uploadedImage = $image->getName();
-                $uploadedImageName = uniqid() . '.' . $uploadedImage->guessExtension();
-                $imagePath = $folder->getPath().$uploadedImageName;
+                    $uploadedImageName = uniqid() . '.' . $uploadedImage->guessExtension();
+                    $imagePath = $folder->getPath().$uploadedImageName;
 
-                $imageManipulator->handleUploadedGaleryImage($uploadedImage, $imagePath);
+                    $imageManipulator->handleUploadedGaleryImage($uploadedImage, $imagePath);
 
-                $image->setName($imagePath);
+                }
             }
-
-            $em->persist($image);
-            $em->flush();
 
             return $this->redirectToRoute('admin_home');
         }

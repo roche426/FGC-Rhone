@@ -23,6 +23,7 @@ security:
         main:
             anonymous: true
             provider: db_provider
+            logout_on_user_change: true
 
             form_login:
                 login_path: login

@@ -1,0 +1,21 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Voir vos galeries</h2>
+{% endblock %}
+{% block body %}
+    <div class="container pt-5 pb-5">
+        {% for folder in folders %}
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <div class="card">
+                    <a href="{{ path('show_images_gallery', {id:folder.id}) }}">{{ folder.name }}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+

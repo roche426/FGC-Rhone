@@ -37,6 +37,10 @@ class ImageFolders
      */
     private $creationDate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="folder")
+     */
+    private $images;
 
     /**
      * @return mixed
@@ -100,6 +104,22 @@ class ImageFolders
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
     }
 
 

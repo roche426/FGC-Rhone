@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
-use AppBundle\Form\PasswordType;
 use AppBundle\Form\UserType;
 use AppBundle\Mail\Mailer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

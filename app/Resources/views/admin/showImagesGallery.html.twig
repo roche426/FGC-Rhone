@@ -1,0 +1,15 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Voir vos galeries</h2>
+{% endblock %}
+{% block body %}
+    <div class="container pt-5 pb-5">
+        {% for image in images %}
+            <img src="/{{ folder.path }}{{ image }}">
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+

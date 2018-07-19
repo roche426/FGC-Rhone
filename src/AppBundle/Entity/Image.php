@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -31,6 +32,15 @@ class Image
      */
     private $creationDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="ImageFolders", inversedBy="images")
+     */
+    private $folder;
+
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -78,6 +88,22 @@ class Image
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFolder()
+    {
+        return $this->folder;
+    }
+
+    /**
+     * @param mixed $folder
+     */
+    public function setFolder($folder)
+    {
+        $this->folder = $folder;
     }
 
 

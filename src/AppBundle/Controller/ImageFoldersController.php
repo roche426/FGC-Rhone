@@ -49,4 +49,39 @@ class ImageFoldersController extends Controller
         );
     }
 
+
+    /**
+     * @Route("show_gallery", name="show_gallery")
+     */
+    public function showGalleryAction()
+    {
+        $folders = $this->getDoctrine()->getRepository(ImageFolders::class)->findAll();
+
+        /*foreach ($folders as $folder) {
+            $images = array_diff(scandir($folder->getPath()), ['.', '..']);
+
+        }*/
+
+        return $this->render('admin/showGallery.html.twig', array(
+            'folders' => $folders
+        ));
+
+    }
+
+    /**
+     * @Route("show_gallery/{id}", name="show_images_gallery")
+     */
+    public function showImagesGalleryAction($id)
+    {
+        $folder = $this->getDoctrine()->getRepository(ImageFolders::class)->find($id);
+
+            $images = array_diff(scandir($folder->getPath()), ['.', '..']);
+
+        return $this->render('admin/showImagesGallery.html.twig', array(
+            'folder' => $folder,
+            'images' => $images
+        ));
+
+    }
+
 }
