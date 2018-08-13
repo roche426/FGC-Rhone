@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\ContactUs;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,9 @@ class AdminController extends Controller
      */
     public function connectedAction()
     {
-        return $this->render('admin/index.html.twig');
+        $messagesContactUs = $this->getDoctrine()->getManager()->getRepository(ContactUs::class)->findAll();
+
+        return $this->render('admin/index.html.twig', ['messagesContactUs' => $messagesContactUs]);
     }
 
     /**
