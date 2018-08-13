@@ -6,7 +6,7 @@
 
 {% block body %}
         <table class="table">
-            <thead class="thead-dark ">
+            <thead class="thead-dark" >
             <tr>
                 <th scope="col">Nom du fichier</th>
                 <th scope="col">Droit d'accès</th>
@@ -35,7 +35,8 @@
                         Oui
                     {% else %}
                         Non
-                    {% endif %}{{ file.isShared }} </td>
+                    {% endif %}
+                </td>
                 <td>{{ file.dateUpload |date('d/m/Y') }} </td>
 
                 <td>

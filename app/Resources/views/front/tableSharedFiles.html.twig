@@ -1,0 +1,9 @@
+<tr>
+    <th scope="row">{{ file.subject }}</th>
+    <td>{{ file.nameFile }}</td>
+    <td>{{ file.description }}</td>
+    <td>{{ file.dateUpload | date('d-m-Y') }}</td>
+    <td><a href="{{ path('admin_download_files', {id:file.id}) }}"><img src="assets/images/icon-download.png"></a></td>
+</tr>
+
+

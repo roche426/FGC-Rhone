@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Files;
 use AppBundle\Entity\ImageFolders;
+use AppBundle\Entity\SharedFiles;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,6 +110,17 @@ class FrontController extends Controller
             'folder' => $folder,
             'images' => $images,
         ));
+    }
+
+
+    /**
+     * @Route("documents", name="show_files")
+     */
+    public function showFilesAction()
+    {
+        $files = $this->getDoctrine()->getManager()->getRepository(SharedFiles::class)->findAll();
+
+        return $this->render('front/showFiles.html.twig', ['files' => $files]);
     }
 
 
