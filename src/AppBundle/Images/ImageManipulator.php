@@ -41,7 +41,6 @@ class ImageManipulator
         if (isset($picture)) {
             $this->simpleImage
             ->fromFile($picture->getRealPath())
-            ->resize(400,400)
             ->toFile($fileNamePicture);
         }
     }
