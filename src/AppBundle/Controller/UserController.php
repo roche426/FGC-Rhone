@@ -89,7 +89,7 @@ class UserController extends Controller
             }
 
             if (!$editform['pictureProfil']->getdata()) {
-                $user->setPicureProfil($currentPicture);
+                $user->setPictureProfil($currentPicture);
             }
 
             $em = $this->getDoctrine()->getManager();

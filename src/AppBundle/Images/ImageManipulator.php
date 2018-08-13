@@ -28,7 +28,7 @@ class ImageManipulator
         if (isset($picture)) {
             $this->simpleImage
                 ->fromFile($picture->getRealPath())
-                ->bestFit(200, 200)
+                ->resize(200, 200)
                 ->toFile($this->profilUploadPath . $fileNamePicture);
         }
     }
