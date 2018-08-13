@@ -23,6 +23,8 @@
 !/web/uploaded_files/pictures_profil/.gitkeep
 /web/uploaded_files/galery/*
 !/web/uploaded_files/galery/.gitkeep
+/web/uploaded_files/thematics_image_gallery/*
+!/web/uploaded_files/thematics_image_gallery/.gitkeep
 
 /private/idCards/*
 !/private/idCards/.gitkeep

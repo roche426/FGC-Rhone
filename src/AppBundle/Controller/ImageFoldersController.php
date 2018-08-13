@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\ImageFolders;
 use AppBundle\Form\ImageFoldersType;
+use AppBundle\Images\ImageManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,11 +18,12 @@ class ImageFoldersController extends Controller
     /**
      * @Route("add-folder", name="add_folder")
      */
-    public function addFolderAction(Request $request)
+    public function addFolderAction(Request $request, ImageManipulator $imageManipulator)
     {
 
         $folder = new ImageFolders();
         $em = $this->getDoctrine()->getManager();
+
 
         $form = $this->createForm(ImageFoldersType::class, $folder);
         $form->handleRequest($request);
@@ -33,6 +35,17 @@ class ImageFoldersController extends Controller
 
             if (!mkdir($path) && !is_dir($path)) {
                 mkdir($path);
+            }
+
+            if ($form['image']->getData()) {
+
+                $image = $folder->getImage();
+
+                $imageName = $folder->getName().'.'.$image->guessExtension();
+
+                $imageManipulator->handleUploadedThematicGaleryImage($image, $imageName);
+                $folder->setImage($imageName);
+
             }
 
             $folder->setCreationDate(new \DateTime('now'));
@@ -115,6 +128,7 @@ class ImageFoldersController extends Controller
 
         array_map('unlink', glob($folder->getPath().'*'));
         rmdir($folder->getPath());
+        unlink($this->getParameter('thematics_galery_Directory').$folder->getImage());
 
         $em->remove($folder);
         $em->flush();

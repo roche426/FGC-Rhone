@@ -11,15 +11,17 @@ class ImageManipulator
      */
     private $simpleImage;
     private $profilUploadPath;
+    private $thematicsGaleryDirectory;
 
-    public function __construct(SimpleImage $simpleImage, $profilUploadPath)
+    public function __construct(SimpleImage $simpleImage, $profilUploadPath, $thematicsGaleryDirectory)
     {
         $this->simpleImage = $simpleImage;
         $this->profilUploadPath = $profilUploadPath;
+        $this->thematicsGaleryDirectory = $thematicsGaleryDirectory;
     }
 
     /**
-     * Upload and resize of article picture
+     * Upload and resize of profil picture
      */
     public function handleUploadedPicture($picture, $fileNamePicture)
     {
@@ -32,7 +34,7 @@ class ImageManipulator
     }
 
     /**
-     * Upload and resize of article picture
+     * Upload and resize of gallery picture
      */
     public function handleUploadedGaleryImage($picture, $fileNamePicture)
     {
@@ -41,6 +43,19 @@ class ImageManipulator
             ->fromFile($picture->getRealPath())
             ->resize(400,400)
             ->toFile($fileNamePicture);
+        }
+    }
+
+    /**
+     * Upload and resize of thematic gallery picture
+     */
+    public function handleUploadedThematicGaleryImage($picture, $fileNamePicture)
+    {
+        if (isset($picture)) {
+            $this->simpleImage
+            ->fromFile($picture->getRealPath())
+            ->resize(500,500)
+            ->toFile($this->thematicsGaleryDirectory.$fileNamePicture);
         }
     }
 

@@ -8,12 +8,14 @@
         {% for folder in folders %}
             <div class="col-md-3 offset-md-1">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/assets/images/chien.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="/uploaded_files/thematics_image_gallery/{{ folder.image }}"
+                         alt="Card image cap">
                     <div class="card-body text-center">
                         <h4 class="card-title">{{ folder.name }}</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">{{ folder.description }}</p>
                         <a href="{{ path('show_images_gallery', {id:folder.id}) }}" class="btn btn-primary">Voir l'album</a>
-                        <a href="{{ path('delete_folder_gallery', {id:folder.id}) }}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path('delete_folder_gallery', {id:folder.id}) }}" class="alert-messsage btn btn-danger"
+                           data-confirm-message="Confirmez-vous la suppression du dossier ?" >Supprimer</a>
                     </div>
                 </div>
             </div>
@@ -21,7 +23,7 @@
     {% else %}
         <div class="col-md-2 offset-md-5 text-center">
             <h4 class="mt-5">Aucun album photo</h4>
-            <a class="btn btn-warning mt-5 mb-3" href="{{ path('add_folder') }}">Créer un album</a>
+            <a class="btn btn-warning mt-5 mb-3" href="{{ path ('add_folder') }}">Créer un album</a>
         </div>
     {% endif %}
 {% endblock %}
