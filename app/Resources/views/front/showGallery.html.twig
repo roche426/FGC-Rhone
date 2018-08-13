@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid pt-5 pb-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 text-center mb-3">
+            <h1>Galerie d'images</h1>
+        </div>
+    </div>
+    <div class="row">
+    {% if folders %}
+        {% for folder in folders %}
+            <div class="col-md-3 offset-md-1 mt-3 mb-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/uploaded_files/thematics_image_gallery/{{ folder.image }}"
+                         alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ folder.name }}</h4>
+                        <p class="card-text">{{ folder.description }}</p>
+                        <a href="{{ path('show_images', {id:folder.id}) }}" class="btn btn-primary">Voir l'album</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

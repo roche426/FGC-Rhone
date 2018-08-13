@@ -38,9 +38,16 @@ class ImageFolders
     private $creationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="folder")
+     * @var string
+     * @ORM\Column(name="description", type="string", nullable=true)
      */
-    private $images;
+    private $description;
+
+    /**
+     * @var string
+     * @ORM\Column(name="image", type="string", nullable=true)
+     */
+    private $image;
 
     /**
      * @return mixed
@@ -107,21 +114,36 @@ class ImageFolders
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getImages()
+    public function getDescription()
     {
-        return $this->images;
+        return $this->description;
     }
 
     /**
-     * @param mixed $images
+     * @param string $description
      */
-    public function setImages($images)
+    public function setDescription($description)
     {
-        $this->images = $images;
+        $this->description = $description;
     }
 
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
 
 
 }

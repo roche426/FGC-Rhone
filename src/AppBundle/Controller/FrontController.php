@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\ImageFolders;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,6 +82,32 @@ class FrontController extends Controller
         $members = $em->findAll();
 
         return $this->render('front/bureauMembers.html.twig', array('members' => $members));
+    }
+
+    /**
+     * @Route("gallery", name="gallery")
+     */
+    public function showGalleryAction()
+    {
+        $em = $this->getDoctrine()->getRepository(ImageFolders::class);
+        $folders = $em->findAll();
+
+        return $this->render('front/showGallery.html.twig', array('folders' => $folders));
+    }
+
+    /**
+     * @Route("images/{id}", name="show_images")
+     */
+    public function showImagesGalleryAction($id)
+    {
+        $folder = $this->getDoctrine()->getRepository(ImageFolders::class)->find($id);
+
+        $images = array_diff(scandir($folder->getPath()), ['.', '..']);
+
+        return $this->render('front/showImageGallery.html.twig', array(
+            'folder' => $folder,
+            'images' => $images,
+        ));
     }
 
 

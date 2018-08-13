@@ -10,7 +10,7 @@
     </div>
     {% for image in images %}
         <div class="col-md-3 mb-4 text-center">
-            <img class="img-thumbnail" src="/{{ folder.path }}{{ image }}">
+            <img class="img-thumbnail" src="/{{ folder.path }}{{ image }}" style="height: 300px; width: 300px">
             <a class="btn btn-danger mt-2" href="{{ path('delete_images_gallery', {image:image, id:folder.id}) }}">Supprimer</a>
         </div>
     {% endfor %}
