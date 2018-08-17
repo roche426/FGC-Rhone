@@ -1,0 +1,57 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Message de {{ message.firstName }} {{ message.lastName }}
+        {% if message.register %}
+        / Matricule : {{ message.register }}
+        {% endif %}
+    </h2>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Date : {{ message.date |date('d/m/Y')}}</li>
+                    <li class="list-group-item">Email : {{ message.email }}</li>
+                    <li class="list-group-item">Objet :
+                        {% if message.subject == constant('CONTACT_VISITORS', message) %}
+                            Demande d'informations
+                        {% elseif message.subject == constant('CONTACT_MEMBERS_ACCES', message) %}
+                            Demande d'accès d'un membre
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">Message : {{ message.message }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form action="{{ path('response_contact') }}" method="post">
+                <div class="form-group">
+                    <label for="email">Email expéditeur : </label>
+                    <input type="email" class="form-control" name="email" value="{{ app.user.email }}">
+                </div>
+                <div class="form-group">
+                    <label for="emailTo">Email destinataire : </label>
+                    <input type="email" class="form-control" name="emailTo" value="{{ message.email }}">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Objet : </label>
+                    <input type="text" class="form-control" name="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Votre message : </label>
+                    <textarea class="form-control" name="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+          </div>
+    </div>
+    <div class="mt-5" align="center">
+        <a class="btn btn-dark" href="{{ path('registration',
+            {firstName:message.firstName, lastName:message.lastName, email:message.email})}}"> Créer un accès membre</a>
+        <a class="btn btn-dark" href="{{ path('delete_message', {id:message.id}) }}">Supprimer</a>
+    </div>
+
+{% endblock %}

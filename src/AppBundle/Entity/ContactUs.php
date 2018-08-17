@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 class ContactUs
 {
 
+    const CONTACT_MEMBERS_ACCES = 0;
+    const CONTACT_VISITORS = 1;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -50,8 +53,8 @@ class ContactUs
     private $message;
 
     /**
-     * @var string
-     * @ORM\Column(name="subject", type="string")
+     * @var int
+     * @ORM\Column(name="subject", type="smallint")
      */
     private $subject;
 
@@ -157,7 +160,7 @@ class ContactUs
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function getSubject()
     {
@@ -165,7 +168,7 @@ class ContactUs
     }
 
     /**
-     * @param string $subject
+     * @param bool $subject
      */
     public function setSubject($subject)
     {

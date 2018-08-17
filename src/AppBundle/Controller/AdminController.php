@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function connectedAction()
     {
-        $messagesContactUs = $this->getDoctrine()->getManager()->getRepository(ContactUs::class)->findAll();
+        $messagesContactUs = $this->getDoctrine()->getManager()->getRepository(ContactUs::class)->findLastMessageNoTreated();
 
         return $this->render('admin/index.html.twig', ['messagesContactUs' => $messagesContactUs]);
     }
@@ -75,6 +75,19 @@ class AdminController extends Controller
         return $this->render('admin/showArticle.html.twig', [
             'article' => $article,
             'comments' => $comments
+        ]);
+    }
+
+    /**
+     * @Route("/messages", name="admin_show_messages")
+     */
+    public function showMessagesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $messagesContactUs = $em->getRepository(ContactUs::class)->findAll();
+
+        return $this->render('admin/showMessages.html.twig', [
+            'messagesContactUs' => $messagesContactUs,
         ]);
     }
 

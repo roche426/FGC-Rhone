@@ -38,6 +38,13 @@ class SecurityController extends Controller
     {
         // 1) build the form
         $user = new User();
+
+        if ($request->query) {
+            $user->setFirstname($request->query->get('firstName'));
+            $user->setLastname($request->query->get('lastName'));
+            $user->setEmail($request->query->get('email'));
+        }
+
         $form = $this->createForm(UserType::class, $user);
 
         // 2) handle the submit (will only happen on POST)
