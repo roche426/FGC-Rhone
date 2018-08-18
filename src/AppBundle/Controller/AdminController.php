@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\ContactUs;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,9 @@ class AdminController extends Controller
      */
     public function connectedAction()
     {
-        return $this->render('admin/index.html.twig');
+        $messagesContactUs = $this->getDoctrine()->getManager()->getRepository(ContactUs::class)->findLastMessageNoTreated();
+
+        return $this->render('admin/index.html.twig', ['messagesContactUs' => $messagesContactUs]);
     }
 
     /**
@@ -72,6 +75,19 @@ class AdminController extends Controller
         return $this->render('admin/showArticle.html.twig', [
             'article' => $article,
             'comments' => $comments
+        ]);
+    }
+
+    /**
+     * @Route("/messages", name="admin_show_messages")
+     */
+    public function showMessagesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $messagesContactUs = $em->getRepository(ContactUs::class)->findAll();
+
+        return $this->render('admin/showMessages.html.twig', [
+            'messagesContactUs' => $messagesContactUs,
         ]);
     }
 

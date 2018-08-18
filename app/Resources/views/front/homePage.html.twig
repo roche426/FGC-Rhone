@@ -61,7 +61,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2 offset-md-5 mt-2">
-                    <a class="btn btn-dark center-block" href="#">Contacter-nous</a>
+                    <a class="btn btn-dark center-block" href="{{ path('contact', {subject:1}) }}">Contacter-nous</a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,8 @@
                         {% else %}href="{{ path('login') }}">
                         {% endif %}Se connecter</a></p>
                     <p>Membre de l'association, mais pas d'accès à votre espace? <br>
-                        <a class="btn btn-dark mt-2" href="#">Demander vos accès</a></p>
+                        <a class="btn btn-dark mt-2" href="{{ path('contact', {subject:0}) }}">
+                            Demander vos accès</a></p>
                 </div>
             </div>
         </div>

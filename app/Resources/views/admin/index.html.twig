@@ -5,6 +5,47 @@
 {% endblock %}
 
 {% block body %}
+    <div class="card mb-5" align="center">
+        <h3 class="card-header">Derniers messages <a href="{{ path('admin_show_messages') }}">Voir tous les messages</a></h3>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark ">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Autheur</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Sujet</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for messageContactUs in messagesContactUs %}
+                    <tr>
+                        <td>{{ messageContactUs.date |date('d/m/Y')}} </td>
+                        <td>{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
+                        <td>{{ messageContactUs.email }}</td>
+                        <td>{{ messageContactUs.register }}</td>
+                        <td>
+                            {% if messageContactUs.subject == constant('CONTACT_VISITORS', messageContactUs) %}
+                            Demande d'informations
+                            {% elseif messageContactUs.subject == constant('CONTACT_MEMBERS_ACCES', messageContactUs) %}
+                            Demande d'accès d'un membre
+                            {% endif %}
+                        </td>
+                        <td>{{ messageContactUs.message }}</td>
+                        <td>
+                            <a class="btn btn-dark" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
     <a class="btn btn-dark" href="{{ path('registration') }}">Créer un nouveau membre</a>
     <a class="btn btn-dark" href="{{ path('admin_users') }}">Voir les membres</a>
     <a class="btn btn-dark" href="{{ path('admin_articles') }}">Voir les articles publiés</a>

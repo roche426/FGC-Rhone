@@ -6,15 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Table(name="shared_files")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SharedFilesRepository")
+ * @ORM\Table(name="contact_us")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactUsRepository")
  */
-class SharedFiles
+class ContactUs
 {
-    const PUBLIC_ACCESS_FILE = 0;
-    const MEMBERS_ACCESS_FILE = 1;
-    const BUREAU_MEMBERS_ACCESS_FILE = 2;
-    const ADMIN_ACCESS_FILE = 3;
+
+    const CONTACT_MEMBERS_ACCES = 0;
+    const CONTACT_VISITORS = 1;
 
     /**
      * @ORM\Column(type="integer")
@@ -25,45 +24,51 @@ class SharedFiles
 
     /**
      * @var string
-     * @ORM\Column(name="path_file", type="string")
+     * @ORM\Column(name="first_name", type="string")
      */
-    private $pathFile;
+    private $firstName;
 
     /**
      * @var string
-     * @ORM\Column(name="name_file", type="string")
+     * @ORM\Column(name="last_name", type="string")
      */
-    private $nameFile;
+    private $lastName;
 
     /**
      * @var string
-     * @ORM\Column(name="description", type="string", nullable=true)
+     * @ORM\Column(name="email", type="string")
      */
-    private $description;
+    private $email;
 
     /**
      * @var string
-     * @ORM\Column(name="subject", type="string")
+     * @ORM\Column(name="register", type="string", nullable=true)
+     */
+    private $register;
+
+    /**
+     * @var string
+     * @ORM\Column(name="message", type="text")
+     */
+    private $message;
+
+    /**
+     * @var int
+     * @ORM\Column(name="subject", type="smallint")
      */
     private $subject;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="date_upload", type="date")
+     * @ORM\Column(name="date", type="date")
      */
-    private $dateUpload;
-
-    /**
-     * @var int
-     * @ORM\Column(name="file_access", type="smallint")
-     */
-    private $fileAccess;
+    private $date;
 
     /**
      * @var bool
-     * @ORM\Column(name="is_shared", type="boolean")
+     * @ORM\Column(name="is_treated", type="boolean")
      */
-    private $isShared;
+    private $isTreated = false;
 
 
     /**
@@ -75,111 +80,87 @@ class SharedFiles
     }
 
     /**
-     * @param mixed $id
+     * @return string
      */
-    public function setId($id)
+    public function getFirstName()
     {
-        $this->id = $id;
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
     }
 
     /**
      * @return string
      */
-    public function getPathFile()
+    public function getLastName()
     {
-        return $this->pathFile;
+        return $this->lastName;
     }
 
     /**
-     * @param string $pathFile
+     * @param string $lastName
      */
-    public function setPathFile($pathFile)
+    public function setLastName($lastName)
     {
-        $this->pathFile = $pathFile;
+        $this->lastName = $lastName;
     }
 
     /**
      * @return string
      */
-    public function getNameFile()
+    public function getEmail()
     {
-        return $this->nameFile;
+        return $this->email;
     }
 
     /**
-     * @param string $nameFile
+     * @param string $email
      */
-    public function setNameFile($nameFile)
+    public function setEmail($email)
     {
-        $this->nameFile = $nameFile;
+        $this->email = $email;
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getDateUpload()
+    public function getRegister()
     {
-        return $this->dateUpload;
+        return $this->register;
     }
 
     /**
-     * @param \DateTime $dateUpload
+     * @param string $register
      */
-    public function setDateUpload($dateUpload)
+    public function setRegister($register)
     {
-        $this->dateUpload = $dateUpload;
+        $this->register = $register;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getFileAccess()
+    public function getMessage()
     {
-        return $this->fileAccess;
+        return $this->message;
     }
 
     /**
-     * @param int $fileAccess
+     * @param string $message
      */
-    public function setFileAccess($fileAccess)
+    public function setMessage($message)
     {
-        $this->fileAccess = $fileAccess;
+        $this->message = $message;
     }
 
     /**
      * @return bool
-     */
-    public function isShared()
-    {
-        return $this->isShared;
-    }
-
-    /**
-     * @param bool $isShared
-     */
-    public function setIsShared($isShared)
-    {
-        $this->isShared = $isShared;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return string
      */
     public function getSubject()
     {
@@ -187,14 +168,44 @@ class SharedFiles
     }
 
     /**
-     * @param string $subject
+     * @param bool $subject
      */
     public function setSubject($subject)
     {
         $this->subject = $subject;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTreated()
+    {
+        return $this->isTreated;
+    }
+
+    /**
+     * @param bool $isTreated
+     */
+    public function setIsTreated($isTreated)
+    {
+        $this->isTreated = $isTreated;
+    }
 
 
 }
