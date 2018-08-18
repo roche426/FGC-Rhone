@@ -17,9 +17,9 @@
                 <th scope="col">Action</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody >
             {% for messageContactUs in messagesContactUs %}
-                <tr>
+                <tr {% if messageContactUs.isTreated %} style="background-color: lightgreen" {% endif %}>
                     <td>{{ messageContactUs.date |date('d/m/Y')}} </td>
                     <td>{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
                     <td>{{ messageContactUs.email }}</td>
