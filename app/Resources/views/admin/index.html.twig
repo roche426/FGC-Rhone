@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="card mb-5" align="center">
-        <h3 class="card-header">Derniers messages <a href="{{ path('admin_show_messages') }}">Voir tous les messages</a></h3>
+    <div class="card mb-5 mt-3" align="center">
+        <h3 class="card-header">Derniers messages</h3>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-dark ">
@@ -42,15 +42,39 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% if messagesContactUs %} <a class="btn btn-primary" href="{{ path('admin_show_messages') }}">Voir tous les messages</a>
+            {% else %} <p>Aucun nouveau message</p> <a class="btn btn-primary" href="{{ path('admin_show_messages') }}">Voir les messages traités</a>
+            {% endif %}
         </div>
     </div>
-
-
-    <a class="btn btn-dark" href="{{ path('registration') }}">Créer un nouveau membre</a>
-    <a class="btn btn-dark" href="{{ path('admin_users') }}">Voir les membres</a>
-    <a class="btn btn-dark" href="{{ path('admin_articles') }}">Voir les articles publiés</a>
-    <a class="btn btn-dark" href="{{ path('admin_add_files') }}">Ajouter des documents</a>
-    <a class="btn btn-dark" href="{{ path('admin_show_files') }}">Voir vos documents</a>
-    <a class="btn btn-dark" href="{{ path('add_folder') }}">Créer une galerie d'images</a>
-    <a class="btn btn-dark" href="{{ path('show_gallery') }}">Voir vos galeries</a>
+    <div class="row mb-5">
+        <div class="col-md-2 ml-5 card" align="center">
+            <h2><span class="glyphicon glyphicon-user"></span> Membres</h2>
+            <div class="card-body">
+                <a class="btn btn-primary mb-5" href="{{ path('registration') }}">Ajouter un membre</a>
+                <a class="btn btn-primary" href="{{ path('admin_users') }}">Liste des membres</a>
+            </div>
+        </div>
+        <div class="col-md-2 offset-md-1 card" align="center">
+            <h2><span class="glyphicon glyphicon-list-alt"></span> Articles</h2>
+            <div class="card-body">
+                <a class="btn btn-primary mb-5" href="#">Ajouter un article</a>
+                <a class="btn btn-primary" href="{{ path('admin_articles') }}">Liste des articles</a>
+            </div>
+        </div>
+        <div class="col-md-2 offset-md-1 card" align="center">
+            <h2><span class="glyphicon glyphicon-download"></span> Documents</h2>
+            <div class="card-body">
+                <a class="btn btn-primary mb-5" href="{{ path('admin_add_files') }}">Ajouter un document</a>
+                <a class="btn btn-primary" href="{{ path('admin_show_files') }}">Liste des documents</a>
+            </div>
+        </div>
+        <div class="col-md-2 offset-md-1 card" align="center">
+            <h2><span class="glyphicon glyphicon-picture"></span> Galeries</h2>
+            <div class="card-body">
+                <a class="btn btn-primary mb-5" href="{{ path('add_folder') }}">Ajouter une galerie</a>
+                <a class="btn btn-primary" href="{{ path('show_gallery') }}">Liste des galeries</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -23,19 +23,27 @@
             <!-- uncomment code for absolute positioning tweek see top comment in css -->
             <div class="absolute-wrapper"> </div>
             <!-- Menu -->
-            <div class="side-menu">
+            <div class="side-menu " align="center">
                 <nav class="navbar navbar-default" role="navigation">
                     <!-- Main Menu -->
-                    <div class="side-menu-container">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Link</a></li>
-
-
-
+                    <div class="side-menu-container pt-1" >
+                        <img class="logo" src="{{ asset('/assets/images/logo.jpg') }}">
+                        <ul class="nav navbar-nav mt-2 mb-2">
+                            <li><a href="{{ path('admin_users') }}"><span class="glyphicon glyphicon-user"></span> Membres</a></li>
+                            <li><a href="{{ path('admin_articles') }}"><span class="glyphicon glyphicon-list-alt"></span> Articles</a></li>
+                            <li><a href="{{ path('admin_show_files') }}"><span class="glyphicon glyphicon-download"></span> Documents</a></li>
+                            <li><a href="{{ path('show_gallery') }}"><span class="glyphicon glyphicon-picture"></span> Galeries</a></li>
+                            <li><a href="{{ path('admin_show_messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
                         </ul>
-                    </div><!-- /.navbar-collapse -->
+                    </div>
+                    <div class="card bg-light mb-1" style="margin: auto">
+                        <div class="card-header">Contact maintenance site</div>
+                        <div class="card-body">
+                            <p>Aurélien ROCHE</p>
+                            <p>06-07-64-13-37</p>
+                            <p>aurelien.roche1@laposte.net</p>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </div>

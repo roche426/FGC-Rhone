@@ -32,8 +32,8 @@
                         {% endif %}
                     </td>
                     <td>{{ messageContactUs.message }}</td>
-                    <td>                        <a class="btn btn-dark" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
-
+                    <td>
+                        <a class="btn btn-dark" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -1,0 +1,25 @@
+/* ==== HEADER & FOOTER ==== */
+html{
+    font-size: 1rem;
+}
+
+.content{
+    min-height: 800px;
+}
+
+.navbar-brand{
+    font-size: 3rem;
+}
+
+.side-menu-container > ul > li{
+    display: inline-block;
+    font-size: 2rem;
+    padding: 15px;
+}
+
+.logo{
+    height: 100px;
+    width: 100px;
+    display: block;
+    text-align: center;
+}
