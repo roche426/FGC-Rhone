@@ -1,7 +1,7 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Liste des membres du site</h2>
+    <h2>Liste des documents partagés</h2>
 {% endblock %}
 
 {% block body %}
@@ -40,11 +40,12 @@
                 <td>{{ file.dateUpload |date('d/m/Y') }} </td>
 
                 <td>
-                    <a class="btn btn-dark" href="{{ path('admin_download_files', {id:file.id}) }}">Voir</a>
-                    <a class="btn btn-dark" href="{{ path('admin_delete_files', {id:file.id}) }}">Supprimer</a>
+                    <a class="btn btn-info" href="{{ path('admin_download_files', {id:file.id}) }}">Voir</a>
+                    <a class="btn btn-danger" href="{{ path('admin_delete_files', {id:file.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
             </tbody>
         </table>
+        <a class="btn btn-primary mb-5" href="{{ path('admin_add_files') }}">Ajouter un document</a>
 {% endblock %}

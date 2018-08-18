@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-        <table class="table">
+        <table class="table" align="center">
             <thead class="thead-dark ">
             <tr>
                 <th scope="col">Prénom</th>
@@ -31,12 +31,12 @@
                 <td>{{ user.postalCode }} {{ user.city }}</td>
                 <td>{{ user.registrationDate |date('d/m/Y')}} </td>
                 <td>
-                    <a class="btn btn-dark" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
-                    <a class="btn btn-dark" href="#">Supprimer</a>
+                    <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
+                    <a class="btn btn-danger" href="#">Supprimer</a>
                 </td>
-
             </tr>
         {% endfor %}
             </tbody>
         </table>
+        <a class="btn btn-primary mb-5" href="{{ path('registration') }}">Ajouter un membre</a>
 {% endblock %}
