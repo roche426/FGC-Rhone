@@ -65,10 +65,10 @@ class ContactUs
     private $date;
 
     /**
-     * @var bool
-     * @ORM\Column(name="is_treated", type="boolean")
+     * @var \DateTime
+     * @ORM\Column(name="is_treated", type="date", nullable=true)
      */
-    private $isTreated = false;
+    private $isTreated;
 
 
     /**
@@ -192,7 +192,7 @@ class ContactUs
     }
 
     /**
-     * @return bool
+     * @return \DateTime
      */
     public function isTreated()
     {
@@ -200,7 +200,7 @@ class ContactUs
     }
 
     /**
-     * @param bool $isTreated
+     * @param \DateTime $isTreated
      */
     public function setIsTreated($isTreated)
     {

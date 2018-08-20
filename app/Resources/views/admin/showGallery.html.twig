@@ -1,7 +1,9 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Voir vos galeries</h2>
+    <h2>Galeries photos</h2>
+    <a class="btn btn-primary mt-1" href="{{ path('add_folder') }}">Ajouter une galerie</a>
+
 {% endblock %}
 {% block body %}
     {% if folders %}

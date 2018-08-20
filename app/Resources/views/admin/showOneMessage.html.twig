@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <form action="{{ path('response_contact') }}" method="post">
+            <form action="{{ path('message_treated', {id:message.id}) }}" method="post">
                 <div class="form-group">
                     <label for="email">Email expéditeur : </label>
                     <input type="email" class="form-control" name="email" value="{{ app.user.email }}">
@@ -45,6 +45,9 @@
                     <textarea class="form-control" name="message" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
+                {% if message.isTreated %}
+                    <p class="btn btn-warning">Message traité le : {{ message.isTreated | date('d/m/Y') }}</p>
+                {% endif %}
             </form>
           </div>
     </div>

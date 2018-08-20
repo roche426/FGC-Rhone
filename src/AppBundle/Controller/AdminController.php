@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\ContactUs;
+use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,11 +56,13 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($id);
-        $articles = $em->getRepository(Blog::class)->findAll($id);
+        $articles = $em->getRepository(Blog::class)->findby(['user' => $id]);
+        $files = $em->getRepository(Files::class)->findOneBy(['user' => $id]);
 
         return $this->render('admin/showUser.html.twig', [
             'user' => $user,
-            'articles' => $articles]);
+            'articles' => $articles,
+            'files' => $files]);
     }
 
 

@@ -1,34 +1,36 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Liste des membres du site</h2>
+    <h2>Liste des articles publiés</h2>
 {% endblock %}
 
 {% block body %}
-        <table class="table">
-            <thead class="thead-dark ">
+    <table class="table">
+        <thead class="thead-dark ">
             <tr>
-                <th scope="col">Prénom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Titre</th>
-                <th scope="col">Date de publication</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="col-md-1 text-center">Prénom</th>
+                <th scope="col" class="col-md-1 text-center">Nom</th>
+                <th scope="col" class="col-md-5 text-center">Titre</th>
+                <th scope="col" class="col-md-1 text-center">Date de publication</th>
+                <th scope="col" class="col-md-2 text-center">Action</th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.user.firstName }}</td>
-                <td>{{ article.user.lastName }}</td>
-                <td>{{ article.title }} </td>
-                <td># </td>
+                <td class="text-center">{{ article.user.firstName }}</td>
+                <td class="text-center">{{ article.user.lastName }}</td>
+                <td class="text-center">{{ article.title }} </td>
+                <td class="text-center">#</td>
 
-                <td>
-                    <a class="btn btn-dark" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
-                    <a class="btn btn-dark" href="#">Supprimer</a>
+                <td class="text-center">
+                    <a class="btn btn-info" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
+                    <a class="btn btn-danger" href="#">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+    <a class="btn btn-primary mb-5" href="#">Ajouter un article</a>
+
 {% endblock %}

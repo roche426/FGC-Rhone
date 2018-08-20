@@ -9,7 +9,7 @@ class ContactUsRepository extends EntityRepository
     public function findLastMessageNoTreated()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.isTreated = false' )
+            ->andWhere('c.isTreated is NULL' )
             ->orderBy('c.date', 'DESC' )
             ->setMaxResults(7)
             ->getQuery()

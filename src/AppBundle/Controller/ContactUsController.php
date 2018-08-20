@@ -62,18 +62,29 @@ class ContactUsController extends Controller
     }
 
     /**
-     * @Route(name="response_contact")
+     * @Route("/admin/messages/treated/{id}", name="message_treated")
      */
-    public function ResponseContactAction(Request $request)
+    public function treatedMessageAction(Request $request,$id)
     {
-        $from = $request->get('email');
-        $to = $request->get('emailTo');
-        $subject = $request->get('subject');
-        $message = $request->get('message');
+        $em = $this->getDoctrine()->getManager();
+        $message = $em->getRepository(ContactUs::class)->find($id);
+        $message->setIsTreated(new \DateTime('now'));
 
-        //ajouter envoi mail + flash message
+        if ($request) {
+            $from = $request->get('email');
+            $to = $request->get('emailTo');
+            $subject = $request->get('subject');
+            $responseContact = $request->get('message');
+
+            //ajouter envoi mail + flash message
+        }
+
+        $em->persist($message);
+        $em->flush();
+
 
         return $this->redirectToRoute('admin_show_messages');
+
     }
 
 }
