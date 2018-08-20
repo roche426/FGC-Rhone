@@ -8,32 +8,32 @@
         <table class="table">
             <thead class="thead-dark ">
             <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Autheur</th>
-                <th scope="col">Email</th>
-                <th scope="col">Matricule</th>
-                <th scope="col">Sujet</th>
-                <th scope="col">Message</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="col-md-1 text-center">Date</th>
+                <th scope="col" class="col-md-1 text-center">Autheur</th>
+                <th scope="col" class="col-md-1 text-center">Email</th>
+                <th scope="col" class="col-md-1 text-center">Matricule</th>
+                <th scope="col" class="col-md-2 text-center">Sujet</th>
+                <th scope="col" class="col-md-4 text-center">Message</th>
+                <th scope="col" class="col-md-1 text-center">Action</th>
             </tr>
             </thead>
             <tbody >
             {% for messageContactUs in messagesContactUs %}
-                <tr {% if messageContactUs.isTreated %} style="background-color: lightgreen" {% endif %}>
-                    <td>{{ messageContactUs.date |date('d/m/Y')}} </td>
-                    <td>{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
-                    <td>{{ messageContactUs.email }}</td>
-                    <td>{{ messageContactUs.register }}</td>
-                    <td>
+                <tr {% if messageContactUs.isTreated %} style="background-color: lightgrey" {% endif %}>
+                    <td class="text-center">{{ messageContactUs.date |date('d/m/Y')}} </td>
+                    <td class="text-center">{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
+                    <td class="text-center">{{ messageContactUs.email }}</td>
+                    <td class="text-center">{{ messageContactUs.register }}</td>
+                    <td class="text-center">
                         {% if messageContactUs.subject == constant('CONTACT_VISITORS', messageContactUs) %}
                             Demande d'informations
                         {% elseif messageContactUs.subject == constant('CONTACT_MEMBERS_ACCES', messageContactUs) %}
                             Demande d'accès d'un membre
                         {% endif %}
                     </td>
-                    <td>{{ messageContactUs.message }}</td>
-                    <td>
-                        <a class="btn btn-dark" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
+                    <td class="text-center">{{ messageContactUs.message }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-light" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
                     </td>
                 </tr>
             {% endfor %}

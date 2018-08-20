@@ -1,19 +1,23 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Ajouter une galerie d'images</h2>
+    <h2>Ajouter une galerie</h2>
 {% endblock %}
 {% block body %}
-    <div class="container pt-5 pb-5">
+    <div class="container pt-5 pb-5" align="center">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                 <div class="card">
                     {{ form_start(form) }}
-                    <div class="card-body">
-                        <h5 class="card-title">Créer votre dossier d'images</h5>
-                        <p class="card-text">{{ form_start(form) }}</p>
-                        <input class="btn btn-dark" type="submit" value="Ajouter">
-                        <p class="card-text">{{ form_end(form) }}</p>
+                    <div class="card-body ">
+                        <h3 class="card-title">Créer votre dossier</h3>
+                        <p class="card-text">{{ form_label(form.name) }}</p>
+                        <p class="card-text">{{ form_widget(form.name) }}</p>
+                        <p class="card-text">{{ form_label(form.description) }}</p>
+                        <p class="card-text">{{ form_widget(form.description) }}</p>
+                        <p class="card-text">{{ form_label(form.image) }}</p>
+                        <p class="card-text">{{ form_widget(form.image) }}</p>
+                        <input class="btn btn-dark mt-4" type="submit" value="Ajouter">
                     </div>
                     {{ form_end(form) }}
                 </div>

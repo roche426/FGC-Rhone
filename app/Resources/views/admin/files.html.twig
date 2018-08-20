@@ -8,18 +8,18 @@
         <table class="table">
             <thead class="thead-dark" >
             <tr>
-                <th scope="col">Nom du fichier</th>
-                <th scope="col">Droit d'accès</th>
-                <th scope="col">Document en cours de partage?</th>
-                <th scope="col">Date de téléchargement</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="col-md-2 text-center">Nom du fichier</th>
+                <th scope="col" class="col-md-1 text-center">Droit d'accès</th>
+                <th scope="col" class="col-md-1 text-center">Document en cours de partage?</th>
+                <th scope="col" class="col-md-1 text-center">Date de téléchargement</th>
+                <th scope="col" class="col-md-2 text-center">Action</th>
             </tr>
             </thead>
             <tbody>
         {% for file in files %}
             <tr>
-                <td>{{ file.nameFile }}</td>
-                <td>
+                <td class="text-center">{{ file.nameFile }}</td>
+                <td class="text-center">
                     {% if file.fileAccess == constant('MEMBERS_ACCESS_FILE', file)%}
                         Membres
                     {% elseif file.fileAccess == constant('BUREAU_MEMBERS_ACCESS_FILE', file)%}
@@ -30,16 +30,16 @@
                         Public
                     {% endif %}
                 </td>
-                <td>
+                <td class="text-center">
                     {% if file.isShared %}
                         Oui
                     {% else %}
                         Non
                     {% endif %}
                 </td>
-                <td>{{ file.dateUpload |date('d/m/Y') }} </td>
+                <td class="text-center">{{ file.dateUpload |date('d/m/Y') }} </td>
 
-                <td>
+                <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_download_files', {id:file.id}) }}">Voir</a>
                     <a class="btn btn-danger" href="{{ path('admin_delete_files', {id:file.id}) }}">Supprimer</a>
                 </td>

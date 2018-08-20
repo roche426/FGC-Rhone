@@ -8,29 +8,29 @@
         <table class="table" align="center">
             <thead class="thead-dark ">
             <tr>
-                <th scope="col">Prénom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Date de naissance</th>
-                <th scope="col">Email</th>
-                <th scope="col">Numéro de téléphone</th>
-                <th scope="col">Adresse</th>
-                <th scope="col">Ville</th>
-                <th scope="col">Date d'inscription</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="col-md-1 text-center">Prénom</th>
+                <th scope="col" class="col-md-1 text-center">Nom</th>
+                <th scope="col" class="col-md-1 text-center">Date de naissance</th>
+                <th scope="col" class="col-md-1 text-center">Email</th>
+                <th scope="col" class="col-md-1 text-center">Téléphone</th>
+                <th scope="col" class="col-md-2 text-center">Adresse</th>
+                <th scope="col" class="col-md-2 text-center">Ville</th>
+                <th scope="col" class="col-md-1 text-center">Inscription le</th>
+                <th scope="col" class="col-md-2 text-center">Action</th>
             </tr>
             </thead>
             <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.birthDate |date('d/m/Y')}} </td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.phoneNumber }}</td>
-                <td>{{ user.address }} {{ user.AdditionalAddress }}</td>
-                <td>{{ user.postalCode }} {{ user.city }}</td>
-                <td>{{ user.registrationDate |date('d/m/Y')}} </td>
-                <td>
+                <td class="text-center">{{ user.firstName }}</td>
+                <td class="text-center">{{ user.lastName }}</td>
+                <td class="text-center">{{ user.birthDate |date('d/m/Y')}} </td>
+                <td class="text-center">{{ user.email }}</td>
+                <td class="text-center">{{ user.phoneNumber }}</td>
+                <td class="text-center">{{ user.address }} {{ user.AdditionalAddress }}</td>
+                <td class="text-center">{{ user.postalCode }} {{ user.city }}</td>
+                <td class="text-center">{{ user.registrationDate |date('d/m/Y')}} </td>
+                <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
                     <a class="btn btn-danger" href="#">Supprimer</a>
                 </td>
