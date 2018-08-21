@@ -4,16 +4,18 @@
     <h2>Voir vos galeries</h2>
 {% endblock %}
 {% block body %}
-    <div class="row center-block text-center mb-3">
-        <a class="btn btn-warning mt-2" href="{{ path('add_images', {id:folder.id}) }}">Ajouter des images à cet
+    <div align="center">
+        <a class="btn btn-warning mt-2 mb-4" href="{{ path('add_images', {id:folder.id}) }}">Ajouter des images à cet
             album</a>
     </div>
-    {% for image in images %}
-        <div class="col-md-3 mb-4 text-center">
-            <img class="img-thumbnail" src="/{{ folder.path }}{{ image }}" style="height: 300px; width: 300px">
-            <a class="btn btn-danger mt-2" href="{{ path('delete_images_gallery', {image:image, id:folder.id}) }}">Supprimer</a>
-        </div>
-    {% endfor %}
+    <div class="row">
+        {% for image in images %}
+            <div class="col-md-3 mb-4 text-center">
+                <img class="img-thumbnail" src="/{{ folder.path }}{{ image }}" style="height: 300px; width: 300px">
+                <a class="btn btn-danger mt-2" href="{{ path('delete_images_gallery', {image:image, id:folder.id}) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 

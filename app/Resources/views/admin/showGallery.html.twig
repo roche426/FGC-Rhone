@@ -7,27 +7,31 @@
 {% endblock %}
 {% block body %}
     {% if folders %}
+        <div class="row">
         {% for folder in folders %}
-            <div class="col-md-3 offset-md-1">
-                <div class="card" style="width: 18rem;">
+            <div class="col-md-3 mb-5">
+                <div class="card">
                     <img class="card-img-top" src="/uploaded_files/thematics_image_gallery/{{ folder.image }}"
                          alt="Card image cap">
                     <div class="card-body text-center">
                         <h4 class="card-title">{{ folder.name }}</h4>
                         <p class="card-text">{{ folder.description }}</p>
-                        <a href="{{ path('show_images_gallery', {id:folder.id}) }}" class="btn btn-primary">Voir l'album</a>
-                        <a href="{{ path('delete_folder_gallery', {id:folder.id}) }}" class="alert-messsage btn btn-danger"
-                           data-confirm-message="Confirmez-vous la suppression du dossier ?" >Supprimer</a>
+                        <a href="{{ path('show_images_gallery', {id:folder.id}) }}" class="btn btn-primary">Voir
+                            l'album</a>
+                        <a href="{{ path('delete_folder_gallery', {id:folder.id}) }}"
+                           class="alert-messsage btn btn-danger"
+                           data-confirm-message="Confirmez-vous la suppression du dossier ?">Supprimer</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     {% else %}
-        <div class="col-md-2 offset-md-5 text-center">
+        <div class="col-md-2 text-center">
             <h4 class="mt-5">Aucun album photo</h4>
             <a class="btn btn-warning mt-5 mb-3" href="{{ path ('add_folder') }}">Créer un album</a>
         </div>
     {% endif %}
+    </div>
 {% endblock %}
 
 
