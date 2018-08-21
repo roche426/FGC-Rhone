@@ -5,6 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\ContactUs;
 use AppBundle\Form\ContactUsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -39,11 +43,38 @@ class ContactUsController extends Controller
     /**
      * @Route("/admin/messages/{id}", name="show_one_message")
      */
-    public function showOneMessageAction($id)
+    public function showOneMessageAction($id, Request $request)
     {
         $message = $this->getDoctrine()->getManager()->getRepository(ContactUs::class)->find($id);
 
-        return $this->render('admin/showOneMessage.html.twig', array('message' => $message));
+        $form = $this->createFormBuilder()
+            ->add('email', TextType::class, array('data' => $this->getUser()->getEmail()))
+            ->add('emailTo', EmailType::class, array('data' => $message->getEmail()))
+            ->add('subject', TextType::class)
+            ->add('message', TextareaType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $request->request->all();
+
+            $from = $data['form']['email'];
+            $to = $data['form']['emailTo'];
+            $subject = $data['form']['subject'];
+            $responseContact = $data['form']['message'];
+
+            $message->setResponse($responseContact);
+            //ajouter envoi mail + flash message
+
+            return $this->redirectToRoute('message_treated', ['id' => $id]);
+        }
+
+
+        return $this->render('admin/showOneMessage.html.twig', array(
+            'message' => $message,
+            'form' => $form->createView()));
     }
 
 
@@ -70,19 +101,8 @@ class ContactUsController extends Controller
         $message = $em->getRepository(ContactUs::class)->find($id);
         $message->setIsTreated(new \DateTime('now'));
 
-        if ($request) {
-            $from = $request->get('email');
-            $to = $request->get('emailTo');
-            $subject = $request->get('subject');
-            $responseContact = $request->get('message');
-
-            $message->setResponse($responseContact);
-            //ajouter envoi mail + flash message
-        }
-
         $em->persist($message);
         $em->flush();
-
 
         return $this->redirectToRoute('admin_show_messages');
 

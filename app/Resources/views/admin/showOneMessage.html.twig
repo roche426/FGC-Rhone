@@ -39,7 +39,9 @@
                     <input type="hidden" class="form-control" name="id" value="{{ message.id }}">
                 </div>
                 {% if message.subject == constant('CONTACT_MEMBERS_ACCES', message) %}
-                    <button type="submit" class="btn btn-primary">Créer un accès membre</button>
+                    <button type="submit" class="btn btn-primary alert-delete"
+                        data-confirm-message="Confirmer la création d'un nouveau membre?" >Créer un accès membre
+                    </button>
                 {% endif %}
             </form>
         </div>
@@ -56,27 +58,27 @@
                     </ul>
                 </div>
             {% else %}
+                {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_label(form.emailTo) }}
+                    {{ form_widget(form.emailTo) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_label(form.subject) }}
+                    {{ form_widget(form.subject) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_label(form.message) }}
+                    {{ form_widget(form.message) }}
+                </div>
+                <button class="btn btn-primary mt-3" type="submit">Envoyer les identifiants</button>
+                {{ form_end(form) }}
+
                 <form action="{{ path('message_treated', {id:message.id}) }}" method="post">
-                    <div class="form-group">
-                        <label for="email">Email expéditeur : </label>
-                        <input type="email" class="form-control" name="email" value="{{ app.user.email }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="emailTo">Email destinataire : </label>
-                        <input type="email" class="form-control" name="emailTo" value="{{ message.email }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Objet : </label>
-                        <input type="text" class="form-control" name="subject">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Votre message : </label>
-                        <textarea class="form-control" name="message" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-                    {% if message.isTreated %}
-                        <p class="btn btn-warning">Message traité le : {{ message.isTreated | date('d/m/Y') }}</p>
-                    {% endif %}
                 </form>
             {% endif %}
         </div>
