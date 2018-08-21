@@ -34,4 +34,13 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getResult();
     }
+
+
+    public function findDeletedUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.deleteAt is NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }

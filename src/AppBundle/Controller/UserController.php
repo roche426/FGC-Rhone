@@ -109,7 +109,7 @@ class UserController extends Controller
      * @Route("/{role}/delete-user/{id}", defaults={"role": "admin"},
      *     name="delete_user")
      */
-    public function deleteUserAdminAction($id, $role,UserManager $userManager)
+    public function deleteUserAction($id, $role,UserManager $userManager)
     {
         if (!$userManager->findUser($id)->getDeleteAt()) {
 

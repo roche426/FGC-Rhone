@@ -63,4 +63,24 @@ class UserManager
         $this->em->persist($user);
         $this->em->flush();
     }
+
+    public function purgeInactivesUsers()
+    {
+        $user = $this->em->getRepository(User::class)->findDeletedUsers();
+        $dateNow = new \DateTime('now');
+
+        foreach ($user as $k => $value) {
+
+            $deletionDate = $value->getDeleteAt();
+
+            $interval = $deletionDate->diff($dateNow);
+            $monthInterval = $interval->format('%m');
+            dump($user[$k]);
+
+            if ($monthInterval) {
+                /*$this->em->remove($user[$k]);
+                $this->em->flush();*/
+            }
+        }
+    }
 }

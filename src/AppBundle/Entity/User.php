@@ -145,17 +145,17 @@ class User implements AdvancedUserInterface, \Serializable
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user", cascade={"persist"})
      */
     private $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"persist"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="Files", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Files", mappedBy="user", cascade={"remove"})
      */
     private $files;
 
