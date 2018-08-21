@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Files;
+use AppBundle\Entity\User;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
+use AppBundle\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -101,5 +103,71 @@ class UserController extends Controller
 
         return $this->render('user/editProfil.html.twig', array('editForm' => $editform->createView()));
     }
+
+
+    /**
+     * @Route("/{role}/delete-user/{id}", defaults={"role": "admin"},
+     *     name="delete_user")
+     */
+    public function deleteUserAction($id, $role,UserManager $userManager)
+    {
+        if (!$userManager->findUser($id)->getDeleteAt()) {
+
+            $userManager->deleteUser($id);
+
+            if ($role == 'admin') {
+
+                return $this->redirectToRoute('admin_users');
+            }
+
+            return $this->redirectToRoute('logout');
+        }
+
+        elseif ($userManager->findUser($id)->getDeleteAt()) {
+
+            $userManager->keepUser($id);
+
+            if ($role == 'admin') {
+
+                return $this->redirectToRoute('admin_users_inactives');
+            }
+
+            return $this->redirectToRoute('logout');
+        }
+    }
+
+    /**
+     * @Route("/{role}/disable-user/{id}", defaults={"role": "admin"},
+     *     name="disable_user")
+     *
+     */
+    public function disableUserAction($id, $role, UserManager $userManager)
+    {
+        if (!$userManager->findUser($id)->getDisableAt()) {
+
+            $userManager->disableUser($id);
+
+            if ($role === 'admin') {
+
+                return $this->redirectToRoute('admin_users');
+            }
+
+            return $this->redirectToRoute('logout');
+        }
+
+        elseif ($userManager->findUser($id)->getDisableAt()) {
+
+            $userManager->reactiveUser($id);
+
+            if ($role === 'admin') {
+
+                return $this->redirectToRoute('admin_users_inactives');
+            }
+
+            return $this->redirectToRoute('logout');
+
+        }
+    }
+
 
 }

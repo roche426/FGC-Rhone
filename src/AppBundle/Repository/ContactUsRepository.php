@@ -15,4 +15,12 @@ class ContactUsRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findTreatedMessages()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.isTreated is NOT NULL' )
+            ->getQuery()
+            ->getResult();
+    }
 }

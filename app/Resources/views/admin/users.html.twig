@@ -32,11 +32,12 @@
                 <td class="text-center">{{ user.registrationDate |date('d/m/Y')}} </td>
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
-                    <a class="btn btn-danger" href="#">Supprimer</a>
+                    <a class="btn btn-danger" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
             </tbody>
         </table>
         <a class="btn btn-primary mb-5" href="{{ path('registration') }}">Ajouter un membre</a>
+        <a class="btn btn-warning mb-5" href="{{ path('admin_users_inactives') }}">Liste membres inactifs</a>
 {% endblock %}

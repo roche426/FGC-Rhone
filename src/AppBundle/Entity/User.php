@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
@@ -124,6 +125,20 @@ class User implements AdvancedUserInterface, \Serializable
     private $pictureProfil;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="delete_at", type="date", nullable=true)
+     */
+    private $deleteAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="disable_at", type="date", nullable=true)
+     */
+    private $disableAt;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", nullable=true)
@@ -131,17 +146,17 @@ class User implements AdvancedUserInterface, \Serializable
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user", cascade={"remove"})
      */
     private $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="Files", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Files", mappedBy="user", cascade={"remove"})
      */
     private $files;
 
@@ -461,6 +476,38 @@ class User implements AdvancedUserInterface, \Serializable
         $this->files = $files;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getDeleteAt()
+    {
+        return $this->deleteAt;
+    }
+
+    /**
+     * @param \DateTime $deleteAt
+     */
+    public function setDeleteAt($deleteAt)
+    {
+        $this->deleteAt = $deleteAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDisableAt()
+    {
+        return $this->disableAt;
+    }
+
+    /**
+     * @param \DateTime $disableAt
+     */
+    public function setDisableAt($disableAt)
+    {
+        $this->disableAt = $disableAt;
+    }
+
 
 
 /* ============================================ */
@@ -563,4 +610,5 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
+
 }

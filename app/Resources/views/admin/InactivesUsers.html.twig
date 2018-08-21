@@ -1,0 +1,44 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    <h2>Liste des membres inactifs</h2>
+{% endblock %}
+
+{% block body %}
+    <table class="table" align="center">
+        <thead class="thead-dark ">
+        <tr>
+            <th scope="col" class="col-md-1 text-center">Prénom</th>
+            <th scope="col" class="col-md-1 text-center">Nom</th>
+            <th scope="col" class="col-md-1 text-center">Date de naissance</th>
+            <th scope="col" class="col-md-1 text-center">Email</th>
+            <th scope="col" class="col-md-1 text-center">Téléphone</th>
+            <th scope="col" class="col-md-2 text-center">Adresse</th>
+            <th scope="col" class="col-md-2 text-center">Ville</th>
+            <th scope="col" class="col-md-1 text-center">Désactivé le</th>
+            <th scope="col" class="col-md-2 text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr {% if user.deleteAt %} style="background-color: lightgrey"{% endif %}>
+                <td class="text-center">{{ user.firstName }}</td>
+                <td class="text-center">{{ user.lastName }}</td>
+                <td class="text-center">{{ user.birthDate |date('d/m/Y') }} </td>
+                <td class="text-center">{{ user.email }}</td>
+                <td class="text-center">{{ user.phoneNumber }}</td>
+                <td class="text-center">{{ user.address }} {{ user.AdditionalAddress }}</td>
+                <td class="text-center">{{ user.postalCode }} {{ user.city }}</td>
+                <td class="text-center">{{ user.disableAt |date('d/m/Y') }} </td>
+                <td class="text-center">
+                    <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
+                    {% if user.deleteAt is null %}
+                        <a class="btn btn-success" href="{{ path('disable_user', {id:user.id}) }}">Réactiver</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary mb-5" href="{{ path('admin_users') }}">Retour</a>
+{% endblock %}

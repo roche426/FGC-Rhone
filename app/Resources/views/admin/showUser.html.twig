@@ -24,6 +24,19 @@
                     <li class="list-group-item">Email : {{ user.email }}</li>
                     <li class="list-group-item">Téléphone : {{ user.phoneNumber }}</li>
                     <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y')}}</li>
+                    <li class="list-group-item">
+                        {% if user.deleteAt %}
+                            <a class="btn btn-warning" href="{{ path('delete_user', {id:user.id}) }}">Annuler suppression</a>
+                        {% else %}
+                            <a class="btn btn-danger" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a>
+                            {% if user.disableAt %}
+                                <a class="btn btn-success" href="{{ path('disable_user', {id:user.id}) }}">Réactiver</a>
+                            {% else %}
+                                <a class="btn btn-warning" href="{{ path('disable_user', {id:user.id}) }}">Désactiver</a>
+                            {% endif %}
+                        {% endif %}
+
+                    </li>
                 </ul>
             </div>
         </div>
