@@ -33,9 +33,20 @@ class AdminController extends Controller
     public function showUsersAction()
     {
         $em = $this->getDoctrine()->getRepository(User::class);
-        $users = $em->findAll();
+        $users = $em->findActivesUsers();
 
         return $this->render('admin/users.html.twig', ['users' => $users]);
+    }
+
+    /**
+     * @Route("/users/inactives", name="admin_users_inactives")
+     */
+    public function showInactivesUsersAction()
+    {
+        $em = $this->getDoctrine()->getRepository(User::class);
+        $users = $em->findInactivesUsers();
+
+        return $this->render('admin/InactivesUsers.html.twig', ['users' => $users]);
     }
 
     /**

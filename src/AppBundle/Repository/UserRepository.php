@@ -16,4 +16,22 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
         ->getQuery()
         ->getOneOrNullResult();
     }
+
+    public function findActivesUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.deleteAt is NULL')
+            ->andWhere('u.disableAt is NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findInactivesUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.deleteAt is NOT NULL or u.disableAt is NOT NULL')
+            ->orderBy('u.deleteAt')
+            ->getQuery()
+            ->getResult();
+    }
 }

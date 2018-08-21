@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Files;
+use AppBundle\Entity\User;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -101,5 +102,61 @@ class UserController extends Controller
 
         return $this->render('user/editProfil.html.twig', array('editForm' => $editform->createView()));
     }
+
+
+    /**
+     * @Route("/delete-user/{id}", name="delete_user")
+     */
+    public function deleteUserAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+
+        if (!$user->getDeleteAt()) {
+            $user->setDeleteAt(new \DateTime('now'));
+            $user->setIsActive(false);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_users');
+        }
+
+        elseif ($user->getDeleteAt()) {
+            $user->setDeleteAt(null);
+            $user->setDisableAt(new \DateTime('now'));
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_users_inactives');
+        }
+    }
+
+    /**
+     * @Route("/disable-user/{id}", name="disable_user")
+     */
+    public function disableUserAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+
+        if (!$user->getDisableAt()) {
+            $user->setDisableAt(new \DateTime('now'));
+            $user->setIsActive(false);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_users');
+        }
+
+        elseif ($user->getDisableAt()) {
+            $user->setDisableAt(null);
+            $user->setIsActive(true);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_users_inactives');
+        }
+    }
+
 
 }

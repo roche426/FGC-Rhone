@@ -124,6 +124,20 @@ class User implements AdvancedUserInterface, \Serializable
     private $pictureProfil;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="delete_at", type="date", nullable=true)
+     */
+    private $deleteAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="disable_at", type="date", nullable=true)
+     */
+    private $disableAt;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", nullable=true)
@@ -459,6 +473,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function setFiles($files)
     {
         $this->files = $files;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeleteAt()
+    {
+        return $this->deleteAt;
+    }
+
+    /**
+     * @param \DateTime $deleteAt
+     */
+    public function setDeleteAt($deleteAt)
+    {
+        $this->deleteAt = $deleteAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDisableAt()
+    {
+        return $this->disableAt;
+    }
+
+    /**
+     * @param \DateTime $disableAt
+     */
+    public function setDisableAt($disableAt)
+    {
+        $this->disableAt = $disableAt;
     }
 
 
