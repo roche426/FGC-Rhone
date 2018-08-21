@@ -25,36 +25,65 @@
                     <li class="list-group-item">Message : {{ message.message }}</li>
                 </ul>
             </div>
-        </div>
-        <div class="col-md-6">
-            <form action="{{ path('message_treated', {id:message.id}) }}" method="post">
+            <form action="{{ path('registration') }}" method="post">
                 <div class="form-group">
-                    <label for="email">Email expéditeur : </label>
-                    <input type="email" class="form-control" name="email" value="{{ app.user.email }}">
+                    <input type="hidden" class="form-control" name="firstName" value="{{ message.firstName }}">
                 </div>
                 <div class="form-group">
-                    <label for="emailTo">Email destinataire : </label>
-                    <input type="email" class="form-control" name="emailTo" value="{{ message.email }}">
+                    <input type="hidden" class="form-control" name="lastName" value="{{ message.lastName }}">
                 </div>
                 <div class="form-group">
-                    <label for="subject">Objet : </label>
-                    <input type="text" class="form-control" name="subject">
+                    <input type="hidden" class="form-control" name="email" value="{{ message.email }}">
                 </div>
                 <div class="form-group">
-                    <label for="message">Votre message : </label>
-                    <textarea class="form-control" name="message" rows="3"></textarea>
+                    <input type="hidden" class="form-control" name="id" value="{{ message.id }}">
                 </div>
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-                {% if message.isTreated %}
-                    <p class="btn btn-warning">Message traité le : {{ message.isTreated | date('d/m/Y') }}</p>
+                {% if message.subject == constant('CONTACT_MEMBERS_ACCES', message) %}
+                    <button type="submit" class="btn btn-primary">Créer un accès membre</button>
                 {% endif %}
             </form>
-          </div>
+        </div>
+        <div class="col-md-6">
+            {% if message.response or message.isTreated %}
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Message traité le : {{ message.isTreated |date('d/m/Y')}}</li>
+                        {% if message.response %}
+                        <li class="list-group-item">Réponse : {{ message.response }}</li>
+                        {% else %}
+                        <li class="list-group-item">Mail automatique envoyé suite à la création du compte</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% else %}
+                <form action="{{ path('message_treated', {id:message.id}) }}" method="post">
+                    <div class="form-group">
+                        <label for="email">Email expéditeur : </label>
+                        <input type="email" class="form-control" name="email" value="{{ app.user.email }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailTo">Email destinataire : </label>
+                        <input type="email" class="form-control" name="emailTo" value="{{ message.email }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Objet : </label>
+                        <input type="text" class="form-control" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message : </label>
+                        <textarea class="form-control" name="message" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    {% if message.isTreated %}
+                        <p class="btn btn-warning">Message traité le : {{ message.isTreated | date('d/m/Y') }}</p>
+                    {% endif %}
+                </form>
+            {% endif %}
+        </div>
     </div>
     <div class="mt-5" align="center">
-        <a class="btn btn-dark" href="{{ path('registration',
-            {firstName:message.firstName, lastName:message.lastName, email:message.email})}}"> Créer un accès membre</a>
         <a class="btn btn-dark" href="{{ path('delete_message', {id:message.id}) }}">Supprimer</a>
     </div>
+
 
 {% endblock %}

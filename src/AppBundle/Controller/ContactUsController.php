@@ -76,6 +76,7 @@ class ContactUsController extends Controller
             $subject = $request->get('subject');
             $responseContact = $request->get('message');
 
+            $message->setResponse($responseContact);
             //ajouter envoi mail + flash message
         }
 
