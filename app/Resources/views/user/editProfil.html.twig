@@ -12,7 +12,13 @@
             <input class="btn btn-dark" type="submit" value="modifier">
         </div>
         {{ form_end(editForm) }}
+
+        <a class="btn btn-danger" href="{{ path('delete_user', {role:'user', id:app.user.id}) }}">Supprimer</a>
+        <a class="btn btn-warning" href="{{ path('disable_user', {role:'user', id:app.user.id}) }}">Désactiver</a>
+
     </div>
+
+
 
 {% endblock %}
 
