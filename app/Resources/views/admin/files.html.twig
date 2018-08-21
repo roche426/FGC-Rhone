@@ -41,7 +41,8 @@
 
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_download_files', {id:file.id}) }}">Voir</a>
-                    <a class="btn btn-danger" href="{{ path('admin_delete_files', {id:file.id}) }}">Supprimer</a>
+                    <a class="btn btn-danger alert-delete" href="{{ path('admin_delete_files', {id:file.id}) }}"
+                       data-confirm-message="Confirmer la suppression du document?">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

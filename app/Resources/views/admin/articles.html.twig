@@ -26,7 +26,8 @@
 
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
-                    <a class="btn btn-danger" href="#">Supprimer</a>
+                    <a class="btn btn-danger alert-delete" href="#"
+                       data-confirm-message="Confirmer la suppression de l'article?">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

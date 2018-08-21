@@ -33,7 +33,8 @@
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
                     {% if user.deleteAt is null %}
-                        <a class="btn btn-success" href="{{ path('disable_user', {id:user.id}) }}">Réactiver</a>
+                        <a class="btn btn-success alert-delete" href="{{ path('disable_user', {id:user.id}) }}"
+                           data-confirm-message="Confirmer la réactivation de l'utilisateur?">Réactiver</a>
                     {% endif %}
                 </td>
             </tr>

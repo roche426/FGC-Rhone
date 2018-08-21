@@ -45,13 +45,20 @@ class ContactUsController extends Controller
      */
     public function showOneMessageAction($id, Request $request)
     {
-        $message = $this->getDoctrine()->getManager()->getRepository(ContactUs::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $message = $em->getRepository(ContactUs::class)->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('email', TextType::class, array('data' => $this->getUser()->getEmail()))
-            ->add('emailTo', EmailType::class, array('data' => $message->getEmail()))
-            ->add('subject', TextType::class)
-            ->add('message', TextareaType::class)
+            ->add('email', TextType::class, array(
+                'data' => $this->getUser()->getEmail(),
+                'required' => true))
+            ->add('emailTo', EmailType::class, array(
+                'data' => $message->getEmail(),
+                'required' => true))
+            ->add('subject', TextType::class, array(
+                'required' => true))
+            ->add('message', TextareaType::class, array(
+                'required' => true))
             ->getForm();
 
         $form->handleRequest($request);
@@ -66,6 +73,8 @@ class ContactUsController extends Controller
             $responseContact = $data['form']['message'];
 
             $message->setResponse($responseContact);
+            $em->persist($message);
+            $em->flush();
             //ajouter envoi mail + flash message
 
             return $this->redirectToRoute('message_treated', ['id' => $id]);

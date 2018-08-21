@@ -39,9 +39,7 @@
                     <input type="hidden" class="form-control" name="id" value="{{ message.id }}">
                 </div>
                 {% if message.subject == constant('CONTACT_MEMBERS_ACCES', message) %}
-                    <button type="submit" class="btn btn-primary alert-delete"
-                        data-confirm-message="Confirmer la création d'un nouveau membre?" >Créer un accès membre
-                    </button>
+                    <button type="submit" class="btn btn-primary">Créer un accès membre</button>
                 {% endif %}
             </form>
         </div>
@@ -75,7 +73,7 @@
                     {{ form_label(form.message) }}
                     {{ form_widget(form.message) }}
                 </div>
-                <button class="btn btn-primary mt-3" type="submit">Envoyer les identifiants</button>
+                <button class="btn btn-primary mt-3" type="submit">Envoyer</button>
                 {{ form_end(form) }}
 
                 <form action="{{ path('message_treated', {id:message.id}) }}" method="post">
@@ -84,7 +82,8 @@
         </div>
     </div>
     <div class="mt-5" align="center">
-        <a class="btn btn-dark" href="{{ path('delete_message', {id:message.id}) }}">Supprimer</a>
+        <a class="btn btn-dark alert-delete" href="{{ path('delete_message', {id:message.id}) }}"
+           data-confirm-message="Confirmer la supression du message?">Supprimer</a>
     </div>
 
 

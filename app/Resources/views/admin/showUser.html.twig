@@ -26,13 +26,17 @@
                     <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y')}}</li>
                     <li class="list-group-item">
                         {% if user.deleteAt %}
-                            <a class="btn btn-warning" href="{{ path('delete_user', {id:user.id}) }}">Annuler suppression</a>
+                            <a class="btn btn-warning alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
+                               data-confirm-message="Annuler la suppression de l'utilisateur?">Annuler suppression</a>
                         {% else %}
-                            <a class="btn btn-danger" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a>
+                            <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
+                               data-confirm-message="Confirmer la suppression de l'utilisateur?">Supprimer</a>
                             {% if user.disableAt %}
-                                <a class="btn btn-success" href="{{ path('disable_user', {id:user.id}) }}">Réactiver</a>
+                                <a class="btn btn-success alert-delete" href="{{ path('disable_user', {id:user.id}) }}"
+                                   data-confirm-message="Confirmer la réactivation de l'utilisateur?">Réactiver</a>
                             {% else %}
-                                <a class="btn btn-warning" href="{{ path('disable_user', {id:user.id}) }}">Désactiver</a>
+                                <a class="btn btn-warning alert-delete" href="{{ path('disable_user', {id:user.id}) }}"
+                                   data-confirm-message="Confirmer la désactivation de l'utilisateur?">Désactiver</a>
                             {% endif %}
                         {% endif %}
 

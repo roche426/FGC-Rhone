@@ -32,7 +32,8 @@
                 <td class="text-center">{{ user.registrationDate |date('d/m/Y')}} </td>
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
-                    <a class="btn btn-danger" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a>
+                    <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
+                        data-confirm-message="Confirmer la suppression de l'utilisateur?">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
