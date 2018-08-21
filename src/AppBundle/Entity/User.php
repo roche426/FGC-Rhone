@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
@@ -145,12 +146,12 @@ class User implements AdvancedUserInterface, \Serializable
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user", cascade={"remove"})
      */
     private $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
      */
     private $comments;
 
@@ -609,4 +610,5 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
+
 }

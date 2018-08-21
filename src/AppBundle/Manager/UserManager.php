@@ -75,11 +75,20 @@ class UserManager
 
             $interval = $deletionDate->diff($dateNow);
             $monthInterval = $interval->format('%m');
-            dump($user[$k]);
 
             if ($monthInterval) {
-                /*$this->em->remove($user[$k]);
-                $this->em->flush();*/
+                if ($user[$k]->getPictureProfil()){
+                    unlink('web/' . $user[$k]->getPictureProfil());
+                }
+
+                if ($user[$k]->getFiles()) {
+                    if ($user[$k]->getFiles()->getIdCard()) {
+                        unlink($user[$k]->getFiles()->getIdCard());
+                    }
+                }
+
+                $this->em->remove($user[$k]);
+                $this->em->flush();
             }
         }
     }
