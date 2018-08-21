@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ContactUs;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use AppBundle\Mail\Mailer;
@@ -38,11 +39,18 @@ class SecurityController extends Controller
     {
         // 1) build the form
         $user = new User();
+        $entityManager = $this->getDoctrine()->getManager();
 
-        if ($request->query) {
-            $user->setFirstname($request->query->get('firstName'));
-            $user->setLastname($request->query->get('lastName'));
-            $user->setEmail($request->query->get('email'));
+        // Récupère information suite demande accès via section contacter-nous et traite le message en Admin
+        if ($request) {
+            $user->setFirstname($request->get('firstName'));
+            $user->setLastname($request->get('lastName'));
+            $user->setEmail($request->get('email'));
+
+            $message = $entityManager->getRepository(ContactUs::class)->find($request->get('id'));
+            $message->setIsTreated(new \DateTime('now'));
+            $entityManager->persist($message);
+            $entityManager->flush();
         }
 
         $form = $this->createForm(UserType::class, $user);
@@ -58,7 +66,6 @@ class SecurityController extends Controller
 
 
             // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -71,10 +78,7 @@ class SecurityController extends Controller
         }
 
 
-        return $this->render(
-            'security/register.html.twig',
-            array('form' => $form->createView())
-        );
+        return $this->render('security/register.html.twig', array('form' => $form->createView()));
     }
 
     /**

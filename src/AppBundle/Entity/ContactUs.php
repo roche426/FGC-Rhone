@@ -65,6 +65,12 @@ class ContactUs
     private $date;
 
     /**
+     * @var string
+     * @ORM\Column(name="response", type="text", nullable=true)
+     */
+    private $response;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="is_treated", type="date", nullable=true)
      */
@@ -190,6 +196,23 @@ class ContactUs
     {
         $this->date = $date;
     }
+
+    /**
+     * @return string
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param string $response
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
+    }
+
 
     /**
      * @return \DateTime
