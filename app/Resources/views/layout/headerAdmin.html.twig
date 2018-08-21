@@ -1,50 +1,39 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="bg-light">
     <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <a class="navbar-brand" href="{{ path('admin_home') }}">
-                Administration
-            </a>
-            <form class="navbar-form navbar-left" method="GET" role="search">
-                <div class="form-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path('home_page') }}" target="_blank">Retour au site</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-<div class="container-fluid">
-    <div class="col-xs-2 sidebar">
         <div class="row">
-            <!-- uncomment code for absolute positioning tweek see top comment in css -->
-            <div class="absolute-wrapper"> </div>
-            <!-- Menu -->
-            <div class="side-menu " align="center">
-                <nav class="navbar navbar-default" role="navigation">
-                    <!-- Main Menu -->
-                    <div class="side-menu-container pt-1" >
-                        <img class="logo" src="{{ asset('/assets/images/logo.jpg') }}">
-                        <ul class="nav navbar-nav mt-2 mb-2">
-                            <li><a href="{{ path('admin_users') }}"><span class="glyphicon glyphicon-user"></span> Membres</a></li>
-                            <li><a href="{{ path('admin_articles') }}"><span class="glyphicon glyphicon-list-alt"></span> Articles</a></li>
-                            <li><a href="{{ path('admin_show_files') }}"><span class="glyphicon glyphicon-download"></span> Documents</a></li>
-                            <li><a href="{{ path('show_gallery') }}"><span class="glyphicon glyphicon-picture"></span> Galeries</a></li>
-                            <li><a href="{{ path('admin_show_messages') }}"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-                        </ul>
-                    </div>
-                    <div class="card bg-light mb-1" style="margin: auto">
-                        <div class="card-header">Contact maintenance site</div>
-                        <div class="card-body">
-                            <p>Aurélien ROCHE</p>
-                            <p>06-07-64-13-37</p>
-                            <p>aurelien.roche1@laposte.net</p>
-                        </div>
-                    </div>
-                </nav>
+            <div class="col-md-6 offset-md-3 text-center mt-4">
+                <h1>Administration</h1>
+            </div>
+            <div class="col-md-1 offset-md-2 mt-5">
+                <a href="#">Retour Site</a>
             </div>
         </div>
     </div>
+</nav>
+
+<div class="container-fluid mt-5">
+    <div class="row" align="center">
+        <div class="col-md-2">
+            <div class="card bg-light mb-1" style="margin: auto">
+                <div class="card-header">
+                    <h1>MENU</h1>
+                    <img class="logo" src="{{ asset('/assets/images/logo.jpg') }}">
+                </div>
+                <div class="card-body navbar-nav">
+                        <h2 class="mb-4"><a href="{{ path('admin_users') }}">Membres</a></h2>
+                        <h2 class="mb-4"><a href="{{ path('admin_articles') }}">Articles</a></h2>
+                        <h2 class="mb-4"><a href="{{ path('admin_show_files') }}">Documents</a></h2>
+                        <h2 class="mb-4"><a href="{{ path('show_gallery') }}">Galeries</a></h2>
+                        <h2 class="mb-4"><a href="{{ path('admin_show_messages') }}">Messages</a></h2>
+                </div>
+                <div class="card bg-light mb-1" style="margin: auto">
+                    <div class="card-header">Contact maintenance site</div>
+                    <div class="card-body">
+                        <p>Aurélien ROCHE</p>
+                        <p>06-07-64-13-37</p>
+                        <p>aurelien.roche1@laposte.net</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
