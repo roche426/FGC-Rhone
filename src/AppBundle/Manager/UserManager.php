@@ -87,6 +87,21 @@ class UserManager
                     }
                 }
 
+                $comments = $user[$k]->getComments();
+                $articles = $user[$k]->getArticles();
+
+                if ($comments) {
+                    foreach ($articles as $article) {
+                        $article->setUser(null);
+                    }
+                }
+
+                if ($articles) {
+                    foreach ($comments as $comment) {
+                        $comment->setUser(null);
+                    }
+                }
+
                 $this->em->remove($user[$k]);
                 $this->em->flush();
             }

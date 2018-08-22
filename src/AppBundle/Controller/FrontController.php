@@ -39,7 +39,7 @@ class FrontController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository(Blog::class)->findOneBy(array('id' => $id));
-        $comments = $em->getRepository(Comment::class)->findAll(array('id' => $id));
+        $comments = $em->getRepository(Comment::class)->findBy(array('article' => $id));
 
         $comment = new Comment();
         $form = $this->createForm('AppBundle\Form\CommentType', $comment);

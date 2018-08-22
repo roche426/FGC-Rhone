@@ -47,6 +47,7 @@
         <div class="col-md-3 offset-md-1">
             <div class="card bg-light">
                 <h3 class="card-title">Documents</h3>
+                {% if files %}
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">
                         <div class="card">
@@ -124,6 +125,7 @@
                         </div>
                     </li>
                 </ul>
+                {% endif %}
             </div>
         </div>
         <div class="col-md-4 offset-md-1">

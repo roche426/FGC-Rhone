@@ -146,12 +146,12 @@ class User implements AdvancedUserInterface, \Serializable
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
      */
     private $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
      */
     private $comments;
 

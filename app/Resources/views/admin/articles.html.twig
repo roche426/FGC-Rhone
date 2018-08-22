@@ -9,8 +9,7 @@
     <table class="table">
         <thead class="thead-dark ">
             <tr>
-                <th class="text-center">Prénom</th>
-                <th class="text-center">Nom</th>
+                <th class="text-center">Membre</th>
                 <th class="text-center">Titre</th>
                 <th class="text-center">Date de publication</th>
                 <th class="text-center">Action</th>
@@ -19,8 +18,11 @@
         <tbody>
         {% for article in articles %}
             <tr>
-                <td class="text-center">{{ article.user.firstName }}</td>
-                <td class="text-center">{{ article.user.lastName }}</td>
+                {% if article.user %}
+                <td class="text-center">{{ article.user.firstName }} {{ article.user.lastName }}</td>
+                {% else %}
+                <td class="text-center">Utilisateur supprimé</td>
+                {% endif %}
                 <td class="text-center">{{ article.title }} </td>
                 <td class="text-center">{{ article.publicationDate | date('d-m-Y') }}</td>
 

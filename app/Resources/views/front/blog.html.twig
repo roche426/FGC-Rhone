@@ -2,56 +2,19 @@
 
 {% block body %}
 
-    <div class="container pt-5 pb-5" align="center">
-        {% if article %}
-            <div class="row">
-                <h1 class="mx-auto">{{ article.title }}</h1>
-            </div>
-            <div class="row mt-3">
-                {{ froala_display(article.article) }}
-            </div>
-            <h5 align="right"><i>Publié le {{ article.publicationDate | date('d-m-Y') }}
-                    par {{ article.user.firstName }} {{ article.user.lastName }}</i>
-            </h5>
-        {% endif %}
-        <div class="row mt-5">
-            <div class="col-md-12 card">
-                <h2 class="card-header bg-success">
-                    Commentaires
-                </h2>
-                <div class="card-body">
-                    {% if comments %}
-                        {% for comment in comments %}
-                            <div class="card col-md-8">
-                                <ul class="list-group list-group-flush">
-                                    <div class="row mt-3">
-                                        <div class="col-md-5">
-                                            <p> {{ comment.user.firstName }} {{ comment.user.lastName }}
-                                                <i>le {{ comment.publicationDate | date('d-m-Y') }}</i>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <h5>{{ comment.comment }}</h5>
-                                        </div>
-                                    </div>
-                                </ul>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>Aucun commentaire</p>
-                    {% endif %}
-                </div>
-                {% if app.user %}
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2 text-center">
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
+    {% include 'front/article.html.twig' %}
 
-                            <input type="submit" value="Enregistrer"/>
-                            {{ form_end(form) }}
-                        </div>
+            {% if app.user %}
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+
+                        <input type="submit" value="Enregistrer"/>
+                        {{ form_end(form) }}
                     </div>
-                {% endif %}
+                </div>
+            {% endif %}
             </div>
         </div>
     </div>
