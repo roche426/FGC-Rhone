@@ -1,39 +1,37 @@
 <nav class="bg-light">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mt-4">
-                <a href="{{ path('admin_home') }}"><h1>Administration</h1></a>
+        <div class="row bg-green">
+            <div class="col-md-6 ">
+                <a class="navbar-brand" href="{{ path('admin_home') }}"> Administration FGPR </a>
             </div>
-            <div class="col-md-1 offset-md-2 mt-5">
-                <a href="#">Retour Site</a>
+            <div class="col-md-1 offset-md-5 mt-5">
+                <a href="{{ path('home_page') }}">Retour Site</a>
             </div>
         </div>
     </div>
 </nav>
 
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-3">
     <div class="row" align="center">
         <div class="col-md-2">
-            <div class="card bg-light mb-1" style="margin: auto">
-                <div class="card-header">
-                    <h1>MENU</h1>
-                    <img class="logo" src="{{ asset('/assets/images/logo.jpg') }}">
+            <div class="card bg-light mb-1 mx-auto">
+                <div class="card-header bg-green">
+                    <img class="logo mt-2 mb-3" src="{{ asset('/assets/images/logo.jpg') }}">
                 </div>
-                <div class="card-body navbar-nav">
-                        <h2 class="mb-4"><a href="{{ path('admin_users') }}">Membres</a></h2>
-                        <h2 class="mb-4"><a href="{{ path('admin_articles') }}">Articles</a></h2>
-                        <h2 class="mb-4"><a href="{{ path('admin_show_files') }}">Documents</a></h2>
-                        <h2 class="mb-4"><a href="{{ path('show_gallery') }}">Galeries</a></h2>
-                        <h2 class="mb-4"><a href="{{ path('admin_show_messages') }}">Messages</a></h2>
-                </div>
-                <div class="card bg-light mb-1" style="margin: auto">
-                    <div class="card-header">Contact maintenance site</div>
-                    <div class="card-body">
-                        <p>Aurélien ROCHE</p>
-                        <p>06-07-64-13-37</p>
-                        <p>aurelien.roche1@laposte.net</p>
+                <div class="card-body navbar-nav bg-gold">
+                    <a class="btn mt-2 btn-menu" href="{{ path('admin_users') }}">Membres</a>
+                    <a class="btn mt-4 btn-menu" href="{{ path('admin_articles') }}">Articles</a>
+                    <a class="btn mt-4 btn-menu" href="{{ path('admin_show_files') }}">Documents</a>
+                    <a class="btn mt-4 btn-menu" href="{{ path('show_gallery') }}">Galeries</a>
+                    <a class="btn mt-4 btn-menu" href="{{ path('admin_show_messages') }}">Messages</a>
+                    <div class="card bg-light mt-4" style="margin: auto">
+                        <div class="card-header">Contact maintenance site</div>
+                        <div class="card-body">
+                            <p>Aurélien ROCHE</p>
+                            <p>06-07-64-13-37</p>
+                            <p>aurelien.roche1@laposte.net</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>

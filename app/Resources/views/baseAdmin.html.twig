@@ -16,42 +16,44 @@
 
 <body>
 {% include 'layout/headerAdmin.html.twig' %}
-    <div class="col-md-10">
-        <div class="card bg-light mb-1" style="margin: auto">
-            <div class="card-header">
-                {% block titleDashboard %}{% endblock %}
-            </div>
-
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}" role="alert">
-                        {% if label == "success" %}
-                            <i class="far fa-check-circle"></i> {{ message|raw }}
-                        {% elseif label == "warning" %}
-                            <i class="far fa-pause-circle"></i> {{ message|raw }}
-                        {% elseif label == "danger" %}
-                            <i class="far fa-times-circle"></i> {{ message|raw }}
-                        {% elseif label == "info" %}
-                            <i class="far fa-question-circle"></i> {{ message|raw }}
-                        {% elseif label == "secondary" %}
-                            <i class="far fa-arrow-alt-circle-right"></i> {{ message|raw }}
-                        {% else %}
-                            {{ message|raw }}
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-
-            <div class="card-body">
-                <div class="panel-heading text-center">
+        <div class="col-md-10">
+            <div class="card mx-auto bg-gold">
+                <div class="card-header bg-green">
+                    <h1>{% block titleDashboard %}{% endblock %}</h1>
                 </div>
-                <div class="panel-body">
-                    {% block body %}{% endblock %}
+
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}" role="alert">
+                            {% if label == "success" %}
+                                <i class="far fa-check-circle"></i> {{ message|raw }}
+                            {% elseif label == "warning" %}
+                                <i class="far fa-pause-circle"></i> {{ message|raw }}
+                            {% elseif label == "danger" %}
+                                <i class="far fa-times-circle"></i> {{ message|raw }}
+                            {% elseif label == "info" %}
+                                <i class="far fa-question-circle"></i> {{ message|raw }}
+                            {% elseif label == "secondary" %}
+                                <i class="far fa-arrow-alt-circle-right"></i> {{ message|raw }}
+                            {% else %}
+                                {{ message|raw }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <div class="card-body">
+                    <div class="panel-heading text-center">
+                    </div>
+                    <div class="panel-body">
+                        {% block body %}{% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
     {% block javascripts %}{% endblock %}

@@ -1,12 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Liste des membres inactifs</h2>
+    Liste des membres inactifs
 {% endblock %}
 
 {% block body %}
     <table class="table" align="center">
-        <thead class="thead-dark ">
+        <thead class="bg-green gold ">
         <tr>
             <th scope="col" class="text-center">Prénom</th>
             <th scope="col" class="text-center">Nom</th>
@@ -19,7 +19,7 @@
             <th scope="col" class="text-center">Action</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-light">
         {% for user in users %}
             <tr {% if user.deleteAt %} style="background-color: lightgrey"{% endif %}>
                 <td class="text-center">{{ user.firstName }}</td>
@@ -31,7 +31,7 @@
                 <td class="text-center">{{ user.postalCode }} {{ user.city }}</td>
                 <td class="text-center">{{ user.disableAt |date('d/m/Y') }} </td>
                 <td class="text-center">
-                    <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
+                    <a class="btn btn-primary bg-green" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
                     {% if user.deleteAt is null %}
                         <a class="btn btn-success alert-delete" href="{{ path('disable_user', {id:user.id}) }}"
                            data-confirm-message="Confirmer la réactivation de l'utilisateur?">Réactiver</a>
@@ -41,5 +41,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary mb-5" href="{{ path('admin_users') }}">Retour</a>
+    <a class="btn btn-primary mb-5 bg-green" href="{{ path('admin_users') }}">Retour</a>
 {% endblock %}

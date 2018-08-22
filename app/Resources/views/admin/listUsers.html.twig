@@ -1,12 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Liste des membres du site</h2>
+    Liste des membres du site
 {% endblock %}
 
 {% block body %}
         <table class="table" align="center">
-            <thead class="thead-dark ">
+            <thead class="bg-green gold ">
             <tr>
                 <th scope="col" class="text-center">Prénom</th>
                 <th scope="col" class="text-center">Nom</th>
@@ -19,7 +19,7 @@
                 <th scope="col" class="text-center">Action</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-light">
         {% for user in users %}
             <tr>
                 <td class="text-center">{{ user.firstName }}</td>
@@ -31,7 +31,7 @@
                 <td class="text-center">{{ user.postalCode }} {{ user.city }}</td>
                 <td class="text-center">{{ user.registrationDate |date('d/m/Y')}} </td>
                 <td class="text-center">
-                    <a class="btn btn-info" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
+                    <a class="btn btn-info bg-green" href="{{ path('admin_show_user', {id:user.id}) }}">Voir</a>
                     <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
                         data-confirm-message="Confirmer la suppression de l'utilisateur?">Supprimer</a>
                 </td>
@@ -39,6 +39,6 @@
         {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-primary mb-5" href="{{ path('registration') }}">Ajouter un membre</a>
-        <a class="btn btn-warning mb-5" href="{{ path('admin_users_inactives') }}">Liste membres inactifs</a>
+        <a class="btn btn-primary mt-5 bg-green" href="{{ path('registration') }}">Ajouter un membre</a>
+        <a class="btn btn-danger mt-5" href="{{ path('admin_users_inactives') }}">Liste membres inactifs</a>
 {% endblock %}

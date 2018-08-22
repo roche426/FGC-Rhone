@@ -1,7 +1,8 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Profil {{ user.firstName }} {{ user.lastName }} <a class="btn btn-primary ml-5" href="{{ path('admin_users') }}">Retour</a></h2>
+    Profil {{ user.firstName }} {{ user.lastName }} <a class="btn btn-primary btn-gold ml-5" href="{{ path('admin_users')
+}}">Retour</a>
 
 
 {% endblock %}
@@ -47,13 +48,13 @@
             </div>
         </div>
         <div class="col-md-3 offset-md-1">
-            <div class="card bg-light">
-                <h3 class="card-title">Documents</h3>
+            <div class="card bg-green">
+                <h3 class="card-title gold">Documents</h3>
                 {% if files %}
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Carte d'identité
                             </div>
                             <ul class="list-group list-group-flush">
@@ -68,7 +69,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Permis de chasse
                             </div>
                             <ul class="list-group list-group-flush">
@@ -83,7 +84,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Assurance
                             </div>
                             <ul class="list-group list-group-flush">
@@ -98,7 +99,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Documents divers
                             </div>
                             <ul class="list-group list-group-flush">
@@ -113,7 +114,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Documents divers
                             </div>
                             <ul class="list-group list-group-flush">
@@ -132,9 +133,9 @@
         </div>
         <div class="col-md-4 offset-md-1">
             <div class="list-group">
-                <div class="list-group-item list-group-item-action flex-column align-items-start active">
-                    <div>
-                        <h3 class="mb-1 center-text">Articles publiés par {{ user.firstName }} {{ user.lastName }}</h3>
+                <div class="card">
+                    <div class="card-header bg-green gold">
+                        <h3 class="mb-1 center-text">Articles publiés</h3>
                     </div>
                 </div>
                 {% if articles %}
