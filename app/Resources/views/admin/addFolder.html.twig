@@ -17,7 +17,10 @@
                         <p class="card-text">{{ form_widget(form.description) }}</p>
                         <p class="card-text">{{ form_label(form.image) }}</p>
                         <p class="card-text">{{ form_widget(form.image) }}</p>
-                        <input class="btn btn-dark mt-4" type="submit" value="Ajouter">
+                        <div class="mt-5">
+                            <input class="btn btn-dark" type="submit" value="Ajouter">
+                            <a class="btn btn-primary" href="{{ path('show_gallery') }}">Retour</a>
+                        </div>
                     </div>
                     {{ form_end(form) }}
                 </div>

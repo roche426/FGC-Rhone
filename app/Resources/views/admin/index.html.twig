@@ -58,7 +58,7 @@
         <div class="col-md-2 offset-md-1 card" align="center">
             <h2><span class="glyphicon glyphicon-list-alt"></span> Articles</h2>
             <div class="card-body">
-                <a class="btn btn-primary mb-5" href="#">Ajouter un article</a>
+                <a class="btn btn-primary mb-5" href={{ path('blog_new', {admin:true}) }}">Ajouter un article</a>
                 <a class="btn btn-primary" href="{{ path('admin_articles') }}">Liste des articles</a>
             </div>
         </div>

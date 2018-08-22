@@ -1,7 +1,9 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Profil {{ user.firstName }} {{ user.lastName }}</h2>
+    <h2>Profil {{ user.firstName }} {{ user.lastName }} <a class="btn btn-primary ml-5" href="{{ path('admin_users') }}">Retour</a></h2>
+
+
 {% endblock %}
 
 {% block body %}

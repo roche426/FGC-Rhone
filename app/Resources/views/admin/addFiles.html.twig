@@ -22,7 +22,10 @@
                         <p class="card-text">{{ form_label(form.isShared) }}</p>
                         <p class="card-text">{{ form_widget(form.isShared) }}</p>
                         <p class="card-text mt-4">{{ form_widget(form.pathFile) }}</p>
-                        <input class="btn btn-dark mt-4" type="submit" value="Ajouter">
+                        <div class="mt-5">
+                            <input class="btn btn-dark" type="submit" value="Ajouter">
+                            <a class="btn btn-primary" href="{{ path('admin_show_files') }}">Retour</a>
+                        </div>
                     </div>
                     {{ form_end(form) }}
                 </div>

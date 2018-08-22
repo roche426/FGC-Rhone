@@ -4,9 +4,9 @@
     <h2>Voir vos galeries</h2>
 {% endblock %}
 {% block body %}
-    <div align="center">
-        <a class="btn btn-warning mt-2 mb-4" href="{{ path('add_images', {id:folder.id}) }}">Ajouter des images à cet
-            album</a>
+    <div class="pt-3 pb-3" align="center">
+        <a class="btn btn-warning" href="{{ path('add_images', {id:folder.id}) }}">Ajouter des images à cet album</a>
+        <a class="btn btn-primary" href="{{ path('show_gallery') }}">Retour</a>
     </div>
     <div class="row">
         {% for image in images %}
