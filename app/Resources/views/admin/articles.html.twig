@@ -22,17 +22,17 @@
                 <td class="text-center">{{ article.user.firstName }}</td>
                 <td class="text-center">{{ article.user.lastName }}</td>
                 <td class="text-center">{{ article.title }} </td>
-                <td class="text-center">#</td>
+                <td class="text-center">{{ article.publicationDate | date('d-m-Y') }}</td>
 
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
-                    <a class="btn btn-danger alert-delete" href="#"
+                    <a class="btn btn-danger alert-delete" href="{{ path('delete_article', {id:article.id}) }}"
                        data-confirm-message="Confirmer la suppression de l'article?">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary mb-5" href="#">Ajouter un article</a>
+    <a class="btn btn-primary mb-5" href="{{ path('blog_new') }}">Ajouter un article</a>
 
 {% endblock %}

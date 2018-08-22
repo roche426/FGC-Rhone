@@ -52,6 +52,7 @@ class BlogController extends Controller
     public function newBlogAction(Request $request)
     {
         $blog = new Blog();
+        $blog->setPublicationDate(new \DateTime('now'));
 
         $form = $this->createForm('AppBundle\Form\BlogType', $blog);
         $form->handleRequest($request);

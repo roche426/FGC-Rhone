@@ -12,7 +12,9 @@
             <div class="row mt-3">
                 {{ froala_display(article.article) }}
             </div>
-            <h5 align="right"><i>Publié par {{ article.user.firstName }} {{ article.user.lastName }}</i></h5>
+            <h5 align="right"><i>Publié le {{ article.publicationDate | date('d-m-Y') }}
+                    par {{ article.user.firstName }} {{ article.user.lastName }}</i>
+            </h5>
         {% endif %}
         <div class="row mt-5">
             <div class="col-md-12 card">

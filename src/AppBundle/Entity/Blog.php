@@ -36,12 +36,18 @@ class Blog
     private $article;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="publication_date", type="date")
+     */
+    private $publicationDate;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
      */
     private $comments;
 
@@ -134,6 +140,22 @@ class Blog
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublicationDate()
+    {
+        return $this->publicationDate;
+    }
+
+    /**
+     * @param \DateTime $publicationDate
+     */
+    public function setPublicationDate($publicationDate)
+    {
+        $this->publicationDate = $publicationDate;
     }
 
 
