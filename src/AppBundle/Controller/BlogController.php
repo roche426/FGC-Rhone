@@ -31,30 +31,10 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->find($id);
 
-        $currentPicture = $blog->getImageArticle();
-
         $editform = $this->createForm('AppBundle\Form\BlogType', $blog);
         $editform->handleRequest($request);
 
         if ($editform->isSubmitted() && $editform->isValid()) {
-
-            if ($editform['imageArticle']->getdata()) {
-                $pictureProfil = $blog->getImageArticle();
-
-                $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
-
-                $pictureProfil->move($this->getParameter('upload_Path_Article_Picture'), $fileNamePicture);
-
-                $blog->setImageArticle($this->getParameter('upload_Path_Article_Picture') . $fileNamePicture);
-
-                if ($currentPicture) {
-                    unlink($currentPicture);
-                }
-            }
-
-            if (!$editform['imageArticle']->getdata()) {
-                $blog->setImageArticle($currentPicture);
-            }
 
             $em->persist($blog);
             $em->flush();
@@ -79,15 +59,6 @@ class BlogController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $blog->setUser($this->getUser());
 
-            if ($form['imageArticle']->getdata()) {
-                $pictureProfil = $blog->getImageArticle();
-
-                $fileNamePicture = uniqid() . '.' . $pictureProfil->guessExtension();
-
-                $pictureProfil->move($this->getParameter('upload_Path_Article_Picture'), $fileNamePicture);
-                $blog->setImageArticle( $this->getParameter('upload_Path_Article_Picture') . $fileNamePicture);
-            }
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($blog);
             $em->flush();
@@ -106,12 +77,6 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->find($id);
-
-        $currentPicture = $blog->getImageArticle();
-
-        if ($currentPicture) {
-            unlink($currentPicture);
-        }
 
         $em->remove($blog);
         $em->flush();

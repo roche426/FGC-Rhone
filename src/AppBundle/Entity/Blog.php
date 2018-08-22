@@ -31,23 +31,9 @@ class Blog
     /**
      * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="author", type="string", length=50)
-     */
-    private $author;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="article", type="text")
      */
     private $article;
-
-    /**
-     * @var string
-     * @ORM\Column(name="image_article", type="string", length=255, nullable=true)
-     */
-
-    private $imageArticle;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
@@ -94,30 +80,6 @@ class Blog
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Blog
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set article
      *
      * @param string $article
@@ -141,29 +103,6 @@ class Blog
         return $this->article;
     }
 
-    /**
-     * Set imageArticle
-     *
-     * @param string $imageArticle
-     *
-     * @return Blog
-     */
-    public function setImageArticle($imageArticle)
-    {
-        $this->imageArticle = $imageArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get imageArticle
-     *
-     * @return string
-     */
-    public function getImageArticle()
-    {
-        return $this->imageArticle;
-    }
 
     /**
      * @return mixed

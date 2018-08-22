@@ -2,62 +2,58 @@
 
 {% block body %}
 
-    <div class="container-fluid pt-5 pb-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3">
+    <div class="container pt-5 pb-5" align="center">
+        {% if article %}
+            <div class="row">
                 <h1>{{ article.title }}</h1>
             </div>
-        </div>
-        <div class="container">
             <div class="row mt-3">
-                {% if article %}
-                <div class="col-md-6 mt-3">
-                    <img class="img-article" src="/{{ article.imageArticle }}">
-                    <h5>Par {{ article.user.firstName }} {{ article.user.LastName }}</h5>
-                </div>
-                <div class="col-md-6">
-                    <p>{{ froala_display(article.article) }}</p>
-                </div>
+                {{ froala_display(article.article) }}
             </div>
-            {% else %}
-                <div class="row">
-                    <div class="col-md-2 offset-md-8">
-                        <h5>Pas d'article disponible</h5>
-                    </div>
+            <h5 align="right"><i>Publié par {{ article.user.firstName }} {{ article.user.lastName }}</i></h5>
+        {% endif %}
+        <div class="row mt-5">
+            <div class="col-md-12 card">
+                <h2 class="card-header bg-success">
+                    Commentaires
+                </h2>
+                <div class="card-body">
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="card col-md-8">
+                                <ul class="list-group list-group-flush">
+                                    <div class="row mt-3">
+                                        <div class="col-md-5">
+                                            <p> {{ comment.user.firstName }} {{ comment.user.lastName }}
+                                                <i>le {{ comment.publicationDate | date('d-m-Y') }}</i>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h5>{{ comment.comment }}</h5>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Aucun commentaire</p>
+                    {% endif %}
                 </div>
-            {% endif %}
-            <div class="row mt-5">
-                <div class="col-md-12 text-center">
-                    <h3>Commentaires</h3>
-                </div>
-            </div>
-            {% if comments %}
-                {% for comment in comments %}
+                {% if app.user %}
                     <div class="row">
-                        <div class="col-md-2 offset-md-2 text-center">
-                            <h5> {{ comment.user.firstName }} {{ comment.user.lastName }} </h5>
-                        </div>
-                        <div class="col-md-6">
-                            <p>{{ comment.comment }}</p>
+                        <div class="col-md-8 offset-md-2 text-center">
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+
+                            <input type="submit" value="Enregistrer"/>
+                            {{ form_end(form) }}
                         </div>
                     </div>
-                {% endfor %}
-            {% else %}
-                <p>Aucun commentaire</p>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        {{ form_start(form) }}
-                        {{ form_widget(form) }}
-
-                        <input type="submit" value="Enregistrer" />
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
+
+
     </div>
 {% endblock %}
 
