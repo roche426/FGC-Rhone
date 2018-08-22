@@ -81,6 +81,7 @@ class ImageController extends Controller
 
         if (!array_diff(scandir($folder->getPath()), ['.', '..'])) {
             rmdir($folder->getPath());
+            unlink($this->getParameter('thematics_galery_Directory') .$folder->getImage());
 
             $em->remove($folder);
             $em->flush();

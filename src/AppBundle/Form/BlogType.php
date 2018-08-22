@@ -18,11 +18,7 @@ class BlogType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('author', TextType::class)
-            ->add('article', FroalaEditorType::class)
-            ->add('imageArticle', FileType::class, array(
-                'required' => false,
-                'data_class' => null));
+            ->add('article', FroalaEditorType::class);
     }
 
     /**

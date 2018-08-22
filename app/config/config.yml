@@ -72,6 +72,6 @@ swiftmailer:
 
 kms_froala_editor:
     language: "fr"
-
+    imageUploadFolder : "/uploaded_files/pictures_articles"
 
 

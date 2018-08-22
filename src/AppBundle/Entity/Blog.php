@@ -31,23 +31,15 @@ class Blog
     /**
      * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="author", type="string", length=50)
-     */
-    private $author;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="article", type="text")
      */
     private $article;
 
     /**
-     * @var string
-     * @ORM\Column(name="image_article", type="string", length=255, nullable=true)
+     * @var \DateTime
+     * @ORM\Column(name="publication_date", type="date")
      */
-
-    private $imageArticle;
+    private $publicationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
@@ -55,7 +47,7 @@ class Blog
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
      */
     private $comments;
 
@@ -94,30 +86,6 @@ class Blog
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Blog
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set article
      *
      * @param string $article
@@ -141,29 +109,6 @@ class Blog
         return $this->article;
     }
 
-    /**
-     * Set imageArticle
-     *
-     * @param string $imageArticle
-     *
-     * @return Blog
-     */
-    public function setImageArticle($imageArticle)
-    {
-        $this->imageArticle = $imageArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get imageArticle
-     *
-     * @return string
-     */
-    public function getImageArticle()
-    {
-        return $this->imageArticle;
-    }
 
     /**
      * @return mixed
@@ -195,6 +140,22 @@ class Blog
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublicationDate()
+    {
+        return $this->publicationDate;
+    }
+
+    /**
+     * @param \DateTime $publicationDate
+     */
+    public function setPublicationDate($publicationDate)
+    {
+        $this->publicationDate = $publicationDate;
     }
 
 

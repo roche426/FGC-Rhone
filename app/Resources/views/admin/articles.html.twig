@@ -9,8 +9,7 @@
     <table class="table">
         <thead class="thead-dark ">
             <tr>
-                <th class="text-center">Prénom</th>
-                <th class="text-center">Nom</th>
+                <th class="text-center">Membre</th>
                 <th class="text-center">Titre</th>
                 <th class="text-center">Date de publication</th>
                 <th class="text-center">Action</th>
@@ -19,20 +18,23 @@
         <tbody>
         {% for article in articles %}
             <tr>
-                <td class="text-center">{{ article.user.firstName }}</td>
-                <td class="text-center">{{ article.user.lastName }}</td>
+                {% if article.user %}
+                <td class="text-center">{{ article.user.firstName }} {{ article.user.lastName }}</td>
+                {% else %}
+                <td class="text-center">Utilisateur supprimé</td>
+                {% endif %}
                 <td class="text-center">{{ article.title }} </td>
-                <td class="text-center">#</td>
+                <td class="text-center">{{ article.publicationDate | date('d-m-Y') }}</td>
 
                 <td class="text-center">
                     <a class="btn btn-info" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
-                    <a class="btn btn-danger alert-delete" href="#"
+                    <a class="btn btn-danger alert-delete" href="{{ path('delete_article', {id:article.id}) }}"
                        data-confirm-message="Confirmer la suppression de l'article?">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary mb-5" href="#">Ajouter un article</a>
+    <a class="btn btn-primary mb-5" href="{{ path('blog_new') }}">Ajouter un article</a>
 
 {% endblock %}

@@ -105,5 +105,33 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/comment/delete/{id}", name="delete_comment")
+     */
+    public function deleteCommentAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $comment = $em->getRepository(Comment::class)->find($id);
+
+        $em->remove($comment);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_articles');
+    }
+
+    /**
+     * @Route("/article/delete/{id}", name="delete_article")
+     */
+    public function deleteArticleAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository(Blog::class)->find($id);
+
+        $em->remove($article);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_articles');
+    }
+
 
 }
