@@ -1,13 +1,13 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Liste des articles publiés</h2>
+    Liste des articles publiés
 {% endblock %}
 
 {% block body %}
 
     <table class="table">
-        <thead class="thead-dark ">
+        <thead class="bg-green gold ">
             <tr>
                 <th class="text-center">Membre</th>
                 <th class="text-center">Titre</th>
@@ -15,7 +15,7 @@
                 <th class="text-center">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-light">
         {% for article in articles %}
             <tr>
                 {% if article.user %}
@@ -27,7 +27,7 @@
                 <td class="text-center">{{ article.publicationDate | date('d-m-Y') }}</td>
 
                 <td class="text-center">
-                    <a class="btn btn-info" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
+                    <a class="btn btn-info bg-green" href="{{ path('admin_show_article', {id:article.id}) }}">Voir</a>
                     <a class="btn btn-danger alert-delete" href="{{ path('delete_article', {id:article.id}) }}"
                        data-confirm-message="Confirmer la suppression de l'article?">Supprimer</a>
                 </td>
@@ -35,6 +35,6 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary mb-5" href="{{ path('blog_new') }}">Ajouter un article</a>
+    <a class="btn btn-primary bg-green mb-5" href="{{ path('blog_new', {admin:true}) }}">Ajouter un article</a>
 
 {% endblock %}

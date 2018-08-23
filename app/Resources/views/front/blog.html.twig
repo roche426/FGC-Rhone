@@ -1,9 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{% include 'front/article.html.twig' %}
 
-    {% include 'front/article.html.twig' %}
-
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="card col-md-8">
+                        <ul class="list-group list-group-flush">
+                            <div class="row mt-3">
+                                <div class="col-md-5">
+                                    {% if comment.user %}
+                                    <p> {{ comment.user.firstName }} {{ comment.user.lastName }}
+                                        {% else %}
+                                    <p> Utilisateur supprimé
+                                        {% endif %}
+                                        <i>le {{ comment.publicationDate | date('d-m-Y') }}</i>
+                                    </p>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>{{ comment.comment }}</h5>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun commentaire</p>
+            {% endif %}
             {% if app.user %}
                 <div class="row">
                     <div class="col-md-8 offset-md-2 text-center">

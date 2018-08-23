@@ -1,7 +1,7 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Galeries photos</h2>
+    Galeries photos
 {% endblock %}
 {% block body %}
     {% if folders %}
@@ -14,7 +14,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">{{ folder.name }}</h4>
                         <p class="card-text">{{ folder.description }}</p>
-                        <a href="{{ path('show_images_gallery', {id:folder.id}) }}" class="btn btn-primary">Voir
+                        <a href="{{ path('show_images_gallery', {id:folder.id}) }}" class="btn btn-primary bg-green">Voir
                             l'album</a>
                         <a class="alert-delete btn btn-danger" href="{{ path('delete_folder_gallery', {id:folder.id})}}"
                            data-confirm-message="Confirmez-vous la suppression du dossier ?">Supprimer</a>

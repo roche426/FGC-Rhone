@@ -1,11 +1,26 @@
+/* ==== COLORS ==== */
+.bg-green{
+    background-color: #202d11;
+}
+
+.btn-gold{
+    background-color: #fcebc2;
+    border: solid #202d11;
+}
+
+.bg-gold{
+    background-color: #fcebc2;
+}
+
+.gold{
+    color: #fcebc2;
+}
+
 /* ==== HEADER & FOOTER ==== */
 html{
     font-size: 1rem;
 }
 
-.content{
-    min-height: 800px;
-}
 
 .navbar-brand{
     font-size: 3rem;
@@ -23,3 +38,25 @@ html{
     display: block;
     text-align: center;
 }
+
+h1, .navbar-brand, .navbar-brand:hover{
+    color: #fcebc2;
+    font-weight: bold;
+    text-shadow: 1px 1px #202d11, -1px 1px #202d11, 1px -1px #202d11;
+}
+
+.btn-menu{
+    font-size: 20px;
+    text-decoration: none;
+    color: #202d11;
+    border: solid;
+    font-weight: bold;
+}
+
+.btn-menu:hover{
+    font-size: 20px;
+    background-color: #202d11;
+    color: #fcebc2;
+}
+
+

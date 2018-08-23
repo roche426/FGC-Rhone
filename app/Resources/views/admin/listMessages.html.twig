@@ -1,12 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Liste des messages reçus</h2>
+    Liste des messages reçus
 {% endblock %}
 
 {% block body %}
         <table class="table">
-            <thead class="thead-dark ">
+            <thead class="bg-green gold ">
             <tr>
                 <th scope="col" class="text-center">Date</th>
                 <th scope="col" class="text-center">Autheur</th>
@@ -17,7 +17,7 @@
                 <th scope="col" class="text-center">Action</th>
             </tr>
             </thead>
-            <tbody >
+            <tbody class="bg-light">
             {% for messageContactUs in messagesContactUs %}
                 <tr {% if messageContactUs.isTreated %} style="background-color: lightgrey" {% endif %}>
                     <td class="text-center">{{ messageContactUs.date |date('d/m/Y')}} </td>
@@ -33,7 +33,8 @@
                     </td>
                     <td class="text-center">{{ messageContactUs.message }}</td>
                     <td class="text-center">
-                        <a class="btn btn-light" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
+                        <a class="btn btn-primary bg-green" href="{{ path('show_one_message', {id:messageContactUs.id})
+                        }}">Accèder au message</a>
                     </td>
                 </tr>
             {% endfor %}

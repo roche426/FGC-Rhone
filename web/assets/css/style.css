@@ -1,3 +1,21 @@
+/* ==== COLORS ==== */
+.bg-green{
+    background-color: #202d11;
+}
+
+.btn-gold{
+    background-color: #fcebc2;
+    border: solid #202d11;
+}
+
+.bg-gold{
+    background-color: #fcebc2;
+}
+
+.gold{
+    color: #fcebc2;
+}
+
 /* == Mise en forme générale == */
 html{
     color: black;

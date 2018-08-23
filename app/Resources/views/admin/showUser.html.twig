@@ -1,7 +1,27 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Profil {{ user.firstName }} {{ user.lastName }}</h2>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#statut-change">
+                {{ user.isAdmin == true ? 'Administrateur' : 'Utilisateur' }}
+                 <span class="badge badge-primary bg-green">
+                    {% if user.statut == constant('CHAIRMAN', user) %} Président
+                    {% elseif user.statut == constant('TREASURER', user) %} Trésorier
+                    {% elseif user.statut == constant('SECRETARY', user) %} Secrétaire
+                    {% else %} Membre
+                    {% endif %}
+                 </span>
+            </button>
+        </div>
+        <div class="col-md-8">
+            Profil {{ user.firstName }} {{ user.lastName }}
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-light ml-5" href="{{ path('admin_users') }}">Retour</a>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block body %}
@@ -9,7 +29,7 @@
         <div class="col-md-3">
             <div class="card">
                 {% if user.pictureProfil %}
-                    <img class="card-img-top" src="/{{ user.pictureProfil }}" alt="{{ user.firstName }} {{ user.lastName }}">
+                    <img class="mt-4" src="/{{ user.pictureProfil }}" alt="{{ user.firstName }} {{ user.lastName }}">
                 {% else %}
                     <img class="card-img-top" src="/assets/images/user-icon.png" alt="{{ user.firstName }} {{ user.lastName }}">
                 {% endif %}
@@ -19,7 +39,7 @@
                 </div>
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">Date de naissance : {{ user.birthDate | date('d/m/Y')}}</li>
-                    <li class="list-group-item">Adresse : {{ user.address }} {{ user.additionalAddress }}</li>
+                    <li class="list-group-item">Adresse : {{ user.address }}, {{ user.additionalAddress }}</li>
                     <li class="list-group-item">Ville : {{ user.postalCode }} {{ user.city }}</li>
                     <li class="list-group-item">Email : {{ user.email }}</li>
                     <li class="list-group-item">Téléphone : {{ user.phoneNumber }}</li>
@@ -45,13 +65,13 @@
             </div>
         </div>
         <div class="col-md-3 offset-md-1">
-            <div class="card bg-light">
-                <h3 class="card-title">Documents</h3>
+            <div class="card bg-green">
+                <h3 class="card-title gold mt-3">Documents</h3>
                 {% if files %}
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Carte d'identité
                             </div>
                             <ul class="list-group list-group-flush">
@@ -66,7 +86,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Permis de chasse
                             </div>
                             <ul class="list-group list-group-flush">
@@ -81,7 +101,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Assurance
                             </div>
                             <ul class="list-group list-group-flush">
@@ -96,7 +116,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Documents divers
                             </div>
                             <ul class="list-group list-group-flush">
@@ -111,7 +131,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-green gold">
                                 Documents divers
                             </div>
                             <ul class="list-group list-group-flush">
@@ -130,9 +150,9 @@
         </div>
         <div class="col-md-4 offset-md-1">
             <div class="list-group">
-                <div class="list-group-item list-group-item-action flex-column align-items-start active">
-                    <div>
-                        <h3 class="mb-1 center-text">Articles publiés par {{ user.firstName }} {{ user.lastName }}</h3>
+                <div class="card">
+                    <div class="card-header bg-green gold">
+                        <h3 class="mb-1 center-text">Articles publiés</h3>
                     </div>
                 </div>
                 {% if articles %}
@@ -150,6 +170,39 @@
                         <h5 class="mb-1">Aucun article publié</h5>
                     </div>
                 {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal changement statut utilisateur -->
+
+    <div class="modal fade" id="statut-change" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Changer statut {{ user.firstName }} {{ user.lastName }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(editForm) }}
+                    <div class="row mb-5 mt-3">
+                        <div class="col-md-6">
+                            {{ form_label(editForm.isAdmin) }}
+                            {{ form_widget(editForm.isAdmin) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_label(editForm.statut) }}
+                            {{ form_widget(editForm.statut) }}
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary bg-green" value="Enregister">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+                </div>
+                <div class="modal-footer">
+                    {{ form_end(editForm) }}
+                </div>
             </div>
         </div>
     </div>

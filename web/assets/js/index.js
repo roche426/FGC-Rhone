@@ -23,3 +23,7 @@ $(".alert-delete").click(function(e) {
             }}
     });
 });
+
+$("#statut-change").click(function () {
+    console.log('bonjour')
+})

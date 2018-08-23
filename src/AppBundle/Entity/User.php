@@ -2,9 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -43,12 +43,14 @@ class User implements AdvancedUserInterface, \Serializable
     private $password;
 
     /**
+     * @Assert\Email(message="Format de l'email invalide", checkMX=true)
      * @var string
      * @ORM\Column(name="email", type="string", length=254, unique=true)
      */
     private $email;
 
     /**
+     * @Assert\Date(message="Merci d'entrer une date valide")
      * @var \DateTime
      * @ORM\Column(name="birth_date", type="date", nullable=true)
      */
@@ -61,6 +63,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $city;
 
     /**
+     * @Assert\Regex(pattern="/^[0-9]{5,5}$/", message="Merci de renseigner un code postal valide.")
      * @var string
      * @ORM\Column(name="postal_code", type="string", nullable=true)
      */
@@ -85,12 +88,14 @@ class User implements AdvancedUserInterface, \Serializable
     private $registrationDate;
 
     /**
+     * @Assert\NotNull(message="'Ce champs ne doit pas être nul")
      * @var bool
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive = false;
 
     /**
+     * @Assert\NotNull(message="'Ce champs ne doit pas être nul")
      * @var bool
      * @ORM\Column(name="is_admin", type="boolean")
      */
@@ -98,49 +103,43 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @var string
-     *
      * @ORM\Column(name="token", type="string", nullable=true, unique=true)
      */
     private $token;
 
     /**
      * @var int
-     *
      * @ORM\Column(name="statut", type="smallint", nullable=true)
      */
     private $statut;
 
     /**
+     * @Assert\Regex(pattern="/^((\+|00)33\s?|0)[0-9].+$/", message="Merci de renseigner un numero de téléphone valide")
      * @var string
-     *
      * @ORM\Column(name="phone_number", type="string", nullable=true)
      */
     private $phoneNumber;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="picture_profil", type="string", nullable=true)
      */
     private $pictureProfil;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="delete_at", type="date", nullable=true)
      */
     private $deleteAt;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="disable_at", type="date", nullable=true)
      */
     private $disableAt;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="description", type="string", nullable=true)
      */
     private $description;

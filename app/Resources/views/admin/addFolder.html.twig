@@ -1,7 +1,7 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Ajouter une galerie</h2>
+    Ajouter une galerie
 {% endblock %}
 {% block body %}
     <div class="container pt-5 pb-5" align="center">
@@ -15,9 +15,18 @@
                         <p class="card-text">{{ form_widget(form.name) }}</p>
                         <p class="card-text">{{ form_label(form.description) }}</p>
                         <p class="card-text">{{ form_widget(form.description) }}</p>
-                        <p class="card-text">{{ form_label(form.image) }}</p>
-                        <p class="card-text">{{ form_widget(form.image) }}</p>
-                        <input class="btn btn-dark mt-4" type="submit" value="Ajouter">
+                        <div class="row mt-5">
+                            <div class="col-md-5">
+                                <p class="card-text">{{ form_label(form.image) }}</p>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="card-text">{{ form_widget(form.image) }}</p>
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <input class="btn btn-warning" type="submit" value="Ajouter">
+                            <a class="btn btn-primary bg-green" href="{{ path('show_gallery') }}">Retour</a>
+                        </div>
                     </div>
                     {{ form_end(form) }}
                 </div>

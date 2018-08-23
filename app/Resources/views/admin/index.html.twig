@@ -1,79 +1,80 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Tableau de bord</h2>
+    <h1>Tableau de bord</h1>
 {% endblock %}
 
 {% block body %}
     <div class="card mb-5 mt-3" align="center">
-        <h3 class="card-header">Derniers messages</h3>
+        <h3 class="card-header bg-green gold">Derniers messages</h3>
         <div class="card-body">
             <table class="table">
-                <thead class="thead-dark ">
+                <thead class="bg-gold">
                 <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Autheur</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Matricule</th>
-                    <th scope="col">Sujet</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Action</th>
+                    <th class="text-center" scope="col">Date</th>
+                    <th class="text-center" scope="col">Autheur</th>
+                    <th class="text-center" scope="col">Email</th>
+                    <th class="text-center" scope="col">Matricule</th>
+                    <th class="text-center" scope="col">Sujet</th>
+                    <th class="text-center" scope="col">Message</th>
+                    <th class="text-center" scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for messageContactUs in messagesContactUs %}
                     <tr>
-                        <td>{{ messageContactUs.date |date('d/m/Y')}} </td>
-                        <td>{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
-                        <td>{{ messageContactUs.email }}</td>
-                        <td>{{ messageContactUs.register }}</td>
-                        <td>
+                        <td class="text-center">{{ messageContactUs.date |date('d/m/Y')}} </td>
+                        <td class="text-center">{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
+                        <td class="text-center">{{ messageContactUs.email }}</td>
+                        <td class="text-center">{{ messageContactUs.register }}</td>
+                        <td class="text-center">
                             {% if messageContactUs.subject == constant('CONTACT_VISITORS', messageContactUs) %}
                             Demande d'informations
                             {% elseif messageContactUs.subject == constant('CONTACT_MEMBERS_ACCES', messageContactUs) %}
                             Demande d'accès d'un membre
                             {% endif %}
                         </td>
-                        <td>{{ messageContactUs.message }}</td>
-                        <td>
-                            <a class="btn btn-dark" href="{{ path('show_one_message', {id:messageContactUs.id}) }}">Accèder au message</a>
+                        <td class="text-center">{{ messageContactUs.message }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-dark bg-green" href="{{ path('show_one_message', {id:messageContactUs.id})
+                            }}">Accèder au message</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            {% if messagesContactUs %} <a class="btn btn-primary" href="{{ path('admin_show_messages') }}">Voir tous les messages</a>
+            {% if messagesContactUs %} <a class="btn btn-primary bg-green" href="{{ path('admin_show_messages') }}">Voir tous les messages</a>
             {% else %} <p>Aucun nouveau message</p> <a class="btn btn-primary" href="{{ path('admin_show_messages') }}">Voir les messages traités</a>
             {% endif %}
         </div>
     </div>
     <div class="row mb-5">
-        <div class="col-md-2 ml-5 card" align="center">
-            <h2><span class="glyphicon glyphicon-user"></span> Membres</h2>
+        <div class="col-md-2 card ml-5 pt-4 pb-4 bg-green gold" align="center">
+            <h2>Membres</h2>
             <div class="card-body">
-                <a class="btn btn-primary mb-5" href="{{ path('registration') }}">Ajouter un membre</a>
-                <a class="btn btn-primary" href="{{ path('admin_users') }}">Liste des membres</a>
+                <a class="btn btn-light mb-5" href="{{ path('registration') }}">Ajouter un membre</a>
+                <a class="btn btn-light" href="{{ path('admin_users') }}">Liste des membres</a>
             </div>
         </div>
-        <div class="col-md-2 offset-md-1 card" align="center">
-            <h2><span class="glyphicon glyphicon-list-alt"></span> Articles</h2>
+        <div class="col-md-2 offset-md-1 card pt-4 pb-4 bg-green gold" align="center">
+            <h2>Articles</h2>
             <div class="card-body">
-                <a class="btn btn-primary mb-5" href="#">Ajouter un article</a>
-                <a class="btn btn-primary" href="{{ path('admin_articles') }}">Liste des articles</a>
+                <a class="btn btn-light mb-5" href={{ path('blog_new', {admin:true}) }}">Ajouter un article</a>
+                <a class="btn btn-light" href="{{ path('admin_articles') }}">Liste des articles</a>
             </div>
         </div>
-        <div class="col-md-2 offset-md-1 card" align="center">
-            <h2><span class="glyphicon glyphicon-download"></span> Documents</h2>
+        <div class="col-md-2 offset-md-1 card pt-4 pb-4 bg-green gold" align="center">
+            <h2>Documents</h2>
             <div class="card-body">
-                <a class="btn btn-primary mb-5" href="{{ path('admin_add_files') }}">Ajouter un document</a>
-                <a class="btn btn-primary" href="{{ path('admin_show_files') }}">Liste des documents</a>
+                <a class="btn btn-light mb-5" href="{{ path('admin_add_files') }}">Ajouter un document</a>
+                <a class="btn btn-light" href="{{ path('admin_show_files') }}">Liste des documents</a>
             </div>
         </div>
-        <div class="col-md-2 offset-md-1 card" align="center">
-            <h2><span class="glyphicon glyphicon-picture"></span> Galeries</h2>
+        <div class="col-md-2 offset-md-1 card pt-4 pb-4 bg-green gold" align="center">
+            <h2>Galeries</h2>
             <div class="card-body">
-                <a class="btn btn-primary mb-5" href="{{ path('add_folder') }}">Ajouter une galerie</a>
-                <a class="btn btn-primary" href="{{ path('show_gallery') }}">Liste des galeries</a>
+                <a class="btn btn-light mb-5" href="{{ path('add_folder') }}">Ajouter une galerie</a>
+                <a class="btn btn-light" href="{{ path('show_gallery') }}">Liste des galeries</a>
             </div>
         </div>
     </div>

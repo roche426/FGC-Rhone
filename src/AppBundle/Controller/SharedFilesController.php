@@ -45,7 +45,7 @@ class SharedFilesController extends Controller
             return $this->redirectToRoute('admin_home');
         }
 
-        return $this->render('admin/addFiles.html.twig', [
+        return $this->render('admin/addSharedFiles.html.twig', [
                 'form' => $form->createView(),
                 'files' => $files
             ]
@@ -55,12 +55,12 @@ class SharedFilesController extends Controller
     /**
      * @Route("shared-files", name="admin_show_files")
      */
-    public function showFilesAction()
+    public function listFilesAction()
     {
         $em = $this->getDoctrine()->getRepository(SharedFiles::class);
         $files = $em->findAll();
 
-        return $this->render('admin/files.html.twig', ['files' => $files]);
+        return $this->render('admin/listSharedFiles.html.twig', ['files' => $files]);
     }
 
     /**
