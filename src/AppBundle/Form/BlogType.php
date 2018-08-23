@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class BlogType extends AbstractType
 {
@@ -17,8 +18,10 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('article', FroalaEditorType::class);
+            ->add('title', TextType::class, array(
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
+            ->add('article', FroalaEditorType::class, array(
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])));
     }
 
     /**

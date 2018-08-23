@@ -23,14 +23,12 @@ class Blog
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="article", type="text")
      */
     private $article;

@@ -11,7 +11,14 @@
                     {{ form_start(form) }}
                     <div class="card-body">
                         <h3 class="card-title mb-5">Télécharger vos images</h3>
-                        <p class="card-text">{{ form_widget(form.name) }}</p>
+                        <div class="row">
+                            <div class="col-md-3 offset-md-1">
+                                <p class="card-text">{{ form_label(form.images) }}</p>
+                            </div>
+                            <div class="col-md-8">
+                                <p class="card-text">{{ form_widget(form.images) }}</p>
+                            </div>
+                        </div>
                         <div class="mt-5">
                             <input class="btn btn-warning" type="submit" value="Ajouter">
                             <a class="btn btn-primary bg-green" href="{{ path('show_gallery') }}">Retour</a>

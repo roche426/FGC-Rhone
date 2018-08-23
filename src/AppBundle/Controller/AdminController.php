@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @Route("/admin")
@@ -65,14 +67,17 @@ class AdminController extends Controller
         $files = $em->getRepository(Files::class)->findOneBy(['user' => $id]);
 
         $editForm = $this->createFormBuilder($user)
-            ->add('isAdmin', ChoiceType::class, array('choices' =>
-                ['Administrateur' =>  true,
-                'Utilisateur' =>  false]))
-            ->add('statut', ChoiceType::class, array('choices' =>
-                ['Membre' =>  null,
-                'Président' =>  User::CHAIRMAN,
-                'Trésorier' =>  User::TREASURER,
-                'Sécrétaire' =>  User::SECRETARY]))
+            ->add('isAdmin', ChoiceType::class, array(
+                'constraints' => new NotNull(['message' => 'Ce champs ne doit pas être nul']),
+                'choices' => [
+                    'Administrateur' =>  true,
+                    'Utilisateur' =>  false]))
+            ->add('statut', ChoiceType::class, array(
+                'choices' => [
+                    'Membre' =>  null,
+                    'Président' =>  User::CHAIRMAN,
+                    'Trésorier' =>  User::TREASURER,
+                    'Sécrétaire' =>  User::SECRETARY]))
             ->getForm();
 
         $editForm->handleRequest($request);
@@ -170,16 +175,16 @@ class AdminController extends Controller
         $message = $em->getRepository(ContactUs::class)->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('email', TextType::class, array(
+            ->add('email', EmailType::class, array(
                 'data' => $this->getUser()->getEmail(),
-                'required' => true))
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->add('emailTo', EmailType::class, array(
                 'data' => $message->getEmail(),
-                'required' => true))
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->add('subject', TextType::class, array(
-                'required' => true))
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->add('message', TextareaType::class, array(
-                'required' => true))
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->getForm();
 
         $form->handleRequest($request);

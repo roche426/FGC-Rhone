@@ -20,7 +20,9 @@ class SharedFilesType extends AbstractType
         $builder
             ->add('pathFile', FileType::class, array(
                 'label' => 'Téléchargement',
-                'constraints' => new File(['mimeTypesMessage' => 'Format de l\'image invalide']),
+                'constraints' => array(
+                    new File(['mimeTypesMessage' => 'Format du fichier invalide']),
+                    new NotBlank(['message' => 'Ce champs ne doit pas être vide'])),
                 'data_class' => null))
             ->add('subject', TextType::class, array(
                 'label' => 'Sujet',

@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
 
 /**
  * @package AppBundle\Controller
@@ -24,14 +26,16 @@ class ImageController extends Controller
         $folder = $em->getRepository(ImageFolders::class)->findOneBy(['id' => $id]);
 
         $form = $this->createFormBuilder()
-            ->add('name', FileType::class, ['multiple' => true])
+            ->add('images', FileType::class, array(
+                'multiple' => true,
+                'constraints' => new All(new Image(['mimeTypesMessage' => 'Format de l\'image invalide']))))
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $uploadedImages = $form['name']->getData();
+            $uploadedImages = $form['images']->getData();
 
             foreach ($uploadedImages as $uploadedImage) {
                 if ($uploadedImage) {

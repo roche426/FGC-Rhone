@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -35,6 +36,7 @@ class ContactUs
     private $lastName;
 
     /**
+     * @Assert\Email(message="Format de l'email invalide", checkMX=true)
      * @var string
      * @ORM\Column(name="email", type="string")
      */
