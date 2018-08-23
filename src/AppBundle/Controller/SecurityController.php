@@ -42,7 +42,7 @@ class SecurityController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         // Récupère information suite demande accès via section contacter-nous et traite le message en Admin
-        if ($request) {
+        if ($request->get('firstName')) {
             $user->setFirstname($request->get('firstName'));
             $user->setLastname($request->get('lastName'));
             $user->setEmail($request->get('email'));
