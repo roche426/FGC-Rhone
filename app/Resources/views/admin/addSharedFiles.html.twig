@@ -1,7 +1,7 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Ajouter des documents à partager</h2>
+    Ajouter des documents à partager
 {% endblock %}
 {% block body %}
     <div class="container pt-5 pb-5" align="center">
@@ -23,8 +23,8 @@
                         <p class="card-text">{{ form_widget(form.isShared) }}</p>
                         <p class="card-text mt-4">{{ form_widget(form.pathFile) }}</p>
                         <div class="mt-5">
-                            <input class="btn btn-dark" type="submit" value="Ajouter">
-                            <a class="btn btn-primary" href="{{ path('admin_show_files') }}">Retour</a>
+                            <input class="btn btn-warning" type="submit" value="Ajouter">
+                            <a class="btn btn-primary bg-green" href="{{ path('admin_show_files') }}">Retour</a>
                         </div>
                     </div>
                     {{ form_end(form) }}

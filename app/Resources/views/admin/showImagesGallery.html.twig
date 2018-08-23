@@ -1,12 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Voir vos galeries</h2>
+    Voir vos galeries
 {% endblock %}
 {% block body %}
     <div class="pt-3 pb-3" align="center">
         <a class="btn btn-warning" href="{{ path('add_images', {id:folder.id}) }}">Ajouter des images à cet album</a>
-        <a class="btn btn-primary" href="{{ path('show_gallery') }}">Retour</a>
+        <a class="btn btn-primary bg-green" href="{{ path('show_gallery') }}">Retour</a>
     </div>
     <div class="row">
         {% for image in images %}

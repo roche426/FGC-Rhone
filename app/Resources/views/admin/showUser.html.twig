@@ -1,10 +1,8 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    Profil {{ user.firstName }} {{ user.lastName }} <a class="btn btn-primary btn-gold ml-5" href="{{ path('admin_users')
+    Profil {{ user.firstName }} {{ user.lastName }} <a class="btn btn-light ml-5" href="{{ path('admin_users')
 }}">Retour</a>
-
-
 {% endblock %}
 
 {% block body %}
@@ -12,7 +10,7 @@
         <div class="col-md-3">
             <div class="card">
                 {% if user.pictureProfil %}
-                    <img class="card-img-top" src="/{{ user.pictureProfil }}" alt="{{ user.firstName }} {{ user.lastName }}">
+                    <img class="mt-4" src="/{{ user.pictureProfil }}" alt="{{ user.firstName }} {{ user.lastName }}">
                 {% else %}
                     <img class="card-img-top" src="/assets/images/user-icon.png" alt="{{ user.firstName }} {{ user.lastName }}">
                 {% endif %}
@@ -22,7 +20,7 @@
                 </div>
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">Date de naissance : {{ user.birthDate | date('d/m/Y')}}</li>
-                    <li class="list-group-item">Adresse : {{ user.address }} {{ user.additionalAddress }}</li>
+                    <li class="list-group-item">Adresse : {{ user.address }}, {{ user.additionalAddress }}</li>
                     <li class="list-group-item">Ville : {{ user.postalCode }} {{ user.city }}</li>
                     <li class="list-group-item">Email : {{ user.email }}</li>
                     <li class="list-group-item">Téléphone : {{ user.phoneNumber }}</li>
@@ -49,7 +47,7 @@
         </div>
         <div class="col-md-3 offset-md-1">
             <div class="card bg-green">
-                <h3 class="card-title gold">Documents</h3>
+                <h3 class="card-title gold mt-3">Documents</h3>
                 {% if files %}
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">

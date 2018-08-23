@@ -1,11 +1,10 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block titleDashboard %}
-    <h2>Message de {{ message.firstName }} {{ message.lastName }}
+    Message de {{ message.firstName }} {{ message.lastName }}
         {% if message.register %}
             / Matricule : {{ message.register }}
         {% endif %}
-    </h2>
 {% endblock %}
 
 {% block body %}
@@ -73,7 +72,7 @@
                     {{ form_label(form.message) }}
                     {{ form_widget(form.message) }}
                 </div>
-                <button class="btn btn-primary mt-3" type="submit">Envoyer</button>
+                <button class="btn btn-primary bg-green mt-3" type="submit">Envoyer</button>
                 {{ form_end(form) }}
 
                 <form action="{{ path('message_treated', {id:message.id}) }}" method="post">
@@ -84,6 +83,6 @@
     <div class="mt-5" align="center">
         <a class="btn btn-danger alert-delete" href="{{ path('delete_message', {id:message.id}) }}"
            data-confirm-message="Confirmer la supression du message?">Supprimer</a>
-        <a class="btn btn-primary" href="{{ path('admin_show_messages') }}">Retour</a>
+        <a class="btn btn-primary bg-green" href="{{ path('admin_show_messages') }}">Retour</a>
     </div>
 {% endblock %}
