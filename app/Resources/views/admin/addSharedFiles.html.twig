@@ -21,7 +21,14 @@
                         <p class="card-text">{{ form_widget(form.fileAccess) }}</p>
                         <p class="card-text">{{ form_label(form.isShared) }}</p>
                         <p class="card-text">{{ form_widget(form.isShared) }}</p>
-                        <p class="card-text mt-4">{{ form_widget(form.pathFile) }}</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="card-text mt-4">{{ form_label(form.pathFile) }}</p>
+                            </div>
+                            <div class="col-md-8">
+                                <p class="card-text mt-4">{{ form_widget(form.pathFile) }}</p>
+                            </div>
+                        </div>
                         <div class="mt-5">
                             <input class="btn btn-warning" type="submit" value="Ajouter">
                             <a class="btn btn-primary bg-green" href="{{ path('admin_show_files') }}">Retour</a>
