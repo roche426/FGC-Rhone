@@ -8,6 +8,7 @@ use AppBundle\Entity\ContactUs;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -56,17 +57,37 @@ class AdminController extends Controller
     /**
      * @Route("/users/{id}", name="admin_show_user")
      */
-    public function showUserAction($id)
+    public function showUserAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($id);
         $articles = $em->getRepository(Blog::class)->findby(['user' => $id]);
         $files = $em->getRepository(Files::class)->findOneBy(['user' => $id]);
 
+        $editForm = $this->createFormBuilder($user)
+            ->add('isAdmin', ChoiceType::class, array('choices' =>
+                ['Administrateur' =>  true,
+                'Utilisateur' =>  false]))
+            ->add('statut', ChoiceType::class, array('choices' =>
+                ['Membre' =>  null,
+                'Président' =>  User::CHAIRMAN,
+                'Trésorier' =>  User::TREASURER,
+                'Sécrétaire' =>  User::SECRETARY]))
+            ->getForm();
+
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $this->render('admin/showUser.html.twig', [
             'user' => $user,
             'articles' => $articles,
-            'files' => $files]);
+            'files' => $files,
+            'editForm' => $editForm->createView()]);
     }
 
 
