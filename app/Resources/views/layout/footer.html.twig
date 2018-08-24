@@ -1,11 +1,37 @@
-<!-- Footer -->
-<footer class="page-footer font-small blue navbar-default bg-green gold mt-2">
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">
-        Fédération des Gardes Particuliers du Rhône
+<footer class="mainfooter footerFixed bg-green" role="contentinfo">
+    <div class="footer-middle">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 offset-md-2 text-center">
+                    <div class="footer-pad">
+                        <h5><a class="nav-link font-weight-bold mt-3" href="#"> Mentions légales </a></h5>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+                    <div class="footer-pad">
+                        <h5><a class="nav-link font-weight-bold mt-3" href="{{ path('actuality') }}">Actualité</a></h5>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+                    <div class="footer-pad">
+                        <h5><a class="nav-link font-weight-bold mt-3" href="{{ path('contact') }}">Contact</a></h5>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+                    <div class="footer-pad">
+                        <h5><a class="nav-link font-weight-bold mt-3" href="{{ path('member_area') }}">
+                        {% if app.user %}Espace membre
+                        {% else %} Connexion
+                        {% endif %}
+                        </a></h5>
+                    </div>
+                </div>
+                <div class="pl-5 col-md-2 text-center d-flex justify-content-center">
+                    <a class="navbar-brand" href="https://www.facebook.com/gardesparticuliersdurhone/"
+                       target="_blank"><i class="fab fa-facebook fa-1x"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- Copyright -->
-
 </footer>
-<!-- Footer -->
+
