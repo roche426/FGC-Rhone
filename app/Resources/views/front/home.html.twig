@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Les dernières actualités</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-md-3">
+                    <img class="card-img-top img-fluid img-chairman" src="{{ asset('/assets/images/chien.jpg') }}" alt="Card image cap">
+                </div>
+                <div class="col-md-9 list-group-item">
+                {% if blogs %}
+                    {% for blog in blogs %}
+                    <div class="row mb-3">
+                        <div class="col-md-9">
+                            <h3 class="mb-4"><img src="{{ asset('/assets/images/article.png') }}"> {{ blog.title }}</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary bg-green" href="{{ path('show_article', {id:blog.id }) }}">Lire l'article</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h3 >Pas encore d'articles publiés</h3>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-5">
+            <h1 class="card-header bg-green">Les mots du Président</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-md-9">
+                    <p>e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                    <a class="btn btn-dark mt-2" href="{{ path('bureau_members') }}">Voir les membres du bureau</a>
+                </div>
+                <div class="col-md-3">
+                    <img class="img-joinUs img-fluid mb-2" src="{{ asset('assets/images/princesse.jpg') }}">
+                    <h5><span class="font-weight-bold">PRINCESSE </span><span class="font-italic">Président</span></h5>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-5">
+            <h1 class="card-header bg-green">Rejoignez-nous</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-md-5">
+                    <img class="img-thumbnail img-fluid mb-2" src="{{ asset('assets/images/join-us.jpg') }}">
+                </div>
+                <div class="col-md-7">
+                    <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                    <a class="btn btn-dark center-block" href="{{ path('contact', {subject:1}) }}">Contacter-nous</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5">
+            <h1 class="card-header bg-green">Espace membres</h1>
+            <div class="card-body pt-5 pb-5">
+                <p>Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                <div class="row mt-4">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Accéder à votre espace personnel</div>
+                                    <a class="card-body btn btn-light mt-2" href="{{ path('member_area') }}">Se connecter</a></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Membre mais pas encore d'accès ?</div>
+                                    <a class="card-body btn btn-light mt-2" href="{{ path('contact', {subject:0}) }}">Demander vos accès</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
