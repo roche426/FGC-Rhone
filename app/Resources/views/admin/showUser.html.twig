@@ -31,7 +31,7 @@
                 {% if user.pictureProfil %}
                     <img class="mt-4" src="/{{ user.pictureProfil }}" alt="{{ user.firstName }} {{ user.lastName }}">
                 {% else %}
-                    <img class="card-img-top" src="/assets/images/user-icon.png" alt="{{ user.firstName }} {{ user.lastName }}">
+                    <img class="card-img-top" src="{{ asset('assets/images/user-icon.png') }}" alt="{{ user.firstName }}{{ user.lastName }}">
                 {% endif %}
                 <div class="card-body text-center">
                     <h3>{{ user.firstName }} {{ user.lastName }}</h3>
