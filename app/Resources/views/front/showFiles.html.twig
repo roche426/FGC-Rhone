@@ -1,40 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container pt-5 pb-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3">
-                <h1>Documents partagés</h1>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <table class="table table-striped text-center border">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Objet</th>
-                    <th scope="col">Nom du document</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Date du fichier</th>
-                    <th scope="col">Téléchargement</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for file in files if file.isShared%}
-                        {% if file.fileAccess ==  0 %}
-                            {% include('front/tableSharedFiles.html.twig') %}
-                        {% endif %}
-                        {% if app.user %}
-                            {% if file.fileAccess == 1 and app.user %}
-                                {% include('front/tableSharedFiles.html.twig') %}
-                            {% elseif file.fileAccess == 2 and app.user.statut %}
-                                {% include('front/tableSharedFiles.html.twig') %}
-                            {% elseif file.fileAccess == 3 and app.user.isAdmin %}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Documents partagés</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-md-12">
+                    <table class="table table-striped text-center border">
+                        <thead class="bg-green gold">
+                        <tr>
+                            <th scope="col">Objet</th>
+                            <th scope="col">Nom du document</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date du fichier</th>
+                            <th scope="col">Téléchargement</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in files if file.isShared%}
+                            {% if file.fileAccess ==  0 %}
                                 {% include('front/tableSharedFiles.html.twig') %}
                             {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
+                            {% if app.user %}
+                                {% if file.fileAccess == 1 and app.user %}
+                                    {% include('front/tableSharedFiles.html.twig') %}
+                                {% elseif file.fileAccess == 2 and app.user.statut %}
+                                    {% include('front/tableSharedFiles.html.twig') %}
+                                {% elseif file.fileAccess == 3 and app.user.isAdmin %}
+                                    {% include('front/tableSharedFiles.html.twig') %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
