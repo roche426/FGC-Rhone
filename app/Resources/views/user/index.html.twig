@@ -3,30 +3,161 @@
 {% block body %}
     <div class="container pt-5 pb-5" align="center">
         <div class="card">
-            <h1 class="card-header bg-green">Espace membre</h1>
+            <div class="card-header bg-green">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-light mt-2">
+                            {{ app.user.isAdmin == true ? 'Administrateur' : 'Utilisateur' }}
+                            <span class="badge badge-primary bg-green">
+                {% if app.user.statut == constant('CHAIRMAN', app.user) %} Président
+                {% elseif app.user.statut == constant('TREASURER', app.user) %} Trésorier
+                {% elseif app.user.statut == constant('SECRETARY', app.user) %} Secrétaire
+                {% else %} Membre
+                {% endif %}
+             </span>
+                        </button>
+                    </div>
+                    <div class="col-md-8">
+                        <h1>Espace membre</h1>
+                    </div>
+                </div>
+            </div>
             <div class="row card-body pt-5 pb-5">
                 <div class="col-md-4">
                     <div class="card">
-                    <img class="card-img-top" src="/{{ app.user.pictureProfil }}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Mon profil</h5>
-                            <p class="card-text">{{ app.user.description }}</p>
+                        <img class="mt-4" alt="{{ app.user.firstName }} {{ app.user.lastName }}"
+                        {% if app.user.pictureProfil %}  src="/{{ app.user.pictureProfil }}">
+                        {% else %} src="{{ asset('assets/images/user-icon.png') }}">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            <h3>{{ app.user.firstName }} {{ app.user.lastName }}</h3>
+                            <p class="card-text">{{ app.user.description }} </p>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{ app.user.firstName }} {{ app.user.lastName }}</li>
-                            <li class="list-group-item">{{ app.user.birthDate | date('d-M-Y') }}</li>
-                            <li class="list-group-item">{{ app.user.address }}</li>
-                            {% if app.user.additionalAddress %}
-                                <li class="list-group-item">{{ app.user.additionalAddress }}</li>
-                            {% endif %}
-                            <li class="list-group-item">{{ app.user.city }} {{ app.user.postalCode }}</li>
+                        <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item">Date de naissance : {{ app.user.birthDate | date('d/m/Y') }}</li>
+                            <li class="list-group-item">Adresse : {{ app.user.address }}, {{ app.user.additionalAddress }}</li>
+                            <li class="list-group-item">Ville : {{ app.user.postalCode }} {{ app.user.city }}</li>
+                            <li class="list-group-item">Email : {{ app.user.email }}</li>
+                            <li class="list-group-item">Téléphone : {{ app.user.phoneNumber }}</li>
+                            <li class="list-group-item">Inscription le : {{ app.user.registrationDate |date('d/m/Y') }}</li>
+                            <li class="list-group-item">
+                                <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('edit_profil') }}">Modifier  votre profil</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-8 text-center">
-                    <a class="btn btn-dark" href="{{ path('blog_home') }}">Voir vos articles</a>
-                    <a class="btn btn-dark ml-5 mr-5" href="{{ path('edit_profil') }}">Modifier votre profil</a>
-                    <a class="btn btn-dark" href="{{ path('add_files') }}">Vos documents</a>
+                <div class="col-md-4">
+                    <div class="list-group">
+                        <div class="card">
+                            <div class="card-header bg-green gold">
+                                <h3 class="mb-1 center-text">Documents</h3>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            {% if files %}
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Carte d'identité</div>
+                                    <ul class="list-group list-group-flush">
+                                        {% if files.idCard %}
+                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
+                                            </a>
+                                        {% else %}
+                                            <li class="list-group-item">Aucun document téléchargé</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Licence</div>
+                                    <ul class="list-group list-group-flush">
+                                        {% if files.idCard %}
+                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
+                                            </a>
+                                        {% else %}
+                                            <li class="list-group-item">Aucun document téléchargé</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Assurance</div>
+                                    <ul class="list-group list-group-flush">
+                                        {% if files.idCard %}
+                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
+                                            </a>
+                                        {% else %}
+                                            <li class="list-group-item">Aucun document téléchargé</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Document divers</div>
+                                    <ul class="list-group list-group-flush">
+                                        {% if files.idCard %}
+                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
+                                            </a>
+                                        {% else %}
+                                            <li class="list-group-item">Aucun document téléchargé</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="card">
+                                    <div class="card-header bg-green gold">Document divers</div>
+                                    <ul class="list-group list-group-flush">
+                                        {% if files.idCard %}
+                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
+                                            </a>
+                                        {% else %}
+                                            <li class="list-group-item">Aucun document téléchargé</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                            {% endif %}
+                            <li class="list-group-item">
+                                <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('add_files') }}">Modifier vos documents</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="list-group">
+                        <div class="card">
+                            <div class="card-header bg-green gold">
+                                <h3 class="mb-1 center-text">Articles publiés</h3>
+                            </div>
+                        </div>
+                        {% if articles %}
+                            {% for article in articles %}
+                            <a href="{{ path('blog_edit', {id:article.id}) }}"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ article.title }}</h5>
+                                </div>
+                                <small class="text-muted">{{ article.publicationDate | date('d/m/Y') }}</small>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                        <div class="list-group-item">
+                            <h5 class="mb-1">Aucun article publié</h5>
+                        </div>
+                        {% endif %}
+                        <div class="list-group-item">
+                            <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('blog_new') }}">Créer un article</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
