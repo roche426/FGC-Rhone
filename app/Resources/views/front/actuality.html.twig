@@ -1,28 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid pt-5 pb-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 text-center mb-3">
-            <h1>Nos actualités</h1>
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Nos actualités</h1>
+            <div class="card-body pt-5 pb-5 test">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 rounded bg-gold pt-5 pb-5">
+                        {% if articles %}
+                            {% for article in articles %}
+                                <h3 class="mb-4"><img src="{{ asset('assets/images/article.png') }}">
+                                    <a href="{{ path('show_article', {id:article.id }) }}"> {{ article.title }}</a>
+                                </h3>
+                            {% endfor %}
+                        {% else %}
+                            <p>Pas d'articles publiés</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 offset-md-2 text-center ">
-            {% if articles %}
-                {% for article in articles %}
-                    <h5 class="mb-3"><img src="/assets/images/article.png">
-                        <a href="{{ path('show_article', {id:article.id }) }}"> {{ article.title }}</a>
-                    </h5>
-                {% endfor %}
-            {% else %}
-                <p>Pas d'articles publiés</p>
-            {% endif %}
-        </div>
-    </div>
-</div>
-
-
 {% endblock %}
 
 

@@ -99,3 +99,7 @@ h1, .navbar-brand, .navbar-brand:hover{
     margin-right: 10px;
 }
 
+.test{
+    background: url("/assets/images/test.jpeg");
+    opacity: 0.8;
+}
