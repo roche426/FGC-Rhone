@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <div class="container contain-home p-3" align="center">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-
-                <div class="mt-5">
-                    <input class="btn btn-dark" type="submit" value="Enregistrer"/>
-                    {% if app.request.query.get("admin") == 1 %}
-                        <a class="btn btn-primary" href="{{ path('admin_articles') }}">Retour</a>
-                    {% endif %}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Créer votre article</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-md-12 text-center">
+                    {{ form_start(form) }}
+                    <p>{{ form_widget(form.title) }}</p>
+                    <p>{{ form_widget(form.article) }}</p>
+                    <div class="mt-5">
+                        <input class="btn btn-dark" type="submit" value="Enregistrer"/>
+                        {% if app.request.query.get("admin") == 1 %}
+                            <a class="btn btn-primary" href="{{ path('admin_articles') }}">Retour</a>
+                        {% endif %}
+                    </div>
+                    {{ form_end(form) }}
                 </div>
-                {{ form_end(form) }}
             </div>
         </div>
     </div>

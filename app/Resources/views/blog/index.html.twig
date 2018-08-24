@@ -1,39 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<div class="container pt-5 pb-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 text-center mb-5">
-            <h1>Vos articles</h1>
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Vos articles</h1>
+            <div class=" card-body pt-5 pb-5">
+                <a class="btn btn-dark bg-green mb-5" href="{{ path('blog_new') }}">Créer un nouvel article</a>
+                {% if blogs %}
+                    {% for blogs in blogs %}
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <h3 class="mb-4"><img src="{{ asset('assets/images/article.png') }}"> {{ blogs.title }}
+                                </h3>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a class="btn btn-dark bg-green" href="{{ path('blog_edit', {id:blogs.id}) }}">Modifier</a>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <a class="alert-delete btn btn-danger" href="{{ path('blog_delete', {id:blogs.id}) }}"
+                                   data-confirm-message="Confirmer la supression de l'article?">Supprimer</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-6 offset-md-3 text-center">
+                        <h3>Pas encore d'articles publiés</h3>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 offset-md-4 text-center mb-5">
-            <a class="btn btn-dark" href="{{ path('blog_new') }}">Créer un nouvel article</a>
-
-        </div>
-    </div>
-
-    {% if blogs %}
-        {% for blogs in blogs %}
-        <div class="row">
-            <div class="col-md-8 mb-3">
-                <h3 class="mb-4"><img src="/assets/images/article.png"> {{ blogs.title }}</h3>
-            </div>
-            <div class="col-md-2 text-center">
-                <a class="btn btn-dark" href="{{ path('blog_edit', {id:blogs.id}) }}">Modifier</a>
-            </div>
-            <div class="col-md-2 text-center">
-                <a class="alert-delete btn btn-dark" href="{{ path('blog_delete', {id:blogs.id}) }}"
-                   data-confirm-message="Confirmer la supression de l'article?">Supprimer</a>
-            </div>
-        </div>
-        {% endfor %}
-    {% else %}
-        <div class="col-md-6 offset-md-3 text-center">
-            <h3 >Pas encore d'articles publiés</h3>
-        </div>
-    {% endif %}
 {% endblock %}
 
