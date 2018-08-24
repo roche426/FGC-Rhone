@@ -1,22 +1,27 @@
 <div class="container pt-5 pb-5" align="center">
     {% if article %}
-        <div class="row">
-            <h1 class="mx-auto">{{ article.title }}</h1>
-        </div>
-        <div class="row mt-3">
-            {{ froala_display(article.article) }}
-        </div>
-        <h5 align="right"><i>Publié le {{ article.publicationDate | date('d-m-Y') }}
-                {% if article.user %}
-                par {{ article.user.firstName }} {{ article.user.lastName }}</i>
-            {% else %}
-                par utilisateur supprimé</i>
-            {% endif %}
-        </h5>
-    {% endif %}
-    <div class="row mt-5">
-        <div class="col-md-12 card">
-            <h2 class="card-header bg-success">
-                Commentaires
-            </h2>
-            <div class="card-body">
+    <div class="card">
+        <h1 class="card-header bg-green">{{ article.title }}</h1>
+        <div class="card-body pt-5 pb-5">
+            <div class="col-md-10">
+                <div class="row mt-3">
+                    {{ froala_display(article.article) }}
+                </div>
+                <h5 align="right"><i>Publié le {{ article.publicationDate | date('d-m-Y') }}
+                        {% if article.user %}
+                        par {{ article.user.firstName }} {{ article.user.lastName }}</i>
+                    {% else %}
+                        par utilisateur supprimé</i>
+                    {% endif %}
+                </h5>
+                {% endif %}
+                <div class="row mt-5">
+                    <div class="col-md-12 card bg-green">
+                        <h2 class="card-header gold">
+                            Commentaires
+                        </h2>
+                        <div class="card-body">
+
+
+
+

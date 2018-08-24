@@ -1,70 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid pt-5 pb-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 text-center mb-3">
-            <h1>Nous contacter</h1>
-        </div>
-    </div>
-    <div class="row" align="center">
-        <div class="col-sm-6 offset-sm-3">
-            <div class="card">
-                {{ form_start(form) }}
-                <div class="card-body ">
-                    <h3 class="card-title">Votre message</h3>
-                    <div class="row mt-3">
-                        <div class="col-sm-1">
-                            <p>{{ form_label(form.firstName) }}</p>
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Nous contacter</h1>
+            <div class="card-body pt-5 pb-5">
+                <div class="col-sm-10">
+                    <div class="card">
+                        {{ form_start(form) }}
+                        <div class="card-body ">
+                            <h3 class="card-title">Votre message</h3>
+                            <div class="row mt-3">
+                                <div class="col-sm-1">
+                                    <p>{{ form_label(form.firstName) }}</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="card">{{ form_widget(form.firstName) }}</p>
+                                </div>
+                                <div class="col-sm-1">
+                                    <p class="card-text">{{ form_label(form.lastName) }}</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="card-text">{{ form_widget(form.lastName) }}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-1">
+                                    <p class="card-text">{{ form_label(form.register) }}</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="card-text">{{ form_widget(form.register) }}</p>
+                                </div>
+                                <div class="col-sm-1">
+                                    <p class="card-text">{{ form_label(form.email) }}</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="card-text">{{ form_widget(form.email) }}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-1">
+                                    <p class="card-text">{{ form_label(form.subject) }}</p>
+                                </div>
+                                <div class="col-sm-11">
+                                    <p class="card-text">{{ form_widget(form.subject) }}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-1">
+                                    <p class="card-text mt-4">{{ form_label(form.message) }}</p>
+                                </div>
+                                <div class="col-sm-11">
+                                    <p class="card-text">{{ form_widget(form.message) }}</p>
+                                </div>
+                            </div>
+                            <input class="btn btn-dark mt-4" type="submit" value="Envoyer">
                         </div>
-                        <div class="col-sm-5">
-                            <p class="card">{{ form_widget(form.firstName) }}</p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="card-text">{{ form_label(form.lastName) }}</p>
-                        </div>
-                        <div class="col-sm-5">
-                            <p class="card-text">{{ form_widget(form.lastName) }}</p>
-                        </div>
+                        {{ form_end(form) }}
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-1">
-                            <p class="card-text">{{ form_label(form.register) }}</p>
-                        </div>
-                        <div class="col-sm-5">
-                            <p class="card-text">{{ form_widget(form.register) }}</p>
-                        </div>
-                        <div class="col-sm-1">
-                            <p class="card-text">{{ form_label(form.email) }}</p>
-                        </div>
-                        <div class="col-sm-5">
-                            <p class="card-text">{{ form_widget(form.email) }}</p>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-sm-1">
-                            <p class="card-text">{{ form_label(form.subject) }}</p>
-                        </div>
-                        <div class="col-sm-11">
-                            <p class="card-text">{{ form_widget(form.subject) }}</p>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-sm-1">
-                            <p class="card-text mt-4">{{ form_label(form.message) }}</p>
-                        </div>
-                        <div class="col-sm-11">
-                            <p class="card-text">{{ form_widget(form.message) }}</p>
-                        </div>
-                    </div>
-                    <input class="btn btn-dark mt-4" type="submit" value="Envoyer">
                 </div>
-                {{ form_end(form) }}
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
-
-
-

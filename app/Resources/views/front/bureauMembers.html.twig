@@ -1,34 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container pt-5 pb-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mb-3">
-                <h1>Le Bureau</h1>
-            </div>
-        </div>
-        <div class="row">
-            {% for member in members %}
-                <div class="col-md-4" align="center">
-                    <div class="card" style="width: 18rem;">
-                        {% if member.pictureProfil %}
-                            <img class="card-img-top" src="{{ member.pictureProfil }}" alt="{{ member.firstName }} {{ member.lastName }}">
-                        {% else %}
-                            <img class="card-img-top" src="assets/images/user-icon.png" alt="{{ member.firstName }} {{ member.lastName }}">
-                        {% endif %}
-                        <div class="card-body text-center">
-                            {% if member.statut == constant('CHAIRMAN', member) %}
-                                <h3 class="card-title">Président</h3>
-                            {% elseif member.statut == constant('TREASURER', member) %}
-                                <h3 class="card-title">Trésorier </h3>
-                            {% elseif member.statut == constant('SECRETARY', member) %}
-                                <h3 class="card-title">Secrétaire </h3>
-                            {% endif %}
-                            <h5 class="mt-3">{{ member.firstName }} {{ member.lastName }}</h5>
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Le Bureau</h1>
+            <div class="row card-body pt-5 pb-5">
+                {% for member in members %}
+                    {% if member.statut %}
+                        <div class="col-md-3" align="center">
+                            <div class="card mb-5">
+                                <h3 class="card-header bg-green gold">
+                                    {% if member.statut == constant('CHAIRMAN', member) %} Président
+                                    {% elseif member.statut == constant('TREASURER', member) %} Trésorier
+                                    {% elseif member.statut == constant('SECRETARY', member) %} Secrétaire
+                                    {% endif %}
+                                </h3>
+                                <img class="mt-4 mb-4" alt="{{ member.firstName }} {{ member.lastName }}"
+                                     src="{% if member.pictureProfil %}{{ member.pictureProfil }}{% else %}{{ asset('assets/images/user-icon.png') }}{% endif %}">
+                                    <h3 class="card-header bg-green gold">{{ member.firstName }} {{ member.lastName }}</h3>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

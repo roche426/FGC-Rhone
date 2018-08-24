@@ -29,7 +29,8 @@ class FrontController extends Controller
     {
         $em = $this->getDoctrine();
         $blogs = $em->getRepository(Blog::class)->findTwoLastArticles();
-        return $this->render('front/homePage.html.twig', ['blogs' => $blogs]);
+
+        return $this->render('front/home.html.twig', ['blogs' => $blogs]);
     }
 
     /**

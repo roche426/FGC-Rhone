@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Blog;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
 use AppBundle\Form\ProfilEditionType;
@@ -24,7 +25,14 @@ class UserController extends Controller
      */
     public function connectedAction()
     {
-        return $this->render('user/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository(Blog::class)->findBy(['user' => $this->getUser()]);
+        $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
+
+        return $this->render('user/index.html.twig', array(
+            'articles' => $articles,
+            'files' => $files
+        ));
     }
 
     /**

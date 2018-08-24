@@ -23,6 +23,11 @@ html{
     font-size: 1rem;
 }
 
+body{
+    background-color: #fcebc2;
+
+}
+
 h1, .navbar-brand, .navbar-brand:hover{
     color: #fcebc2;
     font-weight: bold;
@@ -81,8 +86,9 @@ h1, .navbar-brand, .navbar-brand:hover{
 }
 
 .img-joinUs{
-    height: 250px;
-    width: 500px;
+    height: 180px;
+    width: 200px;
+    border-radius: 50%;
 }
 
 
@@ -93,3 +99,7 @@ h1, .navbar-brand, .navbar-brand:hover{
     margin-right: 10px;
 }
 
+.test{
+    background: url("/assets/images/newspaper.jpeg");
+    opacity: 0.8;
+}

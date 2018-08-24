@@ -19,8 +19,12 @@ class BlogType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, array(
+                'attr' => array(
+                    'placeholder' => 'Titre'),
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->add('article', FroalaEditorType::class, array(
+                'attr' => array(
+                    'cols' => 50),
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])));
     }
 

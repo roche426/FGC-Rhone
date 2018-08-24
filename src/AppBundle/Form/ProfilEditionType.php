@@ -44,8 +44,7 @@ class ProfilEditionType extends AbstractType
                 'label' => 'Télécharger votre photo',
                 'required' => false,
                 'constraints' => array(
-                    new Image(['mimeTypesMessage' => 'Format de l\'image invalide']),
-                    new NotBlank(['message' => 'Ce champs ne doit pas être vide'])),
+                    new Image(['mimeTypesMessage' => 'Format de l\'image invalide'])),
                 'data_class' => null))
             ->add('firstName', TextType::class, array(
                 'label' => 'Prénom',

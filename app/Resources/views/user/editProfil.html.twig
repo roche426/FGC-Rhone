@@ -1,74 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container pt-3 pb-5" align="center">
-        <h1>Information du profil</h1>
-        <div class="row">
-            <div class="col-sm-10 offset-sm-1">
-                <div class="card">
-                    {{ form_start(editForm) }}
-                    <div class="card-body ">
-                        <div class="row mt-4">
-                            <div class="col-sm-4">
-                                {{ form_label(editForm.firstName) }}
-                                {{ form_widget(editForm.firstName) }}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Information du profil</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-sm-10 offset-sm-1">
+                    <div class="card">
+                        {{ form_start(editForm) }}
+                        <div class="card-body ">
+                            <div class="row mt-4">
+                                <div class="col-sm-4">
+                                    {{ form_label(editForm.firstName) }}
+                                    {{ form_widget(editForm.firstName) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_label(editForm.lastName) }}
+                                    {{ form_widget(editForm.lastName) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_label(editForm.birthDate) }}
+                                    {{ form_widget(editForm.birthDate) }}
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                {{ form_label(editForm.lastName) }}
-                                {{ form_widget(editForm.lastName) }}
+                            <div class="mt-4">
+                                {{ form_label(editForm.address) }}
+                                {{ form_widget(editForm.address) }}
                             </div>
-                            <div class="col-sm-4">
-                                {{ form_label(editForm.birthDate) }}
-                                {{ form_widget(editForm.birthDate) }}
+                            <div class="mt-4">
+                                {{ form_label(editForm.additionalAddress) }}
+                                {{ form_widget(editForm.additionalAddress) }}
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-4">
+                                    {{ form_label(editForm.postalCode) }}
+                                    {{ form_widget(editForm.postalCode) }}
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ form_label(editForm.city) }}
+                                    {{ form_widget(editForm.city) }}
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-4">
+                                    {{ form_label(editForm.phoneNumber) }}
+                                    {{ form_widget(editForm.phoneNumber) }}
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ form_label(editForm.email) }}
+                                    {{ form_widget(editForm.email) }}
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-sm-3 offset-sm-2">
+                                    <p>{{ form_label(editForm.pictureProfil) }}</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    {{ form_widget(editForm.pictureProfil) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            {{ form_label(editForm.address) }}
-                            {{ form_widget(editForm.address) }}
-                        </div>
-                        <div class="mt-4">
-                            {{ form_label(editForm.additionalAddress) }}
-                            {{ form_widget(editForm.additionalAddress) }}
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-sm-4">
-                                {{ form_label(editForm.postalCode) }}
-                                {{ form_widget(editForm.postalCode) }}
-                            </div>
-                            <div class="col-sm-8">
-                                {{ form_label(editForm.city) }}
-                                {{ form_widget(editForm.city) }}
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-sm-4">
-                                {{ form_label(editForm.phoneNumber) }}
-                                {{ form_widget(editForm.phoneNumber) }}
-                            </div>
-                            <div class="col-sm-8">
-                                {{ form_label(editForm.email) }}
-                                {{ form_widget(editForm.email) }}
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-sm-3 offset-sm-2">
-                                <p>{{ form_label(editForm.pictureProfil) }}</p>
-                            </div>
-                            <div class="col-sm-5">
-                                {{ form_widget(editForm.pictureProfil) }}
-                            </div>
+                        <div class="mt-2 mb-2">
+                            <input class="btn btn-primary bg-green" type="submit" value="Modifier">
                         </div>
                     </div>
-                    <div class="mt-2 mb-2">
-                        <input class="btn btn-primary bg-green" type="submit" value="Modifier">
-                    </div>
+                    {{ form_end(editForm) }}
                 </div>
-                {{ form_end(editForm) }}
             </div>
-        </div>
-        <div class="mt-3">
-            <a class="btn btn-danger" href="{{ path('delete_user', {role:'user', id:app.user.id}) }}">Supprimer profil</a>
-            <a class="btn btn-warning" href="{{ path('disable_user', {role:'user', id:app.user.id}) }}">Désactiver compte</a>
+            <div class="mb-3">
+                <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {role:'user', id:app.user.id}) }}"
+                   data-confirm-message="Confirmez-vous la suppression définitive de votre compte ?" >Supprimer compte</a>
+                <a class="btn btn-warning alert-delete" href="{{ path('disable_user', {role:'user', id:app.user.id}) }}"
+                   data-confirm-message="Confirmez-vous la désactivation de votre compte ?">Désactiver compte</a>
+            </div>
         </div>
     </div>
 {% endblock %}

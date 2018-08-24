@@ -34,8 +34,8 @@
                                 <a class="nav-link" href="{{ path('admin_home') }}">Administration</a>
                             </li>
                         {% endif %}
-                        <li class="nav-item">
-                            <a href="/logout"><i class="fas fa-sign-out-alt">X</i></a>
+                        <li class="nav-item active ml-5">
+                            <a class="nav-link mt-2" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
                         </li>
                     {% else %}
                         <li class="nav-item active">

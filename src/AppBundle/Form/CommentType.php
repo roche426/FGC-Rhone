@@ -17,6 +17,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment', TextType::class, array(
+                'label' => 'Votre commentaire',
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])));
     }
 

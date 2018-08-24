@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Modifier votre article</h1>
+            <div class="row card-body pt-5 pb-5">
+                <div class="col-md-12 text-center">
+                    {{ form_start(edit_form) }}
+                    <p>{{ form_widget(edit_form.title) }}</p>
+                    <p>{{ form_widget(edit_form.article) }}</p>
 
-<div class="container contain-home p-3">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>Modifier votre article</h1>
-            {{ form_start(edit_form) }}
-            {{ form_widget(edit_form) }}
-
-            <input type="submit" value="Enregistrer" />
-            {{ form_end(edit_form) }}
+                    <input class="btn btn-primary bg-green" type="submit" value="Enregistrer" />
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
