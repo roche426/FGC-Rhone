@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="carouselExampleControls" class="carousel slide pt-5 pb-5" data-ride="carousel"
-         style="background-color:
-    #fcebc2">
+    {% if images is not empty %}
+    <div id="carouselExampleControls" class="carousel slide pt-5 pb-5" data-ride="carousel">
         <div class="carousel-inner">
             {% for i in 2..images|length +1 %}
                 <div class="carousel-item  {{ (i == 2) ? 'active' : '' }}" align="center">
@@ -12,12 +11,29 @@
             {% endfor %}
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="carousel-control-prev-icon bg-green" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="carousel-control-next-icon bg-green" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <div align="center">
+        <a class="btn btn-danger mb-5" href="{{ path('show_images', {id:folder.id, theme:'miniature'}) }}">Voir les miniatures</a>
+        <a class="btn btn-primary bg-green mb-5" href="{{ path('gallery') }}">Retour</a>
+    </div>
+    {% else %}
+        <div class="container pt-5 pb-5" align="center">
+            <div class="card">
+                <h1 class="card-header bg-green">Images</h1>
+                <div class="card-body pt-5 pb-5">
+                    <h3>Aucune photo téléchargée pour le moment</h3>
+                </div>
+            </div>
+        </div>
+        <div align="center">
+            <a class="btn btn-primary bg-green mb-5" href="{{ path('gallery') }}">Retour</a>
+        </div>
+    {% endif %}
 {% endblock %}

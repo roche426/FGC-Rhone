@@ -99,18 +99,24 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("images/{id}", name="show_images")
+     * @Route("gallery/images/{id}/{theme}", name="show_images", defaults={"theme": "carousel"})
      */
-    public function showImagesGalleryAction($id)
+    public function showImagesGalleryAction($id, $theme)
     {
         $folder = $this->getDoctrine()->getRepository(ImageFolders::class)->find($id);
 
         $images = array_diff(scandir($folder->getPath()), ['.', '..']);
 
-        return $this->render('front/showImageGallery.html.twig', array(
+        if ($theme === 'carousel') {
+
+            return $this->render('front/showImageGallery.html.twig', array(
+                'folder' => $folder,
+                'images' => $images));
+        }
+
+        return $this->render('front/showImageGalleryMiniatures.html.twig', array(
             'folder' => $folder,
-            'images' => $images,
-        ));
+            'images' => $images));
     }
 
 
