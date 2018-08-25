@@ -105,8 +105,7 @@ h1, .navbar-brand, .navbar-brand:hover{
 }
 
 
-
-/* MODAL pour zoomer les images des galeries*/
+/* ===== MODAL pour zoomer les images des galeries ===== */
 .myImg {
     border-radius: 5px;
     cursor: pointer;
