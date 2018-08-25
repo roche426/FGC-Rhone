@@ -99,7 +99,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("images/{id}", name="show_images")
+     * @Route("gallery/images/{id}", name="show_images")
      */
     public function showImagesGalleryAction($id)
     {

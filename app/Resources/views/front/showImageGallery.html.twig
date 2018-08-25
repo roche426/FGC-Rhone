@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="carouselExampleControls" class="carousel slide pt-5 pb-5" data-ride="carousel"
-         style="background-color:
-    #fcebc2">
+    {% if images is not empty %}
+    <div id="carouselExampleControls" class="carousel slide pt-5 pb-5" data-ride="carousel">
         <div class="carousel-inner">
             {% for i in 2..images|length +1 %}
                 <div class="carousel-item  {{ (i == 2) ? 'active' : '' }}" align="center">
@@ -20,4 +19,14 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    {% else %}
+        <div class="container pt-5 pb-5" align="center">
+            <div class="card">
+                <h1 class="card-header bg-green">Images</h1>
+                <div class="card-body pt-5 pb-5">
+                    <h3>Aucune photo téléchargée pour le moment</h3>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
