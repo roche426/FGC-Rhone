@@ -3,48 +3,49 @@
 {% block body %}
 {% include 'front/article.html.twig' %}
 
-            {% if comments %}
-                {% for comment in comments %}
-                    <div class="card col-md-10">
-                        <ul class="list-group list-group-flush">
-                            <div class="row mt-3">
-                                <div class="col-md-5">
-                                    {% if comment.user %}
-                                    <p> {{ comment.user.firstName }} {{ comment.user.lastName }}
-                                        {% else %}
-                                    <p> Utilisateur supprimé
-                                        {% endif %}
-                                        <i>le {{ comment.publicationDate | date('d-m-Y') }}</i>
-                                    </p>
-                                </div>
-                                <div class="col-md-7">
-                                    <h5>{{ comment.comment }}</h5>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p class="gold">Aucun commentaire</p>
-            {% endif %}
-            {% if app.user %}
-                <div class="row gold mt-5">
-                    <div class="col-md-10 offset-md-1 text-center">
-                        {{ form_start(form) }}
-                        {{ form_label(form.comment) }}
-                        {{ form_widget(form.comment) }}
+                            {% if comments %}
+                                {% for comment in comments %}
+                                    <div class="card col-md-10">
+                                        <ul class="list-group list-group-flush">
+                                            <div class="row mt-3">
+                                                <div class="col-md-5">
+                                                    {% if comment.user %}
+                                                    <p> {{ comment.user.firstName }} {{ comment.user.lastName }}
+                                                        {% else %}
+                                                    <p> Utilisateur supprimé
+                                                        {% endif %}
+                                                        <i>le {{ comment.publicationDate | date('d-m-Y') }}</i>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h5>{{ comment.comment }}</h5>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p class="gold">Aucun commentaire</p>
+                            {% endif %}
+                            {% if app.user %}
+                                <div class="row gold mt-5">
+                                    <div class="col-md-10 offset-md-1 text-center">
+                                        {{ form_start(form) }}
+                                        {{ form_label(form.comment) }}
+                                        {{ form_widget(form.comment) }}
 
-                        <input class="btn btn-light mt-3" type="submit" value="Envoyer"/>
-                        {{ form_end(form) }}
+                                        <input class="btn btn-light mt-3" type="submit" value="Envoyer"/>
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            {% endif %}
+                <a class="btn btn-primary bg-green mt-5" href="{{ path('actuality') }}">Retour</a>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
 {% endblock %}
 

@@ -1,0 +1,36 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block titleDashboard %}
+    Modifier votre document
+{% endblock %}
+{% block body %}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <div class="card">
+                    {{ form_start(editForm) }}
+                    <div class="card-body ">
+                        <p class="card-text">{{ form_label(editForm.nameFile) }}</p>
+                        <p class="card-text">{{ form_widget(editForm.nameFile) }}</p>
+                        <p class="card-text">{{ form_label(editForm.subject) }}</p>
+                        <p class="card-text">{{ form_widget(editForm.subject) }}</p>
+                        <p class="card-text">{{ form_label(editForm.description) }}</p>
+                        <p class="card-text">{{ form_widget(editForm.description) }}</p>
+                        <p class="card-text">{{ form_label(editForm.fileAccess) }}</p>
+                        <p class="card-text">{{ form_widget(editForm.fileAccess) }}</p>
+                        <p class="card-text">{{ form_label(editForm.isShared) }}</p>
+                        <p class="card-text">{{ form_widget(editForm.isShared) }}</p>
+                        <div class="mt-5">
+                            <input class="btn btn-warning" type="submit" value="Modifier">
+                            <a class="btn btn-primary bg-green" href="{{ path('admin_show_files') }}">Retour</a>
+                        </div>
+                    </div>
+                    {{ form_end(editForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

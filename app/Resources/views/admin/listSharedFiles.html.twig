@@ -9,8 +9,10 @@
             <thead class="bg-green gold ">
             <tr>
                 <th scope="col" class="text-center">Nom du fichier</th>
+                <th scope="col" class="text-center">Sujet</th>
+                <th scope="col" class="text-center">Description</th>
                 <th scope="col" class="text-center">Droit d'accès</th>
-                <th scope="col" class="text-center">Document en cours de partage?</th>
+                <th scope="col" class="text-center">Fichier partagé?</th>
                 <th scope="col" class="text-center">Date de téléchargement</th>
                 <th scope="col" class="text-center">Action</th>
             </tr>
@@ -19,6 +21,8 @@
         {% for file in files %}
             <tr>
                 <td class="text-center">{{ file.nameFile }}</td>
+                <td class="text-center">{{ file.subject }}</td>
+                <td class="text-center">{{ file.description }}</td>
                 <td class="text-center">
                     {% if file.fileAccess == constant('MEMBERS_ACCESS_FILE', file)%}
                         Membres
@@ -40,6 +44,7 @@
                 <td class="text-center">{{ file.dateUpload |date('d/m/Y') }} </td>
 
                 <td class="text-center">
+                    <a class="btn btn-warning" href="{{ path('admin_edit_files', {id:file.id}) }}"><i class="far fa-edit"></i></a>
                     <a class="btn btn-info bg-green" href="{{ path('admin_download_files', {id:file.id}) }}">Voir</a>
                     <a class="btn btn-danger alert-delete" href="{{ path('admin_delete_files', {id:file.id}) }}"
                        data-confirm-message="Confirmer la suppression du document?">Supprimer</a>

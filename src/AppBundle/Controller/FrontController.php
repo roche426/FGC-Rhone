@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Comment;
-use AppBundle\Entity\Files;
 use AppBundle\Entity\ImageFolders;
 use AppBundle\Entity\SharedFiles;
 use AppBundle\Entity\User;
@@ -23,7 +22,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("home", name="home_page")
+     * @Route("/home", name="home_page")
      */
     public function homePageAction()
     {
@@ -33,8 +32,35 @@ class FrontController extends Controller
         return $this->render('front/home.html.twig', ['blogs' => $blogs]);
     }
 
+
+    /*===== SECTION ARTICLE/BLOG ===== */
+
     /**
-     * @Route("blog/{id}", name="show_article")
+     * @Route("/blog", name="actuality")
+     */
+    public function actualityAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository(Blog::class)->sortArticlesByDate();
+
+        return $this->render('front/actuality.html.twig', array('articles' => $articles));
+    }
+
+    /*===== SECTION AFFICHAGE MEMBRE DU BUREAU ===== */
+
+    /**
+     * @Route("bureau-members", name="bureau_members")
+     */
+    public function bureauMembersAction()
+    {
+        $em = $this->getDoctrine()->getRepository(User::class);
+        $members = $em->findAll();
+
+        return $this->render('front/bureauMembers.html.twig', array('members' => $members));
+    }
+
+    /**
+     * @Route("/blog/{id}", name="show_article")
      */
     public function displayBlogAction(Request $request, $id)
     {
@@ -65,41 +91,22 @@ class FrontController extends Controller
         ));
     }
 
-    /**
-     * @Route("blog", name="actuality")
-     */
-    public function actualityAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $articles = $em->getRepository(Blog::class)->findAll();
 
-        return $this->render('front/actuality.html.twig', array('articles' => $articles));
-    }
+    /*===== SECTION GALERIE PHOTO ===== */
 
     /**
-     * @Route("bureau-members", name="bureau_members")
-     */
-    public function bureauMembersAction()
-    {
-        $em = $this->getDoctrine()->getRepository(User::class);
-        $members = $em->findAll();
-
-        return $this->render('front/bureauMembers.html.twig', array('members' => $members));
-    }
-
-    /**
-     * @Route("gallery", name="gallery")
+     * @Route("/gallery", name="gallery")
      */
     public function showGalleryAction()
     {
         $em = $this->getDoctrine()->getRepository(ImageFolders::class);
-        $folders = $em->findAll();
+        $folders = $em->sortImagesFoldersByDate();
 
         return $this->render('front/showGallery.html.twig', array('folders' => $folders));
     }
 
     /**
-     * @Route("gallery/images/{id}/{theme}", name="show_images", defaults={"theme": "carousel"})
+     * @Route("/gallery/images/{id}/{theme}", name="show_images", defaults={"theme": "carousel"})
      */
     public function showImagesGalleryAction($id, $theme)
     {
@@ -119,15 +126,27 @@ class FrontController extends Controller
             'images' => $images));
     }
 
+    /*===== SECTION DOCUMENTS PARTAGES ===== */
 
     /**
-     * @Route("documents", name="show_files")
+     * @Route("/download", name="show_files")
      */
     public function showFilesAction()
     {
-        $files = $this->getDoctrine()->getManager()->getRepository(SharedFiles::class)->findAll();
+        $files = $this->getDoctrine()->getManager()->getRepository(SharedFiles::class)->sortFilesByDate();
 
         return $this->render('front/showFiles.html.twig', ['files' => $files]);
+    }
+
+    /**
+     * @Route("/download/{id}", name="download_files")
+     */
+    public function downloadFilesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $files = $em->getRepository(SharedFiles::class)->findOneBy(['id' => $id]);
+
+        return $this->file($files->getPathFile());
     }
 
 
