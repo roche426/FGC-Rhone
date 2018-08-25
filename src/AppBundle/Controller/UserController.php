@@ -76,7 +76,15 @@ class UserController extends Controller
      */
     public function editProfilAction(Request $request, ImageManipulator $imageManipulator)
     {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+
+        if (!$em->getRepository(Files::class)->findOneBy(['user' => $user])) {
+            $files = new Files();
+            $files->setUser($user);
+            $em->persist($files);
+        }
+
         $currentPicture = $this->getUser()->getPictureProfil();
 
         $editform = $this->createForm(ProfilEditionType::class, $user);
@@ -102,7 +110,6 @@ class UserController extends Controller
                 $user->setPictureProfil($currentPicture);
             }
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
