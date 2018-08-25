@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 class SharedFilesController extends Controller
 {
     /**
-     * @Route("add-files", name="admin_add_files")
+     * @Route("/add-files", name="admin_add_files")
      */
     public function addFilesAction(Request $request)
     {
@@ -58,7 +58,7 @@ class SharedFilesController extends Controller
     }
 
     /**
-     * @Route("edit-shared-files/{id}", name="admin_edit_files")
+     * @Route("/edit-shared-files/{id}", name="admin_edit_files")
      */
     public function editFilesAction($id, Request $request)
     {
@@ -109,7 +109,7 @@ class SharedFilesController extends Controller
 
 
     /**
-     * @Route("shared-files", name="admin_show_files")
+     * @Route("/shared-files", name="admin_show_files")
      */
     public function listFilesAction(Request $request)
     {
@@ -120,7 +120,7 @@ class SharedFilesController extends Controller
     }
 
     /**
-     * @Route("download/{id}", name="admin_download_files")
+     * @Route("/download/{id}", name="admin_download_files")
      */
     public function downloadFilesAction($id)
     {
@@ -131,7 +131,7 @@ class SharedFilesController extends Controller
     }
 
     /**
-     * @Route("delete/{id}", name="admin_delete_files")
+     * @Route("/delete/{id}", name="admin_delete_files")
      */
     public function deleteFilesAction($id)
     {

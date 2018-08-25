@@ -13,8 +13,16 @@ class BlogRepository extends \Doctrine\ORM\EntityRepository
     public function findTwoLastArticles()
     {
         return $this->createQueryBuilder('b')
-            ->orderBy('b.id', 'DESC')
+            ->orderBy('b.publicationDate', 'DESC')
             ->setMaxResults(2)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function sortArticlesByDate()
+    {
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.publicationDate', 'DESC')
             ->getQuery()
             ->getResult();
     }
