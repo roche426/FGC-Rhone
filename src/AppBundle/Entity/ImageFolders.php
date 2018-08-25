@@ -45,7 +45,7 @@ class ImageFolders
 
     /**
      * @var string
-     * @ORM\Column(name="image", type="string", nullable=true)
+     * @ORM\Column(name="image", type="string")
      */
     private $image;
 

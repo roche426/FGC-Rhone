@@ -19,6 +19,10 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <div align="center">
+        <a class="btn btn-danger mb-5" href="{{ path('show_images', {id:folder.id, theme:'miniature'}) }}">Voir les miniatures</a>
+        <a class="btn btn-primary bg-green mb-5" href="{{ path('gallery') }}">Retour</a>
+    </div>
     {% else %}
         <div class="container pt-5 pb-5" align="center">
             <div class="card">
@@ -27,6 +31,9 @@
                     <h3>Aucune photo téléchargée pour le moment</h3>
                 </div>
             </div>
+        </div>
+        <div align="center">
+            <a class="btn btn-primary bg-green mb-5" href="{{ path('gallery') }}">Retour</a>
         </div>
     {% endif %}
 {% endblock %}
