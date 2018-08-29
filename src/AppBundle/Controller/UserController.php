@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
+use AppBundle\Form\DocumentType;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
 use AppBundle\Manager\UserManager;
@@ -184,5 +185,48 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @Route("/new")
+     *
+     */
+    public function ContactAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $form = $this->createForm('AppBundle\Form\DocumentType');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            foreach ($data['files'] as $files) {
+
+                if ($files) {
+                    $idCard = $files->getIdCard();
+                    $idCardName = uniqid() .$idCard->guessExtension();
+
+                    $idCard->move($this->getParameter('IdCard_Directory'), $idCardName);
+                    $files->setIdCard($this->getParameter('IdCard_Directory').$idCardName);
+                    $files->setUser($this->getUser());
+
+                }
+
+                $em->persist($files);
+                $em->flush();
+
+            }
+
+            if (!$data['files']) {
+                $this->addFlash('danger', 'Aucun champs renseignés');
+                return $this->redirectToRoute('member_area');
+            }
+
+            $this->addFlash('success', 'Vos documents ont bien été téléchargés!');
+            return $this->redirectToRoute('member_area');
+
+        }
+
+        return $this->render('user\new.html.twig', ['form' => $form->createView()]);
+    }
 }

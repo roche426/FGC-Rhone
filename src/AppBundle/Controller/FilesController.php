@@ -18,8 +18,48 @@ class FilesController extends Controller
 {
     /**
      * @Route("add-files", name="add_files")
+     *
      */
-    public function addFilesAction(Request $request)
+    public function ContactAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm('AppBundle\Form\DocumentType');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            foreach ($data['files'] as $files) {
+
+                if ($files) {
+                    $idCard = $files->getIdCard();
+                    $idCardName = uniqid() .$idCard->guessExtension();
+
+                    $idCard->move($this->getParameter('IdCard_Directory'), $idCardName);
+                    $files->setIdCard($this->getParameter('IdCard_Directory').$idCardName);
+                    $files->setUser($this->getUser());
+                }
+
+                $em->persist($files);
+                $em->flush();
+            }
+
+            if (!$data['files']) {
+                $this->addFlash('danger', 'Aucun champs renseignés');
+                return $this->redirectToRoute('member_area');
+            }
+
+            $this->addFlash('success', 'Vos documents ont bien été téléchargés!');
+            return $this->redirectToRoute('member_area');
+        }
+
+        return $this->render('user\addFiles.html.twig', ['form' => $form->createView()]);
+    }
+
+
+    /*public function addFilesAction(Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -61,7 +101,7 @@ class FilesController extends Controller
                 'form' => $form->createView(),
                 'files' =>   $files ]
         );
-    }
+    }*/
 
 
     /**

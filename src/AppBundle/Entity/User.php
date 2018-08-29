@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -159,6 +160,10 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $files;
 
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
 
     /**
      * @return mixed
