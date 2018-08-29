@@ -60,63 +60,7 @@
                                     <div class="card-header bg-green gold">Carte d'identité</div>
                                     <ul class="list-group list-group-flush">
                                         {% if files.idCard %}
-                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                            </a>
-                                        {% else %}
-                                            <li class="list-group-item">Aucun document téléchargé</li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="card">
-                                    <div class="card-header bg-green gold">Licence</div>
-                                    <ul class="list-group list-group-flush">
-                                        {% if files.idCard %}
-                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                            </a>
-                                        {% else %}
-                                            <li class="list-group-item">Aucun document téléchargé</li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="card">
-                                    <div class="card-header bg-green gold">Assurance</div>
-                                    <ul class="list-group list-group-flush">
-                                        {% if files.idCard %}
-                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                            </a>
-                                        {% else %}
-                                            <li class="list-group-item">Aucun document téléchargé</li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="card">
-                                    <div class="card-header bg-green gold">Document divers</div>
-                                    <ul class="list-group list-group-flush">
-                                        {% if files.idCard %}
-                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                            </a>
-                                        {% else %}
-                                            <li class="list-group-item">Aucun document téléchargé</li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="card">
-                                    <div class="card-header bg-green gold">Document divers</div>
-                                    <ul class="list-group list-group-flush">
-                                        {% if files.idCard %}
-                                            <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                                            <a class="btn btn-light" href="{{ path('download_user_files', {id:app.user.id}) }}">Télécharger
                                                 <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
                                             </a>
                                         {% else %}

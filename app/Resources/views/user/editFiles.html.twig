@@ -13,7 +13,7 @@
                             <p class="card-text">{{ form_widget(form.idCard) }}</p>
                             <input class="btn btn-dark" type="submit" value="modifier votre carte d'identité">
                             {% if files.idCard %}
-                                <a class="btn btn-dark" href="{{ path('download_files', {idCard:true}) }}">Voir votre carte d'identité</a>
+                                <a class="btn btn-dark" href="{{ path('download_user_files', {id:app.user.id}) }}">Voir votre carte d'identité</a>
                             {% else %}
                                 <p>Aucun document téléchargé</p>
                             {% endif %}

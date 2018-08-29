@@ -65,17 +65,14 @@ class FilesController extends Controller
 
 
     /**
-     * @Route("download", name="download_files")
+     * @Route("download/{id}", name="download_user_files")
      */
-    public function downloadFilesAction(Request $request)
+    public function downloadFilesAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
+        $files = $em->getRepository(Files::class)->findOneBy(['user' => $id]);
 
-        if ($request->query->get('idCard')) {
-            return $this->file($files->getIdCard());
-        }
+        return $this->file($files->getIdCard());
 
-        return new Response('erreur');
     }
 }
