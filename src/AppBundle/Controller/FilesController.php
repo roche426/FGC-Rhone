@@ -45,11 +45,12 @@ class FilesController extends Controller
             foreach ($data['files'] as $files) {
 
                 if ($files) {
-                    $idCard = $files->getIdCard();
-                    $idCardName = uniqid() .$idCard->guessExtension();
+                    $path = $files->getPath();
+                    $fileName = $files->getName();
+                    $pathName = $this->getUser()->getLastName().substr($this->getUser()->getFirstName(),0,1) .'-' .$fileName .'.' .$path->guessExtension();
 
-                    $idCard->move($this->getParameter('IdCard_Directory'), $idCardName);
-                    $files->setIdCard($this->getParameter('IdCard_Directory').$idCardName);
+                    $path->move($this->getParameter('files_Directory'), $pathName);
+                    $files->setPath($this->getParameter('files_Directory').$pathName);
                     $files->setUser($this->getUser());
                 }
 
@@ -78,7 +79,7 @@ class FilesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $file = $em->getRepository(Files::class)->find($id);
 
-        return $this->file($file->getIdCard());
+        return $this->file($file->getPath());
 
     }
 
@@ -90,8 +91,8 @@ class FilesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $file = $em->getRepository(Files::class)->find($id);
 
-        if ($file && file_exists($file->getIdCard())) {
-            unlink($file->getIdCard());
+        if ($file && file_exists($file->getPath())) {
+            unlink($file->getPath());
         }
 
         $em->remove($file);

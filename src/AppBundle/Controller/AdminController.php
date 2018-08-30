@@ -64,7 +64,7 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($id);
         $articles = $em->getRepository(Blog::class)->findby(['user' => $id]);
-        $files = $em->getRepository(Files::class)->findOneBy(['user' => $id]);
+        $files = $em->getRepository(Files::class)->findBy(['user' => $id]);
 
         $editForm = $this->createFormBuilder($user)
             ->add('isAdmin', ChoiceType::class, array(

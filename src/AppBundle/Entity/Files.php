@@ -21,15 +21,21 @@ class Files
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="files")
+     * @var string
+     * @ORM\Column(name="id_card", type="string")
      */
-    private $user;
+    private $path;
 
     /**
      * @var string
-     * @ORM\Column(name="id_card", type="string",nullable=true)
+     * @ORM\Column(name="name", type="string")
      */
-    private $idCard;
+    private $name;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="files")
+     */
+    private $user;
 
 
     public function __construct()
@@ -56,17 +62,17 @@ class Files
     /**
      * @return string
      */
-    public function getIdCard()
+    public function getPath()
     {
-        return $this->idCard;
+        return $this->path;
     }
 
     /**
-     * @param string $idCard
+     * @param string $path
      */
-    public function setIdCard($idCard)
+    public function setPath($path)
     {
-        $this->idCard = $idCard;
+        $this->path = $path;
     }
 
     /**
@@ -85,5 +91,20 @@ class Files
         $this->user = $user;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
 }

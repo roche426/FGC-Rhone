@@ -10,14 +10,11 @@
                         <div class="col-sm-8 mb-2">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-text">{{ file.idCard }}</p>
+                                    <h5 class="card-text">{{ file.name }}</h5>
                                     <a class="btn btn-dark bg-green"
                                        href="{{ path('download_user_files', {id:file.id}) }}">Voir votre document</a>
                                     <a class="btn btn-danger alert-delete" href="{{ path('delete_files', {id:file.id})}}"
-                                       data-confirm-message="Confirmez-vous la suppression du dossier ?">Supprimer</a>
-                                    <a class="alert-delete btn btn-danger" href="#"
-                                       data-confirm-message="Confirmez-vous la suppression du dossier ?">Supprimer</a>
-
+                                       data-confirm-message="Confirmez-vous la suppression du document ?">Supprimer</a>
                                 </div>
                             </div>
                         </div>

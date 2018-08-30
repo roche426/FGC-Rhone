@@ -26,8 +26,8 @@
 /web/uploaded_files/thematics_image_gallery/*
 !/web/uploaded_files/thematics_image_gallery/.gitkeep
 
-/private/idCards/*
-!/private/idCards/.gitkeep
+/private/files/*
+!/private/files/.gitkeep
 /private/sharedFiles/*
 !/private/sharedFiles/.gitkeep
 
