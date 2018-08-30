@@ -1,28 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container pt-5 pb-5" align="center">
-    <div class="card">
-        <h1 class="card-header bg-green">Mes documents</h1>
-        <div class="card-body pt-5 pb-5">
-            <div class="col-sm-6">
-                <div class="card">
-                {{ form_start(form) }}
-                <ul class="emails list-unstyled" data-prototype="{{ form_row(form.files.vars.prototype, {'attr':
-                    {'placeholder': 'Email'}})|e('html_attr') }}">
-                    {% for k, field in form.files %}
-                        <p class="d-flex firstEmail">{{ form_row(form.files[k], {'attr': {'placeholder': 'Email'}}) }}</p>
-                    {% endfor %}
-                </ul>
-            <div class="text-center"><button type="submit" class="btn btn-outline-primary mb-5">Ajouter</button></div>
-            {% do form.files.setRendered %}
-            {{ form_end(form) }}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Mes documents</h1>
+            <div class="card-body pt-5 pb-5">
+                <div class="col-sm-6">
+                    <div class="card">
+                    {{ form_start(form) }}
+                    <ul class="files  pt-2 pb-2" data-prototype="{{ form_row(form.files.vars.prototype, {'attr':
+                        {'placeholder': 'Email'}})|e('html_attr') }}">
+                        {% for k, field in form.files %}
+                            <p class="d-flex firstEmail">{{ form_row(form.files[k], {'attr': {'placeholder': 'Email'}}) }}</p>
+                        {% endfor %}
+                    </ul>
+                <div>
+                    <input type="submit" class="btn btn-primary bg-green mt-3 mb-3" value="Enregister">
+                    <a class="btn btn-danger mt-3 mb-3" href="{{ path('show_gallery') }}">Retour</a>
+                </div>
+                {% do form.files.setRendered %}
+                {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 {% endblock %}
 
 

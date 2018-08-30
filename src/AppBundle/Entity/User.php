@@ -156,7 +156,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="Files", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Files", mappedBy="user", cascade={"remove"})
      */
     private $files;
 

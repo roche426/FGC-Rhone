@@ -24,20 +24,16 @@ $(".alert-delete").click(function(e) {
     });
 });
 
-$("#statut-change").click(function () {
-    console.log('bonjour')
-})
-
 
 let $collectionHolder;
 
 // setup an "add a tag" link
-let $addTagButton = $('<button type="button" class="btn btn-outline-info mt-3"><i class="far fa-plus-square fa-lg"></i> Ajouter un email</button>');
+let $addTagButton = $('<button type="button" class="btn btn-warning mt-3"><i class="far fa-plus-square fa-lg"></i> Ajouter un document</button>');
 let $newLinkLi = $('<div class="text-right" />').append($addTagButton);
 
 $(document).ready(function() {
     // Get the ul that holds the collection of emails
-    $collectionHolder = $('ul.emails');
+    $collectionHolder = $('ul.files');
 
     // add the "add a tag" anchor and li to the emails ul
     $collectionHolder.append($newLinkLi);
@@ -47,7 +43,7 @@ $(document).ready(function() {
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
 
     // Get the ul that holds the collection of emails
-    $collectionHolder = $('ul.emails');
+    $collectionHolder = $('ul.files');
 
     // add a delete link to all of the existing tag form li elements
     $collectionHolder.find('li').each(function() {
@@ -89,7 +85,7 @@ function addTagForm($collectionHolder, $newLinkLi) {
 }
 
 function addTagFormDeleteLink($tagFormLi) {
-    let $removeFormButton = $('<button type="button" class="btn btn-outline-danger btn-sm mb-3 ml-2"><i class="far fa-minus-square fa-lg"></i></button>');
+    let $removeFormButton = $('<button type="button" class="btn btn-outline-danger btn-sm mb-3"><i class="far fa-minus-square fa-lg"></i></button>');
     $tagFormLi.append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {
