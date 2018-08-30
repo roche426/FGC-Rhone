@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container pt-5 pb-5" align="center">
+        <div class="card">
+            <h1 class="card-header bg-green">Mes documents</h1>
+            <div class="card-body pt-5 pb-5">
+                {% if files %}
+                    {% for file in files %}
+                        <div class="col-sm-8 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-text">{{ file.name }}</h5>
+                                    <a class="btn btn-dark bg-green"
+                                       href="{{ path('download_user_files', {id:file.id}) }}">Voir votre document</a>
+                                    <a class="btn btn-danger alert-delete" href="{{ path('delete_files', {id:file.id})}}"
+                                       data-confirm-message="Confirmez-vous la suppression du document ?">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h5>Aucun document téléchargé</h5>
+                {% endif %}
+                <a class="btn btn-danger bg-green mt-3" href="{{ path('member_area') }}">Retour</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

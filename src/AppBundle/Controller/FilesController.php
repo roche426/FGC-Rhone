@@ -11,71 +11,94 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @package AppBundle\Controller
- * @Route("/user/files/")
+ * @Route("/user")
 
  */
 class FilesController extends Controller
 {
     /**
-     * @Route("add-files", name="add_files")
+     * @Route("/show-files", name="show_files")
      */
-    public function addFilesAction(Request $request)
+    public function showFilesAction()
     {
-
         $em = $this->getDoctrine()->getManager();
-        $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
+        $files = $em->getRepository(Files::class)->findBy(['user' => $this->getUser()]);
 
-        if (!$files) {
-            return $this->redirectToRoute('first_connexion');
-        }
-
-        $currentIdCard = $files->getIdCard();
-
-        $form = $this->createForm(FilesType::class, $files);
-        $form->handleRequest($request);
-
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($form['idCard']->getData()) {
-
-                $idCard = $files->getIdCard();
-                $idCardName = $this->getUser()->getLastName().substr($this->getUser()->getFirstName(),0,1) . '-IdCard.' .$idCard->guessExtension();
-
-                $idCard->move($this->getParameter('IdCard_Directory'), $idCardName);
-                $files->setIdCard($this->getParameter('IdCard_Directory').$idCardName);
-
-                if ($currentIdCard) {
-                    unlink($currentIdCard);
-                }
-            }
-
-            $em->persist($files);
-            $em->flush();
-
-            return $this->redirectToRoute('member_area');
-        }
-
-        return $this->render('user/editFiles.html.twig', [
-                'form' => $form->createView(),
-                'files' =>   $files ]
-        );
+        return $this->render('user/showFiles.html.twig', ['files' =>   $files ]);
     }
 
 
     /**
-     * @Route("download", name="download_files")
+     * @Route("/add-files", name="add_files")
      */
-    public function downloadFilesAction(Request $request)
+    public function addFilesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $files = $em->getRepository(Files::class)->findOneBy(['user' => $this->getUser()]);
 
-        if ($request->query->get('idCard')) {
-            return $this->file($files->getIdCard());
+        $form = $this->createForm('AppBundle\Form\DocumentType');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            foreach ($data['files'] as $files) {
+
+                if ($files) {
+                    $path = $files->getPath();
+                    $fileName = $files->getName();
+                    $pathName = $this->getUser()->getLastName().substr($this->getUser()->getFirstName(),0,1) .'-' .$fileName .'.' .$path->guessExtension();
+
+                    $path->move($this->getParameter('files_Directory'), $pathName);
+                    $files->setPath($this->getParameter('files_Directory').$pathName);
+                    $files->setUser($this->getUser());
+                }
+
+                $em->persist($files);
+                $em->flush();
+            }
+
+            if (!$data['files']) {
+                $this->addFlash('danger', 'Aucun champs renseignés');
+                return $this->redirectToRoute('member_area');
+            }
+
+            $this->addFlash('success', 'Vos documents ont bien été téléchargés!');
+            return $this->redirectToRoute('member_area');
         }
 
-        return new Response('erreur');
+        return $this->render('user\addFiles.html.twig', ['form' => $form->createView()]);
+    }
+
+
+    /**
+     * @Route("download/{id}", name="download_user_files")
+     */
+    public function downloadFilesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $file = $em->getRepository(Files::class)->find($id);
+
+        return $this->file($file->getPath());
+
+    }
+
+    /**
+     * @Route("delete/{id}", name="delete_files")
+     */
+    public function deleteFilesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $file = $em->getRepository(Files::class)->find($id);
+
+        if ($file && file_exists($file->getPath())) {
+            unlink($file->getPath());
+        }
+
+        $em->remove($file);
+        $em->flush();
+
+        return $this->redirectToRoute('show_files');
+
     }
 }

@@ -5,7 +5,7 @@
         <div class="col-md-2">
             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#statut-change">
                 {{ user.isAdmin == true ? 'Administrateur' : 'Utilisateur' }}
-                 <span class="badge badge-primary bg-green">
+                <span class="badge badge-primary bg-green">
                     {% if user.statut == constant('CHAIRMAN', user) %} Président
                     {% elseif user.statut == constant('TREASURER', user) %} Trésorier
                     {% elseif user.statut == constant('SECRETARY', user) %} Secrétaire
@@ -21,7 +21,6 @@
             <a class="btn btn-light ml-5" href="{{ path('admin_users') }}">Retour</a>
         </div>
     </div>
-
 {% endblock %}
 
 {% block body %}
@@ -31,19 +30,20 @@
                 {% if user.pictureProfil %}
                     <img class="mt-4" src="/{{ user.pictureProfil }}" alt="{{ user.firstName }} {{ user.lastName }}">
                 {% else %}
-                    <img class="card-img-top" src="{{ asset('assets/images/user-icon.png') }}" alt="{{ user.firstName }}{{ user.lastName }}">
+                    <img class="card-img-top" src="{{ asset('assets/images/user-icon.png') }}"
+                         alt="{{ user.firstName }}{{ user.lastName }}">
                 {% endif %}
                 <div class="card-body text-center">
                     <h3>{{ user.firstName }} {{ user.lastName }}</h3>
                     <p class="card-text">{{ user.description }} </p>
                 </div>
                 <ul class="list-group list-group-flush text-center">
-                    <li class="list-group-item">Date de naissance : {{ user.birthDate | date('d/m/Y')}}</li>
+                    <li class="list-group-item">Date de naissance : {{ user.birthDate | date('d/m/Y') }}</li>
                     <li class="list-group-item">Adresse : {{ user.address }}, {{ user.additionalAddress }}</li>
                     <li class="list-group-item">Ville : {{ user.postalCode }} {{ user.city }}</li>
                     <li class="list-group-item">Email : {{ user.email }}</li>
                     <li class="list-group-item">Téléphone : {{ user.phoneNumber }}</li>
-                    <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y')}}</li>
+                    <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y') }}</li>
                     <li class="list-group-item">
                         {% if user.deleteAt %}
                             <a class="btn btn-warning alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
@@ -71,80 +71,24 @@
                         <h3 class="mb-1 center-text">Documents</h3>
                     </div>
                 </div>
-                {% if files %}
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header bg-green gold">Carte d'identité</div>
-                                <ul class="list-group list-group-flush">
-                                    {% if files.idCard %}
-                                        <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
+                <ul class="list-group">
+                    {% if files %}
+                        <li class="list-group-item mb-5">
+                            {% for file in files %}
+                                <div class="card mb-2">
+                                    <div class="card-header bg-green gold">{{ file.name }}</div>
+                                    <ul class="list-group list-group-flush">
+                                        <a class="btn btn-light" href="{{ path('download_user_files', {id:file.id}) }}">Télécharger
                                             <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
                                         </a>
-                                    {% else %}
-                                        <li class="list-group-item">Aucun document téléchargé</li>
-                                    {% endif %}
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
+                            {% endfor %}
                         </li>
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header bg-green gold">Licence</div>
-                                <ul class="list-group list-group-flush">
-                                    {% if files.idCard %}
-                                        <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                            <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                        </a>
-                                    {% else %}
-                                        <li class="list-group-item">Aucun document téléchargé</li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header bg-green gold">Assurance</div>
-                                <ul class="list-group list-group-flush">
-                                    {% if files.idCard %}
-                                        <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                            <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                        </a>
-                                    {% else %}
-                                        <li class="list-group-item">Aucun document téléchargé</li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header bg-green gold">Document divers</div>
-                                <ul class="list-group list-group-flush">
-                                    {% if files.idCard %}
-                                        <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                            <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                        </a>
-                                    {% else %}
-                                        <li class="list-group-item">Aucun document téléchargé</li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header bg-green gold">Document divers</div>
-                                <ul class="list-group list-group-flush">
-                                    {% if files.idCard %}
-                                        <a class="btn btn-light" href="{{ path('download_files', {idCard:true}) }}">Télécharger
-                                            <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                        </a>
-                                    {% else %}
-                                        <li class="list-group-item">Aucun document téléchargé</li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                {% endif %}
+                    {% else %}
+                        <li class="list-group-item">Aucun document téléchargé</li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
         <div class="col-md-4 offset-md-1">
@@ -175,11 +119,13 @@
 
     <!-- Modal changement statut utilisateur -->
 
-    <div class="modal fade" id="statut-change" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="statut-change" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Changer statut {{ user.firstName }} {{ user.lastName }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Changer
+                        statut {{ user.firstName }} {{ user.lastName }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

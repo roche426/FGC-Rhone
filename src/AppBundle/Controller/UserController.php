@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
+use AppBundle\Form\DocumentType;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
 use AppBundle\Manager\UserManager;
@@ -180,9 +181,6 @@ class UserController extends Controller
             }
 
             return $this->redirectToRoute('logout');
-
         }
     }
-
-
 }
