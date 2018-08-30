@@ -25,6 +25,7 @@ $(".alert-delete").click(function(e) {
 });
 
 
+
 let $collectionHolder;
 
 // setup an "add a tag" link

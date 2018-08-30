@@ -13,7 +13,11 @@
                                     <p class="card-text">{{ file.idCard }}</p>
                                     <a class="btn btn-dark bg-green"
                                        href="{{ path('download_user_files', {id:file.id}) }}">Voir votre document</a>
-                                    <a class="btn btn-danger" href="{{ path('download_user_files', {id:file.id}) }}">Supprimer</a>
+                                    <a class="btn btn-danger alert-delete" href="{{ path('delete_files', {id:file.id})}}"
+                                       data-confirm-message="Confirmez-vous la suppression du dossier ?">Supprimer</a>
+                                    <a class="alert-delete btn btn-danger" href="#"
+                                       data-confirm-message="Confirmez-vous la suppression du dossier ?">Supprimer</a>
+
                                 </div>
                             </div>
                         </div>

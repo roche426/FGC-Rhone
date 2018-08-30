@@ -129,7 +129,7 @@ class FrontController extends Controller
     /*===== SECTION DOCUMENTS PARTAGES ===== */
 
     /**
-     * @Route("/download", name="show_files")
+     * @Route("/download", name="show_shared_files")
      */
     public function showFilesAction()
     {
@@ -139,7 +139,7 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/download/{id}", name="download_files")
+     * @Route("/download/{id}", name="download_shared_files")
      */
     public function downloadFilesAction($id)
     {

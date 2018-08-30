@@ -46,63 +46,54 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="list-group">
-                        <div class="card">
-                            <div class="card-header bg-green gold">
-                                <h3 class="mb-1 center-text">Documents</h3>
-                            </div>
-                        </div>
-                        <ul class="list-group">
-                            {% if files %}
-                            <li class="list-group-item">
-                                <div class="card">
-                                    <div class="card-header bg-green gold">Carte d'identité</div>
-                                    <ul class="list-group list-group-flush">
-                                        {% if files.idCard %}
-                                            <a class="btn btn-light" href="{{ path('download_user_files', {id:app.user.id}) }}">Télécharger
-                                                <img class="ml-3" src="{{ asset('assets/images/icon-download.png') }}">
-                                            </a>
-                                        {% else %}
-                                            <li class="list-group-item">Aucun document téléchargé</li>
-                                        {% endif %}
-                                    </ul>
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="list-group">
+                            <div class="card">
+                                <div class="card-header bg-green gold">
+                                    <h3 class="mb-1 center-text">Documents</h3>
                                 </div>
-                            </li>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a class="btn btn-warning ml-5 mr-5 mt-2 mb-2" href="{{ path('add_files')
+                                    }}">Ajouter des documents</a>
+                                    <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('show_files') }}">Voir vos documents</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div class="list-group">
+                            <div class="card">
+                                <div class="card-header bg-green gold">
+                                    <h3 class="mb-1 center-text">Articles publiés</h3>
+                                </div>
+                            </div>
+                            {% if articles %}
+                                {% for article in articles %}
+                                    <a href="{{ path('blog_edit', {id:article.id}) }}"
+                                       class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{ article.title }}</h5>
+                                        </div>
+                                        <small class="text-muted">{{ article.publicationDate | date('d/m/Y') }}</small>
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <div class="list-group-item">
+                                    <h5 class="mb-1">Aucun article publié</h5>
+                                </div>
                             {% endif %}
-                            <li class="list-group-item">
-                                <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('add_files') }}">Modifier vos documents</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="list-group">
-                        <div class="card">
-                            <div class="card-header bg-green gold">
-                                <h3 class="mb-1 center-text">Articles publiés</h3>
+                            <div class="list-group-item">
+                                <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('blog_new') }}">Créer un article</a>
                             </div>
                         </div>
-                        {% if articles %}
-                            {% for article in articles %}
-                            <a href="{{ path('blog_edit', {id:article.id}) }}"
-                               class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ article.title }}</h5>
-                                </div>
-                                <small class="text-muted">{{ article.publicationDate | date('d/m/Y') }}</small>
-                            </a>
-                            {% endfor %}
-                        {% else %}
-                        <div class="list-group-item">
-                            <h5 class="mb-1">Aucun article publié</h5>
-                        </div>
-                        {% endif %}
-                        <div class="list-group-item">
-                            <a class="btn btn-dark bg-green ml-5 mr-5" href="{{ path('blog_new') }}">Créer un article</a>
-                        </div>
                     </div>
+
+
                 </div>
+
             </div>
         </div>
     </div>

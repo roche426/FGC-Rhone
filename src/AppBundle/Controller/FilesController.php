@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FilesController extends Controller
 {
     /**
-     * @Route("/show-files")
+     * @Route("/show-files", name="show_files")
      */
     public function showFilesAction()
     {
@@ -76,9 +76,28 @@ class FilesController extends Controller
     public function downloadFilesAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $files = $em->getRepository(Files::class)->find($id);
+        $file = $em->getRepository(Files::class)->find($id);
 
-        return $this->file($files->getIdCard());
+        return $this->file($file->getIdCard());
+
+    }
+
+    /**
+     * @Route("delete/{id}", name="delete_files")
+     */
+    public function deleteFilesAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $file = $em->getRepository(Files::class)->find($id);
+
+        if ($file && file_exists($file->getIdCard())) {
+            unlink($file->getIdCard());
+        }
+
+        $em->remove($file);
+        $em->flush();
+
+        return $this->redirectToRoute('show_files');
 
     }
 }
