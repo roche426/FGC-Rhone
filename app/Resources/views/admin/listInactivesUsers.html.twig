@@ -41,5 +41,8 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary mb-5 bg-green" href="{{ path('admin_users') }}">Retour</a>
+    <div class="d-flex justify-content-center mt-2">
+        <p>{{ knp_pagination_render(users) }}</p>
+    </div>
+    <a class="btn btn-primary mt-3 bg-green" href="{{ path('admin_users') }}">Retour</a>
 {% endblock %}

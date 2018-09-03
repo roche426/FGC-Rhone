@@ -116,7 +116,13 @@ class SharedFilesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $files = $em->getRepository(SharedFiles::class)->findAll();
 
-        return $this->render('admin/listSharedFiles.html.twig', ['files' => $files]);
+        $paginator  = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $files,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10));
+
+        return $this->render('admin/listSharedFiles.html.twig', ['files' => $result]);
     }
 
     /**
