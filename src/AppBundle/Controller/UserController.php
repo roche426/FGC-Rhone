@@ -5,11 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Blog;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
-use AppBundle\Form\DocumentType;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
 use AppBundle\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -122,65 +122,36 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/{role}/delete-user/{id}", defaults={"role": "admin"},
-     *     name="delete_user")
+     * @Route("/delete-user/{id}", name="delete_user")
      */
-    public function deleteUserAction($id, $role,UserManager $userManager)
+    public function deleteUserAction(User $user)
     {
-        if (!$userManager->findUser($id)->getDeleteAt()) {
+        if (!$user->getDeleteAt()) {
 
-            $userManager->deleteUser($id);
-
-            if ($role == 'admin') {
-
-                return $this->redirectToRoute('admin_users');
-            }
-
-            return $this->redirectToRoute('logout');
+            $user->setDeleteAt(new \DateTime('now'));
+            $user->setIsActive(false);
         }
 
-        elseif ($userManager->findUser($id)->getDeleteAt()) {
+        $this->getDoctrine()->getManager()->flush();
 
-            $userManager->keepUser($id);
-
-            if ($role == 'admin') {
-
-                return $this->redirectToRoute('admin_users_inactives');
-            }
-
-            return $this->redirectToRoute('logout');
-        }
+        return $this->redirectToRoute('logout');
     }
+
 
     /**
-     * @Route("/{role}/disable-user/{id}", defaults={"role": "admin"},
-     *     name="disable_user")
-     *
+     * @Route("/disable-user/{id}", name="disable_user")
      */
-    public function disableUserAction($id, $role, UserManager $userManager)
+    public function disableUserAction(User $user)
     {
-        if (!$userManager->findUser($id)->getDisableAt()) {
+        if (!$user->getDeleteAt()) {
 
-            $userManager->disableUser($id);
-
-            if ($role === 'admin') {
-
-                return $this->redirectToRoute('admin_users');
-            }
-
-            return $this->redirectToRoute('logout');
+            $user->setDisableAt(new \DateTime('now'));
+            $user->setIsActive(false);
         }
 
-        elseif ($userManager->findUser($id)->getDisableAt()) {
+        $this->getDoctrine()->getManager()->flush();
 
-            $userManager->reactiveUser($id);
-
-            if ($role === 'admin') {
-
-                return $this->redirectToRoute('admin_users_inactives');
-            }
-
-            return $this->redirectToRoute('logout');
-        }
+        return $this->redirectToRoute('logout');
     }
+
 }

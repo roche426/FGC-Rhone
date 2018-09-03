@@ -1,3 +1,5 @@
+
+/* Bootbox confirmation avant exécution action */
 $(".alert-delete").click(function(e) {
     e.preventDefault();
 
@@ -25,7 +27,7 @@ $(".alert-delete").click(function(e) {
 });
 
 
-
+/* Ajout dynamique de fichier utilisateur */
 let $collectionHolder;
 
 // setup an "add a tag" link
@@ -94,3 +96,17 @@ function addTagFormDeleteLink($tagFormLi) {
         $tagFormLi.remove();
     });
 }
+
+/* AJAX exécuter action dynamiquement */
+$(function () {
+    $('[data-btn="test"]').on('click', function(e) {
+        e.preventDefault();
+        let $link = $(this);
+        $.get($link.attr('href'), function (datas) {
+            console.log($link.attr('href'));
+            let text = datas.is_paid ? 'Oui' : 'Non';
+            $link.find('a').toggleClass('btn-primary btn-danger').text(text);
+        });
+        return false;
+    });
+});
