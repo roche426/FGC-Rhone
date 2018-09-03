@@ -97,16 +97,16 @@ function addTagFormDeleteLink($tagFormLi) {
     });
 }
 
-/* AJAX exécuter action dynamiquement
+/* AJAX exécuter action dynamiquement */
 $(function () {
-    $('[data-btn="test"]').on('click', function(e) {
+    $('[data-btn="archived"]').on('click', function(e) {
         e.preventDefault();
         let $link = $(this);
         $.get($link.attr('href'), function (datas) {
-            let text = datas.is_disable ? 'Réactiver' : 'Désactiver';
-            $link.find('button').toggleClass('btn-success btn-warning').text(text);
+            let text = datas.is_archived ? 'Désarchiver' : 'Archiver';
+            console.log(datas.is_archived)
+            $('#archived').toggleClass('btn-primary btn-danger').text(text);
         });
         return false;
     });
-});*/
-
+});

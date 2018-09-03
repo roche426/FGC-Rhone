@@ -78,6 +78,12 @@ class ContactUs
      */
     private $isTreated;
 
+    /**
+     * @var bool
+     * @ORM\Column(name="is_archived", type="boolean")
+     */
+    private $isArchived = false;
+
 
     /**
      * @return mixed
@@ -230,6 +236,22 @@ class ContactUs
     public function setIsTreated($isTreated)
     {
         $this->isTreated = $isTreated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isArchived()
+    {
+        return $this->isArchived;
+    }
+
+    /**
+     * @param bool $isArchived
+     */
+    public function setIsArchived($isArchived)
+    {
+        $this->isArchived = $isArchived;
     }
 
 

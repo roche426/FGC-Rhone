@@ -19,7 +19,8 @@
             </thead>
             <tbody class="bg-light">
             {% for messageContactUs in messagesContactUs %}
-                <tr {% if messageContactUs.isTreated %} style="background-color: lightgrey" {% endif %}>
+                <tr {% if messageContactUs.isArchived %} style="background-color: lightgreen"
+                    {% elseif messageContactUs.isTreated %} style="background-color: lightgrey" {% endif %}>
                     <td class="text-center">{{ messageContactUs.date |date('d/m/Y')}} </td>
                     <td class="text-center">{{ messageContactUs.firstName }} {{ messageContactUs.lastName }}</td>
                     <td class="text-center">{{ messageContactUs.email }}</td>
@@ -36,7 +37,7 @@
                         <a class="btn btn-primary bg-green" href="{{ path('show_one_message', {id:messageContactUs.id})
                         }}">Accèder au message</a>
                     </td>
-                </tr>
+                </>
             {% endfor %}
             </tbody>
         </table>

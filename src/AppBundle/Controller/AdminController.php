@@ -284,5 +284,22 @@ class AdminController extends Controller
 
     }
 
+    /**
+     * @Route("/messages/archived/{id}", name="message_archived")
+     */
+    public function archivedMessageAction(Request $request,ContactUs $contactUs)
+    {
+        $contactUs->isArchived() ? $contactUs->setIsArchived(false) : $contactUs->setIsArchived(true);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'is_archived' => $contactUs->isArchived()
+            ]);
+        }
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
+    }
 
 }
