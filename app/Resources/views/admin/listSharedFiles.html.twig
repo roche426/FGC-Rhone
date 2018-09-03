@@ -53,5 +53,8 @@
         {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-primary bg-green mb-5" href="{{ path('admin_add_files') }}">Ajouter un document</a>
+        <div class="d-flex justify-content-center mt-2">
+            <p>{{ knp_pagination_render(files) }}</p>
+        </div>
+        <a class="btn btn-primary bg-green mt-3" href="{{ path('admin_add_files') }}">Ajouter un document</a>
 {% endblock %}

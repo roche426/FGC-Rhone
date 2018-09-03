@@ -38,23 +38,35 @@ class AdminController extends Controller
     /**
      * @Route("/users", name="admin_users")
      */
-    public function listUsersAction()
+    public function listUsersAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(User::class);
         $users = $em->findActivesUsers();
 
-        return $this->render('admin/listUsers.html.twig', ['users' => $users]);
+        $paginator  = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10));
+
+        return $this->render('admin/listUsers.html.twig', ['users' => $result]);
     }
 
     /**
      * @Route("/users/inactives", name="admin_users_inactives")
      */
-    public function listInactivesUsersAction()
+    public function listInactivesUsersAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(User::class);
         $users = $em->findInactivesUsers();
 
-        return $this->render('admin/listInactivesUsers.html.twig', ['users' => $users]);
+        $paginator  = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10));
+
+        return $this->render('admin/listInactivesUsers.html.twig', ['users' => $result]);
     }
 
     /**
@@ -142,12 +154,18 @@ class AdminController extends Controller
     /**
      * @Route("/articles", name="admin_articles")
      */
-    public function listArticlesAction()
+    public function listArticlesAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(Blog::class);
         $articles = $em->findAll();
 
-        return $this->render('admin/listArticles.html.twig', ['articles' => $articles]);
+        $paginator  = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10));
+
+        return $this->render('admin/listArticles.html.twig', ['articles' => $result]);
     }
 
     /**
@@ -198,13 +216,20 @@ class AdminController extends Controller
     /**
      * @Route("/messages", name="admin_show_messages")
      */
-    public function listMessagesAction()
+    public function listMessagesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $messagesContactUs = $em->getRepository(ContactUs::class)->findAll();
 
+        $paginator  = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $messagesContactUs,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10));
+
+
         return $this->render('admin/listMessages.html.twig', [
-            'messagesContactUs' => $messagesContactUs,
+            'messagesContactUs' => $result,
         ]);
     }
 

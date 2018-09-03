@@ -39,6 +39,9 @@
         {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-primary mt-5 bg-green" href="{{ path('registration') }}">Ajouter un membre</a>
-        <a class="btn btn-danger mt-5" href="{{ path('admin_users_inactives') }}">Liste membres inactifs</a>
+        <div class="d-flex justify-content-center mt-2">
+            <p>{{ knp_pagination_render(users) }}</p>
+        </div>
+        <a class="btn btn-primary mt-2 bg-green" href="{{ path('registration') }}">Ajouter un membre</a>
+        <a class="btn btn-danger mt-2" href="{{ path('admin_users_inactives') }}">Liste membres inactifs</a>
 {% endblock %}

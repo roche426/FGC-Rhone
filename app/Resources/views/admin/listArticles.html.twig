@@ -35,6 +35,9 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary bg-green mb-5" href="{{ path('blog_new', {admin:true}) }}">Ajouter un article</a>
+    <div class="d-flex justify-content-center mt-2">
+        <p>{{ knp_pagination_render(articles) }}</p>
+    </div>
+    <a class="btn btn-primary bg-green mt-3" href="{{ path('blog_new', {admin:true}) }}">Ajouter un article</a>
 
 {% endblock %}
