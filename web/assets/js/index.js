@@ -97,16 +97,16 @@ function addTagFormDeleteLink($tagFormLi) {
     });
 }
 
-/* AJAX exécuter action dynamiquement */
+/* AJAX exécuter action dynamiquement
 $(function () {
     $('[data-btn="test"]').on('click', function(e) {
         e.preventDefault();
         let $link = $(this);
         $.get($link.attr('href'), function (datas) {
-            console.log($link.attr('href'));
-            let text = datas.is_paid ? 'Oui' : 'Non';
-            $link.find('a').toggleClass('btn-primary btn-danger').text(text);
+            let text = datas.is_disable ? 'Réactiver' : 'Désactiver';
+            $link.find('button').toggleClass('btn-success btn-warning').text(text);
         });
         return false;
     });
-});
+});*/
+

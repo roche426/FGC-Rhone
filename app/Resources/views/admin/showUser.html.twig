@@ -46,14 +46,12 @@
                     <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y') }}</li>
                     <li class="list-group-item">
                         <a class="btn alert-delete {{ user.deleteAt ? "btn-success" : "btn-danger" }}"
-                           href="{{ path('admin_delete_user', {id:user.id}) }}">{{ user.deleteAt ? "Annuler
-                           suppression" :
-                            "Supprimer" }}</a>
+                           href="{{ path('admin_delete_user', {id:user.id}) }}">{{ user.deleteAt ? "Annuler suppression" : "Supprimer" }}</a>
 
                         {% if user.deleteAt is null %}
-                        <a class="btn alert-delete {{ user.disableAt ? "btn-success" : "btn-warning" }}"
-                           href="{{ path('admin_disable_user', {id:user.id}) }}">{{ user.disableAt ? "Réactiver" :
-                            "Désactiver" }}</a>
+                        <a class="btn alert-delete {{  user.disableAt ? "btn-success" : "btn-warning" }} }}"
+                           href="{{ path('admin_disable_user', {id:user.id}) }}"> {{ user.disableAt ? "Réactiver" : "Désactiver" }}
+                        </a>
                         {% endif %}
                     </li>
                 </ul>
