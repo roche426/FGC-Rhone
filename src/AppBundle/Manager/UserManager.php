@@ -32,14 +32,9 @@ class UserManager
                     unlink('web/' . $user[$k]->getPictureProfil());
                 }
 
-                if ($user[$k]->getFiles()) {
-                    if ($user[$k]->getFiles()->getIdCard()) {
-                        unlink($user[$k]->getFiles()->getIdCard());
-                    }
-                }
-
                 $comments = $user[$k]->getComments();
                 $articles = $user[$k]->getArticles();
+                $files = $user[$k]->getFiles();
 
                 if ($comments) {
                     foreach ($articles as $article) {
@@ -50,6 +45,12 @@ class UserManager
                 if ($articles) {
                     foreach ($comments as $comment) {
                         $comment->setUser(null);
+                    }
+                }
+
+                if ($files) {
+                    foreach ($files as $file) {
+                        unlink($file->getPath());
                     }
                 }
 

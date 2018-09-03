@@ -22,7 +22,7 @@ class Files
 
     /**
      * @var string
-     * @ORM\Column(name="id_card", type="string")
+     * @ORM\Column(name="path", type="string")
      */
     private $path;
 
