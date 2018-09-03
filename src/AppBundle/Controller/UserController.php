@@ -80,12 +80,6 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        if (!$em->getRepository(Files::class)->findOneBy(['user' => $user])) {
-            $files = new Files();
-            $files->setUser($user);
-            $em->persist($files);
-        }
-
         $currentPicture = $this->getUser()->getPictureProfil();
 
         $editform = $this->createForm(ProfilEditionType::class, $user);
