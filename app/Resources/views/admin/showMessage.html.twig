@@ -24,6 +24,7 @@
                     <li class="list-group-item">Message : {{ message.message }}</li>
                 </ul>
             </div>
+            {% if message.subject == constant('CONTACT_MEMBERS_ACCES', message) %}
             <form action="{{ path('registration') }}" method="post">
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="firstName" value="{{ message.firstName }}">
@@ -37,10 +38,12 @@
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="id" value="{{ message.id }}">
                 </div>
-                {% if message.subject == constant('CONTACT_MEMBERS_ACCES', message) %}
                     <button type="submit" class="btn btn-primary">Créer un accès membre</button>
-                {% endif %}
             </form>
+            {% endif %}
+            <a data-btn="archived" id="archived" class="btn {{ message.isArchived ? "btn-danger" : "btn-primary" }} mt-5"
+               href="{{ path ('message_archived', {id:message.id}) }}">{{ message.isArchived ? "Désarchiver" : "Archiver" }}
+            </a>
         </div>
         <div class="col-md-6">
             {% if message.response or message.isTreated %}

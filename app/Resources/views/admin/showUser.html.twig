@@ -45,21 +45,14 @@
                     <li class="list-group-item">Téléphone : {{ user.phoneNumber }}</li>
                     <li class="list-group-item">Inscription le : {{ user.registrationDate |date('d/m/Y') }}</li>
                     <li class="list-group-item">
-                        {% if user.deleteAt %}
-                            <a class="btn btn-warning alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
-                               data-confirm-message="Annuler la suppression de l'utilisateur?">Annuler suppression</a>
-                        {% else %}
-                            <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {id:user.id}) }}"
-                               data-confirm-message="Confirmer la suppression de l'utilisateur?">Supprimer</a>
-                            {% if user.disableAt %}
-                                <a class="btn btn-success alert-delete" href="{{ path('disable_user', {id:user.id}) }}"
-                                   data-confirm-message="Confirmer la réactivation de l'utilisateur?">Réactiver</a>
-                            {% else %}
-                                <a class="btn btn-warning alert-delete" href="{{ path('disable_user', {id:user.id}) }}"
-                                   data-confirm-message="Confirmer la désactivation de l'utilisateur?">Désactiver</a>
-                            {% endif %}
-                        {% endif %}
+                        <a class="btn alert-delete {{ user.deleteAt ? "btn-success" : "btn-danger" }}"
+                           href="{{ path('admin_delete_user', {id:user.id}) }}">{{ user.deleteAt ? "Annuler suppression" : "Supprimer" }}</a>
 
+                        {% if user.deleteAt is null %}
+                        <a class="btn alert-delete {{  user.disableAt ? "btn-success" : "btn-warning" }} }}"
+                           href="{{ path('admin_disable_user', {id:user.id}) }}"> {{ user.disableAt ? "Réactiver" : "Désactiver" }}
+                        </a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

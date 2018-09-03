@@ -68,9 +68,9 @@
                 </div>
             </div>
             <div class="mb-3">
-                <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {role:'user', id:app.user.id}) }}"
+                <a class="btn btn-danger alert-delete" href="{{ path('delete_user', {id:app.user.id}) }}"
                    data-confirm-message="Confirmez-vous la suppression définitive de votre compte ?" >Supprimer compte</a>
-                <a class="btn btn-warning alert-delete" href="{{ path('disable_user', {role:'user', id:app.user.id}) }}"
+                <a class="btn btn-warning alert-delete" href="{{ path('disable_user', {id:app.user.id}) }}"
                    data-confirm-message="Confirmez-vous la désactivation de votre compte ?">Désactiver compte</a>
             </div>
         </div>

@@ -20,6 +20,7 @@ class ContactUsRepository extends EntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.isTreated is NOT NULL' )
+            ->andWhere('c.isArchived = false' )
             ->getQuery()
             ->getResult();
     }

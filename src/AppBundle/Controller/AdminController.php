@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -93,6 +94,47 @@ class AdminController extends Controller
             'articles' => $articles,
             'files' => $files,
             'editForm' => $editForm->createView()]);
+    }
+
+    /**
+     * @Route("/disable/{id}", name="admin_disable_user")
+     */
+    public function disableUserAction($id, User $user, Request $request)
+    {
+        if ($user->getDisableAt()) {
+            $user->setDisableAt(null);
+            $user->setIsActive(true);
+        }
+
+        else {
+            $user->setDisableAt(new \DateTime('now'));
+            $user->setIsActive(false);
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
+    }
+
+
+    /**
+     * @Route("/delete/{id}", name="admin_delete_user")
+     */
+    public function deleteUserAction(User $user, Request $request)
+    {
+        if ($user->getDeleteAt()) {
+            $user->setDisableAt(new \DateTime('now'));
+            $user->setDeleteAt(null);
+        }
+
+        else {
+            $user->setDeleteAt(new \DateTime('now'));
+            $user->setIsActive(false);
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
 
@@ -242,5 +284,22 @@ class AdminController extends Controller
 
     }
 
+    /**
+     * @Route("/messages/archived/{id}", name="message_archived")
+     */
+    public function archivedMessageAction(Request $request,ContactUs $contactUs)
+    {
+        $contactUs->isArchived() ? $contactUs->setIsArchived(false) : $contactUs->setIsArchived(true);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'is_archived' => $contactUs->isArchived()
+            ]);
+        }
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
+    }
 
 }
