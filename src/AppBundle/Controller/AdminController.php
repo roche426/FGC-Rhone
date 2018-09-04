@@ -41,7 +41,16 @@ class AdminController extends Controller
     public function listUsersAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(User::class);
-        $users = $em->findActivesUsers();
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $users = $em->filterUsers($search);
+        }
+        else {
+            $users = $em->findActivesUsers();
+        }
+
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
@@ -49,7 +58,9 @@ class AdminController extends Controller
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 10));
 
-        return $this->render('admin/listUsers.html.twig', ['users' => $result]);
+        return $this->render('admin/listUsers.html.twig', array(
+            'users' => $result,
+            'search' => $search));
     }
 
     /**
