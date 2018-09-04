@@ -15,9 +15,9 @@
                 <th scope="col" class="text-center">Nom du fichier</th>
                 <th scope="col" class="text-center">Sujet</th>
                 <th scope="col" class="text-center">Description</th>
-                <th scope="col" class="text-center">Droit d'accès</th>
-                <th scope="col" class="text-center">Fichier partagé?</th>
-                <th scope="col" class="text-center">Date de téléchargement</th>
+                <th scope="col" class="text-center">{{ knp_pagination_sortable(files, 'Droit d\'accès', 'fileAccess') }}</th>
+                <th scope="col" class="text-center">{{ knp_pagination_sortable(files, 'Fichier partagé?', 'isShared') }}</th>
+                <th scope="col" class="text-center">{{ knp_pagination_sortable(files, 'Date de téléchargemen', 'dateUpload') }}</th>
                 <th scope="col" class="text-center">Action</th>
             </tr>
             </thead>

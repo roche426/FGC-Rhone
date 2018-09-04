@@ -14,12 +14,12 @@
         <tr>
             <th scope="col" class="text-center">Prénom</th>
             <th scope="col" class="text-center">Nom</th>
-            <th scope="col" class="text-center">Date de naissance</th>
+            <th scope="col" class="text-center">{{ knp_pagination_sortable(users, 'Date de naissance', 'birthDate') }}</th>
             <th scope="col" class="text-center">Email</th>
             <th scope="col" class="text-center">Téléphone</th>
             <th scope="col" class="text-center">Adresse</th>
             <th scope="col" class="text-center">Ville</th>
-            <th scope="col" class="text-center">Désactivé le</th>
+            <th scope="col" class="text-center">{{ knp_pagination_sortable(users, 'Désactivé le', 'disableAt') }}</th>
             <th scope="col" class="text-center">Action</th>
         </tr>
         </thead>
