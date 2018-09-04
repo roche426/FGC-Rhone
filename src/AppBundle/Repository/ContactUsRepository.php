@@ -24,4 +24,20 @@ class ContactUsRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function filterMessages($search)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('
+                c.firstName LIKE :search OR
+                c.lastName LIKE :search OR
+                c.email LIKE :search OR
+                c.register LIKE :search OR
+                c.message LIKE :search OR
+                c.subject LIKE :search
+                ')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

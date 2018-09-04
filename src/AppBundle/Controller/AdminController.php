@@ -251,18 +251,28 @@ class AdminController extends Controller
      */
     public function listMessagesAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $messagesContactUs = $em->getRepository(ContactUs::class)->findAll();
+        $em = $this->getDoctrine()->getRepository(ContactUs::class);
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $messagesContactUs = $em->filterMessages($search);
+        }
+
+        else {
+            $messagesContactUs = $em->findAll();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $messagesContactUs,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
 
         return $this->render('admin/listMessages.html.twig', [
             'messagesContactUs' => $result,
+            'search' => $search,
         ]);
     }
 
