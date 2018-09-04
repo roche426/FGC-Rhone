@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block body %}
+        <div class="row mb-3">
+            <form class="form-inline" action="{{ path('admin_show_messages') }}" method="get">
+                {% include('admin/filter.html.twig') %}
+
         <table class="table">
             <thead class="bg-green gold ">
             <tr>
-                <th scope="col" class="text-center">Date</th>
+                <th scope="col" class="text-center">{{ knp_pagination_sortable(messagesContactUs, 'Date', 'date') }}</th>
                 <th scope="col" class="text-center">Autheur</th>
                 <th scope="col" class="text-center">Email</th>
                 <th scope="col" class="text-center">Matricule</th>

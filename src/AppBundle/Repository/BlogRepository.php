@@ -26,4 +26,18 @@ class BlogRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function filterArticles($search)
+    {
+        return $this->createQueryBuilder('b')
+            ->join('b.user', 'u')
+            ->andWhere('
+                b.title LIKE :search OR
+                u.firstname LIKE :search OR
+                u.lastname LIKE :search
+                ')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

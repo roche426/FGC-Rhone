@@ -41,15 +41,26 @@ class AdminController extends Controller
     public function listUsersAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(User::class);
-        $users = $em->findActivesUsers();
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $users = $em->filterUsers($search);
+        }
+
+        else {
+            $users = $em->findActivesUsers();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $users,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
-        return $this->render('admin/listUsers.html.twig', ['users' => $result]);
+        return $this->render('admin/listUsers.html.twig', array(
+            'users' => $result,
+            'search' => $search));
     }
 
     /**
@@ -58,15 +69,25 @@ class AdminController extends Controller
     public function listInactivesUsersAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(User::class);
-        $users = $em->findInactivesUsers();
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $users = $em->filterInactivesUsers($search);
+        }
+        else {
+            $users = $em->findInactivesUsers();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $users,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
-        return $this->render('admin/listInactivesUsers.html.twig', ['users' => $result]);
+        return $this->render('admin/listInactivesUsers.html.twig', array(
+            'users' => $result,
+            'search' => $search));
     }
 
     /**
@@ -157,15 +178,27 @@ class AdminController extends Controller
     public function listArticlesAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(Blog::class);
-        $articles = $em->findAll();
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $articles = $em->filterArticles($search);
+        }
+
+        else {
+            $articles = $em->findAll();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $articles,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
-        return $this->render('admin/listArticles.html.twig', ['articles' => $result]);
+        return $this->render('admin/listArticles.html.twig', array(
+            'articles' => $result,
+            'search' => $search
+        ));
     }
 
     /**
@@ -218,18 +251,28 @@ class AdminController extends Controller
      */
     public function listMessagesAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $messagesContactUs = $em->getRepository(ContactUs::class)->findAll();
+        $em = $this->getDoctrine()->getRepository(ContactUs::class);
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $messagesContactUs = $em->filterMessages($search);
+        }
+
+        else {
+            $messagesContactUs = $em->findAll();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $messagesContactUs,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
 
         return $this->render('admin/listMessages.html.twig', [
             'messagesContactUs' => $result,
+            'search' => $search,
         ]);
     }
 

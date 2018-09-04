@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block body %}
+    <div class="row mb-3">
+        <form class="form-inline" action="{{ path('admin_articles') }}" method="get">
+            {% include('admin/filter.html.twig') %}
 
     <table class="table">
         <thead class="bg-green gold ">
             <tr>
-                <th class="text-center">Membre</th>
+                <th class="text-center">{{ knp_pagination_sortable(articles, 'Membre', 'user') }}</th>
                 <th class="text-center">Titre</th>
-                <th class="text-center">Date de publication</th>
+                <th class="text-center">{{ knp_pagination_sortable(articles, 'Date', 'publicationDate') }}</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>

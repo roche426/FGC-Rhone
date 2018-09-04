@@ -5,17 +5,21 @@
 {% endblock %}
 
 {% block body %}
+        <div class="row mb-3">
+            <form class="form-inline" action="{{ path('admin_users') }}" method="get">
+            {% include('admin/filter.html.twig') %}
+
         <table class="table" align="center">
             <thead class="bg-green gold ">
             <tr>
                 <th scope="col" class="text-center">Prénom</th>
                 <th scope="col" class="text-center">Nom</th>
-                <th scope="col" class="text-center">Date de naissance</th>
+                <th scope="col" class="text-center">{{ knp_pagination_sortable(users, 'Date de naissance', 'birthDate') }}</th>
                 <th scope="col" class="text-center">Email</th>
                 <th scope="col" class="text-center">Téléphone</th>
                 <th scope="col" class="text-center">Adresse</th>
                 <th scope="col" class="text-center">Ville</th>
-                <th scope="col" class="text-center">Inscription le</th>
+                <th scope="col" class="text-center">{{ knp_pagination_sortable(users, 'Inscription le', 'registrationDate') }}</th>
                 <th scope="col" class="text-center">Action</th>
             </tr>
             </thead>
@@ -44,4 +48,7 @@
         </div>
         <a class="btn btn-primary mt-2 bg-green" href="{{ path('registration') }}">Ajouter un membre</a>
         <a class="btn btn-danger mt-2" href="{{ path('admin_users_inactives') }}">Liste membres inactifs</a>
+
+
+
 {% endblock %}

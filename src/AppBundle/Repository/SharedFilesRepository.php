@@ -13,4 +13,17 @@ class SharedFilesRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function filterFiles($search)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('
+                s.nameFile LIKE :search OR
+                s.description LIKE :search OR
+                s.subject LIKE :search
+                ')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }
