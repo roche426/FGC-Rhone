@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-        <div class="row">
+        <div class="row mb-3">
             <form class="form-inline" action="{{ path('admin_users') }}" method="get">
             {% include('admin/filter.html.twig') %}
 
-        <table class="table mt-3" align="center">
+        <table class="table" align="center">
             <thead class="bg-green gold ">
             <tr>
                 <th scope="col" class="text-center">Prénom</th>
