@@ -48,7 +48,8 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     {
 
         return $this->createQueryBuilder('u')
-            ->where('
+            ->andHaving('u.deleteAt is NULL')
+            ->andWhere('
                 u.firstname LIKE :search OR
                 u.lastname LIKE :search OR
                 u.postalCode LIKE :search OR

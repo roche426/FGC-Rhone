@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -47,16 +48,16 @@ class AdminController extends Controller
             $search = $request->query->get('search');
             $users = $em->filterUsers($search);
         }
+
         else {
             $users = $em->findActivesUsers();
         }
-
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $users,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
         return $this->render('admin/listUsers.html.twig', array(
             'users' => $result,
