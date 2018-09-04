@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    <div class="row">
+        <form class="form-inline" action="{{ path('admin_articles') }}" method="get">
+            {% include('admin/filter.html.twig') %}
 
     <table class="table">
         <thead class="bg-green gold ">

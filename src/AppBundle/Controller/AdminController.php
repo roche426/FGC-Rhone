@@ -14,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -179,15 +178,27 @@ class AdminController extends Controller
     public function listArticlesAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(Blog::class);
-        $articles = $em->findAll();
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $articles = $em->filterArticles($search);
+        }
+
+        else {
+            $articles = $em->findAll();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $articles,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
-        return $this->render('admin/listArticles.html.twig', ['articles' => $result]);
+        return $this->render('admin/listArticles.html.twig', array(
+            'articles' => $result,
+            'search' => $search
+        ));
     }
 
     /**
