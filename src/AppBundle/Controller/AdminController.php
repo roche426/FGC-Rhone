@@ -70,15 +70,25 @@ class AdminController extends Controller
     public function listInactivesUsersAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(User::class);
-        $users = $em->findInactivesUsers();
+        $search = null;
+
+        if ($request->query->get('search')) {
+            $search = $request->query->get('search');
+            $users = $em->filterInactivesUsers($search);
+        }
+        else {
+            $users = $em->findInactivesUsers();
+        }
 
         $paginator  = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $users,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10));
+            $request->query->getInt('limit', 7));
 
-        return $this->render('admin/listInactivesUsers.html.twig', ['users' => $result]);
+        return $this->render('admin/listInactivesUsers.html.twig', array(
+            'users' => $result,
+            'search' => $search));
     }
 
     /**

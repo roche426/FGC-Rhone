@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
+    <div class="row">
+        <form class="form-inline" action="{{ path('admin_users_inactives') }}" method="get">
+        {% include('admin/filter.html.twig') %}
+
     <table class="table" align="center">
         <thead class="bg-green gold ">
         <tr>

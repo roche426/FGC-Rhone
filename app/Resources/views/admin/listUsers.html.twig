@@ -7,14 +7,8 @@
 {% block body %}
         <div class="row">
             <form class="form-inline" action="{{ path('admin_users') }}" method="get">
-                <div class="form-group mx-sm-3 mb-2">
-                    <label for="search" class="sr-only">Password</label>
-                    <input class="form-control" type="text" name="search" id="txtName" placeholder="Votre recherche">
-                </div>
-                <button type="submit" id="search" class="btn btn-primary bg-green mb-2">Filtrer</button>
-            </form>
-            {% if search is not null %} <h5 class="mt-2 ml-5">Les résultats de la recherche '{{ search }}'</h5> {% endif %}
-        </div>
+            {% include('admin/filter.html.twig') %}
+
         <table class="table mt-3" align="center">
             <thead class="bg-green gold ">
             <tr>
