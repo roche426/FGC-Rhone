@@ -18,7 +18,7 @@
 
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="alert alert-{{ label }}" role="alert">
+                <div class="alert alert-{{ label }}" role="alert" align="center">
                     {% if label == "success" %}
                         <i class="far fa-check-circle"></i> {{ message|raw }}
                     {% elseif label == "warning" %}

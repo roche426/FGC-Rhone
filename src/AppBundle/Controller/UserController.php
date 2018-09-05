@@ -48,9 +48,6 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $files = new Files();
-            $files->setUser($this->getUser());
-
             if ($form['pictureProfil']->getdata()) {
                 $pictureProfil = $user->getPictureProfil();
 
@@ -63,9 +60,9 @@ class UserController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->persist($files);
             $em->flush();
 
+            $this->addFlash('success', 'Votre profil a bien été modifié');
             return $this->redirectToRoute('member_area');
         }
 
@@ -108,6 +105,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', 'Votre profil a bien été modifié');
             return $this->redirectToRoute('member_area');
         }
 
@@ -128,6 +126,7 @@ class UserController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
+        $this->addFlash('success', 'Votre compte a bien été supprimé');
         return $this->redirectToRoute('logout');
     }
 
@@ -145,6 +144,7 @@ class UserController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
+        $this->addFlash('success', 'Votre compte a bien été désactivé. Pour le réactiver, veuillez nous faire une demande par mail');
         return $this->redirectToRoute('logout');
     }
 

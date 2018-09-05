@@ -48,6 +48,7 @@ class ImageController extends Controller
                 }
             }
 
+            $this->addFlash('success', 'Vos images ont bien été enregistrées');
             return $this->redirectToRoute('show_gallery');
         }
 

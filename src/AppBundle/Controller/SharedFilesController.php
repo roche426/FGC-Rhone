@@ -47,6 +47,7 @@ class SharedFilesController extends Controller
             $em->persist($files);
             $em->flush();
 
+            $this->addFlash('success', 'Votre document a bien été enregistré');
             return $this->redirectToRoute('admin_home');
         }
 
@@ -101,6 +102,7 @@ class SharedFilesController extends Controller
             $em->persist($files);
             $em->flush();
 
+            $this->addFlash('success', 'Votre document a bien été modifié');
             return $this->redirectToRoute('admin_show_files');
         }
 
@@ -162,6 +164,7 @@ class SharedFilesController extends Controller
             $em->remove($files);
             $em->flush();
 
+            $this->addFlash('success', 'Votre document a bien été supprimé');
             return $this->redirectToRoute('admin_show_files');
         }
 
