@@ -11,7 +11,7 @@ class ContactUsRepository extends EntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.isTreated is NULL' )
             ->orderBy('c.date', 'DESC' )
-            ->setMaxResults(7)
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult();
     }

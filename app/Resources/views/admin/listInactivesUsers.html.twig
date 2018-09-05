@@ -8,7 +8,9 @@
     <div class="row mb-3">
         <form class="form-inline" action="{{ path('admin_users_inactives') }}" method="get">
         {% include('admin/filter.html.twig') %}
-
+        {% if search is not null %}
+            <a class="ml-3 mt-1" href="{{ path('admin_users_inactives') }}"><img src="{{ asset('assets/images/refresh.png') }}"></a>
+        {% endif %}
     <table class="table" align="center">
         <thead class="bg-green gold ">
         <tr>
