@@ -121,6 +121,7 @@ class UserController extends Controller
         if (!$user->getDeleteAt()) {
 
             $user->setDeleteAt(new \DateTime('now'));
+            $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
         }
 

@@ -163,6 +163,7 @@ class AdminController extends Controller
 
         else {
             $user->setDeleteAt(new \DateTime('now'));
+            $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
         }
 
