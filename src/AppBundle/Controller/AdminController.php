@@ -132,7 +132,7 @@ class AdminController extends Controller
     /**
      * @Route("/disable/{id}", name="admin_disable_user")
      */
-    public function disableUserAction($id, User $user, Request $request)
+    public function disableUserAction(User $user, Request $request)
     {
         if ($user->getDisableAt()) {
             $user->setDisableAt(null);
@@ -146,6 +146,7 @@ class AdminController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
+        $this->addFlash('success', 'L\'utilisateur a bien été désactivé');
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
@@ -162,11 +163,13 @@ class AdminController extends Controller
 
         else {
             $user->setDeleteAt(new \DateTime('now'));
+            $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
         }
 
         $this->getDoctrine()->getManager()->flush();
 
+        $this->addFlash('success', 'L\utilisateur a bien été supprimé');
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
@@ -227,6 +230,7 @@ class AdminController extends Controller
         $em->remove($comment);
         $em->flush();
 
+        $this->addFlash('success', 'Le commentaire a bien été supprimé');
         return $this->redirectToRoute('admin_articles');
     }
 
@@ -241,6 +245,7 @@ class AdminController extends Controller
         $em->remove($article);
         $em->flush();
 
+        $this->addFlash('success', 'Votre article a bien été supprimé');
         return $this->redirectToRoute('admin_articles');
     }
 
@@ -311,8 +316,10 @@ class AdminController extends Controller
             $message->setResponse($responseContact);
             $em->persist($message);
             $em->flush();
-            //ajouter envoi mail + flash message
 
+            //ajouter envoi mail
+
+            $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('message_treated', ['id' => $id]);
         }
 
@@ -333,6 +340,7 @@ class AdminController extends Controller
         $em->remove($message);
         $em->flush();
 
+        $this->addFlash('success', 'Votre message a bien été supprimé');
         return $this->redirectToRoute('admin_home');
     }
 
@@ -348,6 +356,7 @@ class AdminController extends Controller
         $em->persist($message);
         $em->flush();
 
+        $this->addFlash('success', 'Votre message a bien été traité');
         return $this->redirectToRoute('admin_show_messages');
 
     }

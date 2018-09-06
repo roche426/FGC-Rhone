@@ -39,6 +39,7 @@ class BlogController extends Controller
             $em->persist($blog);
             $em->flush();
 
+            $this->addFlash('success', 'Votre article a bien été modifié');
             return $this->redirectToRoute('blog_home');
         }
 
@@ -64,6 +65,7 @@ class BlogController extends Controller
             $em->persist($blog);
             $em->flush();
 
+            $this->addFlash('success', 'Votre article a bien été créé');
             return $this->redirectToRoute('blog_home');
         }
 
@@ -82,6 +84,7 @@ class BlogController extends Controller
         $em->remove($blog);
         $em->flush();
 
+        $this->addFlash('success', 'Votre article a bien été supprimé');
         return $this->redirectToRoute('blog_home');
     }
 

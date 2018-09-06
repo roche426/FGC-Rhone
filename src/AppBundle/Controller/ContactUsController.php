@@ -30,6 +30,7 @@ class ContactUsController extends Controller
             $em->persist($contact);
             $em->flush();
 
+            $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('home_page');
         }
 

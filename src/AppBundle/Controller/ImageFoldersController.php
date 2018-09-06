@@ -55,6 +55,7 @@ class ImageFoldersController extends Controller
 
             $folderId = $folder->getId();
 
+            $this->addFlash('success', 'Votre galerie a bien été créée');
             return $this->redirectToRoute('add_images', ['id' => $folderId]);
         }
 
@@ -94,6 +95,7 @@ class ImageFoldersController extends Controller
         $em->remove($folder);
         $em->flush();
 
+        $this->addFlash('success', 'Votre galerie a bien été supprimée');
         return $this->redirectToRoute('show_gallery');
 
     }

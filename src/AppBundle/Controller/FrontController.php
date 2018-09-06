@@ -13,16 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FrontController extends Controller
 {
-    /**
-     * @Route("/")
-     */
-    public function indexAction()
-    {
-        return $this->render('front/index.html.twig');
-    }
 
     /**
-     * @Route("/home", name="home_page")
+     * @Route("/", name="home_page")
      */
     public function homePageAction()
     {
@@ -81,6 +74,7 @@ class FrontController extends Controller
             $em->persist($comment);
             $em->flush();
 
+            $this->addFlash('success', 'Votre commentaire a bien été enregistré');
             return $this->redirect($id);
         }
 

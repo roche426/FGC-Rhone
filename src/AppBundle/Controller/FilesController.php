@@ -98,6 +98,7 @@ class FilesController extends Controller
         $em->remove($file);
         $em->flush();
 
+        $this->addFlash('success', 'Votre document a bien été supprimé');
         return $this->redirectToRoute('show_files');
 
     }
