@@ -7,6 +7,7 @@ use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
 use AppBundle\Form\ProfilEditionType;
 use AppBundle\Images\ImageManipulator;
+use AppBundle\Mail\Mailer;
 use AppBundle\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -116,7 +117,7 @@ class UserController extends Controller
     /**
      * @Route("/delete-user/{id}", name="delete_user")
      */
-    public function deleteUserAction(User $user)
+    public function deleteUserAction(User $user, Mailer $mailer)
     {
         if (!$user->getDeleteAt()) {
 
@@ -127,6 +128,9 @@ class UserController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
+        $mailMessage = 'Nous vous informons que votre compte a été supprimé. Si vous n\'êtes pas à l\'origine de cette suppression, merci de nous contacter via le site ou par mail.';
+        $mailer->deleteAccountUser($user, $mailMessage);
+
         $this->addFlash('success', 'Votre compte a bien été supprimé');
         return $this->redirectToRoute('logout');
     }
@@ -135,7 +139,7 @@ class UserController extends Controller
     /**
      * @Route("/disable-user/{id}", name="disable_user")
      */
-    public function disableUserAction(User $user)
+    public function disableUserAction(User $user, Mailer $mailer)
     {
         if (!$user->getDeleteAt()) {
 
@@ -144,6 +148,9 @@ class UserController extends Controller
         }
 
         $this->getDoctrine()->getManager()->flush();
+
+        $mailMessage = 'Nous vous informons que votre compte a été désactivé. Pour le réactiver, merci de nous faire la demande via le site ou par mail.';
+        $mailer->deleteAccountUser($user, $mailMessage);
 
         $this->addFlash('success', 'Votre compte a bien été désactivé. Pour le réactiver, veuillez nous faire une demande par mail');
         return $this->redirectToRoute('logout');

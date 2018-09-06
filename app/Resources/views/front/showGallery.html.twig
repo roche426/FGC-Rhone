@@ -9,11 +9,15 @@
                     {% for folder in folders %}
                         <div class="col-md-4 mt-3 mb-3">
                             <div class="card bg-green">
-                                <img class="card-img-top" src="/uploaded_files/thematics_image_gallery/{{ folder.image }}"
-                                     alt="Card image cap">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title gold">{{ folder.name }}</h4>
-                                    <p class="card-text gold">{{ folder.description }}</p>
+                                <div class="header-album">
+                                    <img class="card-img-top {{ folder.description ? 'fade-image' }}"
+                                         src="/uploaded_files/thematics_image_gallery/{{ folder.image }}" alt="Card image cap">
+                                    <div class="fade-middle">
+                                        <p class="card-text gold fade-text">{{ folder.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center" style="height: 150px">
+                                    <h5 class="card-title gold">{{ folder.name }}</h5>
                                     <a href="{{ path('show_images', {id:folder.id}) }}" class="btn btn-light">Voir
                                         l'album</a>
                                 </div>

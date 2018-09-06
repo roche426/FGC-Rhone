@@ -17,6 +17,7 @@ class ForgotPasswordType extends AbstractType
     {
         $builder
             ->add('email',  EmailType::class, array(
+                'attr' => array('placeholder' => 'Saisissez votre email'),
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])));
     }
     /**

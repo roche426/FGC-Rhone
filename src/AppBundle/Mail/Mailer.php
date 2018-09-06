@@ -34,7 +34,7 @@ class Mailer
     {
         $subject = "Réinitialisation de votre mot de passe";
         $to = $user->getEmail();
-        $body = $this->templating->render('mail/forgotPasswordEmail.html.twig', array('user' => $user));
+        $body = $this->templating->render('mail/forgotPassword.html.twig', array('user' => $user));
         $this->sendMail($to, $subject, $body);
     }
 
@@ -43,6 +43,25 @@ class Mailer
         $subject = "Confirmation d'inscription";
         $to = $user->getEmail();
         $body = $this->templating->render('mail/registrationActivation.html.twig', array('user' => $user));
+        $this->sendMail($to, $subject, $body);
+    }
+
+    public function contactUsResponseMail($to, $subject, $responseMessage, $initialMessage)
+    {
+        $body = $this->templating->render('mail/contactUsResponse.html.twig', array(
+            'message' => $responseMessage,
+            'inialMessage' => $initialMessage));
+        $this->sendMail($to, $subject, $body);
+    }
+
+
+    public function deleteAccountUser(User $user, $message)
+    {
+        $subject = "Vous nous quittez?";
+        $to = $user->getEmail();
+        $body = $this->templating->render('mail/deleteAccountUser.html.twig', array(
+            'user' => $user,
+            'message' => $message));
         $this->sendMail($to, $subject, $body);
     }
 

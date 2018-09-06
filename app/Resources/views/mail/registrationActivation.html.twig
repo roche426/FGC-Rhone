@@ -1,8 +1,10 @@
 {% block content %}
-    <strong>Bienvenue !</strong><br>
-    <p>Votre compte à bien été créé, pour continuer, veuillez créer votre mot de passe afin de confirmation
-        l'inscription
+    <strong>Bienvenue sur le site de la Fédération des Gardes Particuliers du Rhône!</strong><br>
+
+    <p>Votre compte à bien été créé, pour continuer, veuillez créer votre mot de passe afin de confirmation l'inscription
         <a href="{{ url('registration_confirmation', {'slug': user.token }) }}">cliquer ici</a>.</p>
-    <p>Bonne journée!</p>
+
+    {% include('mail/footer.html.twig') %}
+
     <p><i>(Ceci est un mail automatique, merci de ne pas répondre. Si vous souhaitez nous contacter vous pouvez le faire directement sur la plateforme)</i></p>
 {% endblock %}

@@ -7,6 +7,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\ContactUs;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
+use AppBundle\Mail\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -137,16 +138,20 @@ class AdminController extends Controller
         if ($user->getDisableAt()) {
             $user->setDisableAt(null);
             $user->setIsActive(true);
+            $typeFlash = 'success';
+            $messageFlash = 'L\'utilisateur a bien été réactivé';
         }
 
         else {
             $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
+            $typeFlash = 'danger';
+            $messageFlash = 'L\'utilisateur a bien été désactivé';
         }
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\'utilisateur a bien été désactivé');
+        $this->addFlash($typeFlash, $messageFlash);
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
@@ -159,17 +164,21 @@ class AdminController extends Controller
         if ($user->getDeleteAt()) {
             $user->setDisableAt(new \DateTime('now'));
             $user->setDeleteAt(null);
+            $typeFlash = 'success';
+            $messageFlash = 'La suppression de l\'utilisateur a bien été annulée';
         }
 
         else {
             $user->setDeleteAt(new \DateTime('now'));
             $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
+            $typeFlash = 'danger';
+            $messageFlash = 'L\'utilisateur a bien été supprimé';
         }
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\utilisateur a bien été supprimé');
+        $this->addFlash($typeFlash, $messageFlash);
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
@@ -284,15 +293,12 @@ class AdminController extends Controller
     /**
      * @Route("/admin/messages/{id}", name="show_one_message")
      */
-    public function showMessageAction($id, Request $request)
+    public function showMessageAction($id, Request $request, Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $message = $em->getRepository(ContactUs::class)->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('email', EmailType::class, array(
-                'data' => $this->getUser()->getEmail(),
-                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->add('emailTo', EmailType::class, array(
                 'data' => $message->getEmail(),
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
@@ -308,7 +314,6 @@ class AdminController extends Controller
 
             $data = $request->request->all();
 
-            $from = $data['form']['email'];
             $to = $data['form']['emailTo'];
             $subject = $data['form']['subject'];
             $responseContact = $data['form']['message'];
@@ -317,7 +322,7 @@ class AdminController extends Controller
             $em->persist($message);
             $em->flush();
 
-            //ajouter envoi mail
+            $mailer->contactUsResponseMail($to, $subject, $responseContact, $message);
 
             $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('message_treated', ['id' => $id]);
