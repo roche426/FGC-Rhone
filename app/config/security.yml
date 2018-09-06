@@ -31,7 +31,7 @@ security:
                 default_target_path: member_area
 
             logout:
-                invalidate_session: true
+                invalidate_session: false
                 path: /logout
                 target: /
             # activate different ways to authenticate

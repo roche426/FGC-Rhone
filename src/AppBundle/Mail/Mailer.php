@@ -54,4 +54,15 @@ class Mailer
         $this->sendMail($to, $subject, $body);
     }
 
+
+    public function deleteAccountUser(User $user, $message)
+    {
+        $subject = "Vous nous quittez?";
+        $to = $user->getEmail();
+        $body = $this->templating->render('mail/deleteAccountUser.html.twig', array(
+            'user' => $user,
+            'message' => $message));
+        $this->sendMail($to, $subject, $body);
+    }
+
 }
