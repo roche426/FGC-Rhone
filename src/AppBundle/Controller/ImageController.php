@@ -6,10 +6,13 @@ use AppBundle\Entity\ImageFolders;
 use AppBundle\Images\ImageManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @package AppBundle\Controller
@@ -61,15 +64,33 @@ class ImageController extends Controller
     /**
      * @Route("show_gallery/{id}", name="show_images_gallery")
      */
-    public function showImagesGalleryAction($id)
+    public function showImagesGalleryAction(ImageFolders $folder, Request $request)
     {
-        $folder = $this->getDoctrine()->getRepository(ImageFolders::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        $editForm = $this->createFormBuilder($folder)
+            ->add('name', TextType::class, array(
+                'label' => 'Nom de l\'album',
+                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
+            ->add('description', TextareaType::class, array(
+                'label' => 'Description',
+                'required' => false
+            ))
+            ->getForm();
+
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $em->flush();
+        }
 
         $images = array_diff(scandir($folder->getPath()), ['.', '..']);
 
         return $this->render('admin/showImagesGallery.html.twig', array(
             'folder' => $folder,
-            'images' => $images
+            'images' => $images,
+            'editForm' => $editForm->createView()
         ));
 
     }
