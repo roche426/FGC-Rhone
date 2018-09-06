@@ -72,9 +72,9 @@ class SecurityController extends Controller
             $mailer->registrationActivationEmail($user);
 
             $userEmail = $user->getEmail();
-            $this->addFlash('success', 'Vous êtes enregistré ! Afin de finaliser votre inscription, un email de confirmation vous a été transmis à l\'adresse suivante : ' . $userEmail);
+            $this->addFlash('success', 'Utilsateur enregistré ! Afin de finaliser l\'inscription, un email de confirmation a été transmis à l\'adresse suivante : ' . $userEmail);
 
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('admin_show_messages');
         }
 
 
@@ -119,7 +119,7 @@ class SecurityController extends Controller
 
                 //message flash parameters
                 $flashType = 'success';
-                $flashMessage = 'Votre inscription est finalisée !';
+                $flashMessage = 'Votre inscription est finalisée, merci de compléter les informations de votre profil !';
 
             } else {
                 //message flash parameters
@@ -156,45 +156,27 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$user` variable has also been updated
+
             $userForm = $form->getData();
-
             $emailForm = $userForm->getEmail();
-
-            //$user = new user();
             $em = $this->getDoctrine()->getManager();
-
-            //user in db with this email
-            $user = $em->getRepository(User::class)->findOneBy(
-                ['email' => $emailForm]
-            );
+            $user = $em->getRepository(User::class)->findOneBy(['email' => $emailForm]);
 
             if ($user) {
-                //Unique Id Token fill in
-                $user->setToken(uniqid('FGPR', true));
 
-                //Token persisted in db
+                $user->setToken(uniqid('FGPR', true));
                 $em->persist($user);
                 $em->flush();
 
-                // Send MAIL to emailForm
                 $mailer->forgotPasswordEmail($user);
 
-                //message flash parameters
-                $flashType = 'success';
-                $flashMessage = 'Un email vous a été transmis à l\'adresse suivante : ' . $emailForm;
-
             } else {
-                //message flash parameters
-                $flashType = 'danger';
-                $flashMessage = 'Cet email ne correspond à aucun utilisateur !';
+
+                $this->addFlash('danger', 'Cet email ne correspond à aucun utilisateur !');
+                return ($this->redirectToRoute('forgot_password'));
             }
 
-            //message flash
-            $this->addFlash($flashType, $flashMessage);
-
-            //Redirection
+            $this->addFlash('success', 'Un email vous a été transmis à l\'adresse suivante : ' . $emailForm);
             return ($this->redirectToRoute('login'));
         }
 
@@ -243,12 +225,12 @@ class SecurityController extends Controller
 
                 //message flash parameters
                 $flashType = 'success';
-                $flashMessage = 'Votre mot de passe est modifié !';
+                $flashMessage = 'Votre mot de passe a bien été modifié !';
 
             } else {
                 //message flash parameters
                 $flashType = 'danger';
-                $flashMessage = 'Le mot de passe ne peut être modifié !';
+                $flashMessage = 'Erreur lors de la modification du mot de passe !';
             }
 
             //message flash
