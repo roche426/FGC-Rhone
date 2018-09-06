@@ -7,6 +7,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\ContactUs;
 use AppBundle\Entity\Files;
 use AppBundle\Entity\User;
+use AppBundle\Mail\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -284,15 +285,12 @@ class AdminController extends Controller
     /**
      * @Route("/admin/messages/{id}", name="show_one_message")
      */
-    public function showMessageAction($id, Request $request)
+    public function showMessageAction($id, Request $request, Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $message = $em->getRepository(ContactUs::class)->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('email', EmailType::class, array(
-                'data' => $this->getUser()->getEmail(),
-                'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
             ->add('emailTo', EmailType::class, array(
                 'data' => $message->getEmail(),
                 'constraints' => new NotBlank(['message' => 'Ce champs ne doit pas être vide'])))
@@ -308,7 +306,6 @@ class AdminController extends Controller
 
             $data = $request->request->all();
 
-            $from = $data['form']['email'];
             $to = $data['form']['emailTo'];
             $subject = $data['form']['subject'];
             $responseContact = $data['form']['message'];
@@ -317,7 +314,7 @@ class AdminController extends Controller
             $em->persist($message);
             $em->flush();
 
-            //ajouter envoi mail
+            $mailer->contactUsResponseMail($to, $subject, $responseContact, $message);
 
             $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('message_treated', ['id' => $id]);

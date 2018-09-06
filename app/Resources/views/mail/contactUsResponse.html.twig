@@ -1,0 +1,10 @@
+{% block content %}
+    <strong>Bonjour {{ inialMessage.firstName }} {{ inialMessage.lastName }}</strong><br>
+    <p>Une réponse à été apporté à votre demande du {{ inialMessage.date | date('d/m/Y') }}.</p>
+    <p>Votre message : "{{ inialMessage.message }}"</p>
+    <p>Réponse : </p>
+    <p>{{ message }}</p>
+    <p>Bonne journée!</p>
+    <p>Cordialement,</p>
+    <p>Fédération des Gardes Particuliers du Rhône</p>
+{% endblock %}
