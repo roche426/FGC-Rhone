@@ -138,16 +138,20 @@ class AdminController extends Controller
         if ($user->getDisableAt()) {
             $user->setDisableAt(null);
             $user->setIsActive(true);
+            $typeFlash = 'success';
+            $messageFlash = 'L\'utilisateur a bien été réactivé';
         }
 
         else {
             $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
+            $typeFlash = 'danger';
+            $messageFlash = 'L\'utilisateur a bien été désactivé';
         }
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\'utilisateur a bien été désactivé');
+        $this->addFlash($typeFlash, $messageFlash);
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
@@ -160,17 +164,21 @@ class AdminController extends Controller
         if ($user->getDeleteAt()) {
             $user->setDisableAt(new \DateTime('now'));
             $user->setDeleteAt(null);
+            $typeFlash = 'success';
+            $messageFlash = 'La suppression de l\'utilisateur a bien été annulée';
         }
 
         else {
             $user->setDeleteAt(new \DateTime('now'));
             $user->setDisableAt(new \DateTime('now'));
             $user->setIsActive(false);
+            $typeFlash = 'danger';
+            $messageFlash = 'L\'utilisateur a bien été supprimé';
         }
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', 'L\utilisateur a bien été supprimé');
+        $this->addFlash($typeFlash, $messageFlash);
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
